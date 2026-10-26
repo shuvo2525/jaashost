@@ -2667,18 +2667,19 @@
 
     // FINAL SUBMISSION & INVOICE CREATION
     function submitOrderFinal(payInfo) {
-      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const randNum = Math.floor(10000 + Math.random() * 90000);
       const invoiceId = 'INV-2026-' + randNum;
 
-      const firstName = document.getElementById('cFirstName').value.trim() || 'Valued';
-      const lastName = document.getElementById('cLastName').value.trim() || 'Customer';
+      const firstName = document.getElementById('cFirstName').value.trim() || 'Ashish';
+      const lastName = document.getElementById('cLastName').value.trim() || 'Halder';
       const fullName = (firstName + ' ' + lastName).trim();
-      const email = document.getElementById('cEmail').value.trim() || 'customer@jaasbd.com';
-      const phone = document.getElementById('cPhone').value.trim() || '+8801818430308';
-      const street = document.getElementById('cAddress').value.trim() || 'Hat Masjid Road';
-      const district = document.getElementById('cDistrict').value.trim() || 'Rajbari';
-      const address = street + ', ' + district;
-      const pass = (document.getElementById('cPass') ? document.getElementById('cPass').value.trim() : '') || 'PutulHost@2026#Secure';
+      const email = document.getElementById('cEmail').value.trim() || 'ashish@example.com';
+      const phone = document.getElementById('cPhone').value.trim() || '+88-01818-430308';
+      const street = document.getElementById('cAddress').value.trim() || '843/06, Kadim Dewhata, Mirzapur';
+      const district = document.getElementById('cDistrict').value.trim() || 'Tangail';
+      const address = street + ', ' + district + '. 1940.';
+      const company = (document.getElementById('cCompany') ? document.getElementById('cCompany').value.trim() : '') || 'Golden Frame BD';
+      const pass = (document.getElementById('cPass') ? document.getElementById('cPass').value.trim() : '') || 'admin123';
 
       const client = {
         id: 'CL-' + Math.floor(1000 + Math.random() * 9000),
@@ -2688,7 +2689,7 @@
         email: email,
         password: pass,
         phone: phone,
-        company: 'Personal / Business Account',
+        company: company,
         address: address,
         district: district,
         loggedIn: true,
@@ -2698,52 +2699,85 @@
 
       const payableTotal = calculatePayableTotal();
       const subtotalTotal = (app.hasDomain ? app.domainPrice : 0) + (app.hasHosting ? app.cyclePrice : 0) + (app.hasIdAddon ? 300 : 0);
+      const discountAmount = app.discount || (subtotalTotal > payableTotal ? (subtotalTotal - payableTotal) : 0);
 
       const cpUser = 'jaas_' + (firstName.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 5) || 'user') + Math.floor(10 + Math.random() * 90);
       const cpPass = 'Putul#' + Math.random().toString(36).slice(-8);
 
-      const todayStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-      const dueStr = new Date(Date.now() + 7 * 86400000).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      const todayStr = new Date().toISOString().split('T')[0]; // "2026-10-26"
+      const randTrx = 'TXN-SSL-' + Math.floor(100000 + Math.random() * 900000);
+
+      // Create itemized details matching official A4 invoice pad
+      let invoiceItems = [];
+      const planInfo = (CATALOG && CATALOG[app.planId]) ? CATALOG[app.planId] : { storage: '20 GB NVMe SSD', name: app.planName || 'Business Hosting' };
+      const storageLabel = planInfo.storage || '20 GB NVMe';
+
+      if (app.hasHosting && app.hasDomain) {
+        invoiceItems.push({
+          name: `${app.planName} (${storageLabel}) + Domain: ${app.domain}`,
+          desc: 'LiteSpeed Server, Free Automated SSL, Unlimited Bandwidth, Daily Backups, 10Gbps BDIX',
+          domain: app.domain,
+          term: `${app.cyclePeriodLabel || '1 Year'}<br>(Annually)`,
+          total: payableTotal
+        });
+      } else if (app.hasHosting) {
+        invoiceItems.push({
+          name: `${app.planName} (${storageLabel})`,
+          desc: 'LiteSpeed Server, Free Automated SSL, Unlimited Bandwidth, Daily Backups, 10Gbps BDIX',
+          domain: app.domain || 'mycompany.com',
+          term: `${app.cyclePeriodLabel || '1 Year'}<br>(Annually)`,
+          total: payableTotal
+        });
+      } else {
+        invoiceItems.push({
+          name: `Domain Registration (0 GB NVMe) + Domain: ${app.domain || 'mycompany.com'}`,
+          desc: 'Free DNS Management, 2 Email Forwards, Automated SSL, Theft Protection',
+          domain: app.domain || 'mycompany.com',
+          term: '1 Year<br>(Annually)',
+          total: payableTotal
+        });
+      }
 
       const invoice = {
         id: invoiceId,
         date: todayStr,
-        dueDate: dueStr,
-        planName: app.hasHosting ? `${app.planName} (${app.cyclePeriodLabel})` : `Domain Registration (${app.domain})`,
-        domain: app.domain || 'N/A',
+        dueDate: todayStr,
+        planName: invoiceItems[0].name,
+        domain: app.domain || 'mycompany.com',
+        term: '1 Year<br>(Annually)',
         amount: payableTotal,
-        subtotal: subtotalTotal,
-        discount: app.discount,
+        subtotal: subtotalTotal || (payableTotal + discountAmount),
+        discount: discountAmount,
         vatRate: 0,
         vatAmount: 0,
         status: payInfo.status || 'PAID',
-        gateway: payInfo.gateway || 'SSLCommerz Automated',
-        txnId: payInfo.txnId || 'TXN-' + Math.floor(100000 + Math.random() * 900000),
+        gateway: payInfo.gateway || 'SSLCOMMERZ / EPS Online Payment',
+        txnId: payInfo.txnId || randTrx,
         cpanelUser: cpUser,
         cpanelPass: cpPass,
-        serverIP: '103.145.118.25'
+        serverIP: '103.145.118.25',
+        items: invoiceItems
       };
 
       let service = null;
       if (app.hasHosting) {
-        const planInfo = CATALOG[app.planId] || CATALOG['ph-1gb-host'];
         service = {
           id: 'srv-' + Math.floor(100 + Math.random() * 900),
           planId: app.planId,
           name: app.planName,
           domain: app.domain || 'mysite.com',
-          storage: planInfo.storage || '10 GB NVMe',
+          storage: storageLabel,
           billingCycle: app.cyclePeriodLabel,
           price: app.cyclePrice,
           status: 'Active',
-          regDate: new Date().toISOString().split('T')[0],
+          regDate: todayStr,
           nextDue: new Date(Date.now() + (app.cycle === '1y' ? 365 : 30) * 86400000).toISOString().split('T')[0],
           serverIP: '103.145.118.25',
           nameservers: ['ns1.jaasbd.com', 'ns2.jaasbd.com'],
           cpanelUser: cpUser,
           cpanelPass: cpPass,
           diskUsed: '12 MB',
-          diskLimit: planInfo.storage || '10 GB',
+          diskLimit: storageLabel,
           bandwidthUsed: '0.05 GB'
         };
       }
@@ -2758,7 +2792,7 @@
             const domainItem = {
               id: 'dom-' + Math.floor(100 + Math.random() * 900),
               domain: app.domain,
-              regDate: new Date().toISOString().split('T')[0],
+              regDate: todayStr,
               expiryDate: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
               nextDue: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
               price: app.domainPrice || 1150,
@@ -2776,6 +2810,33 @@
           }
           JaasStore.syncOrderToBackend(client, invoice, service);
         }
+
+        // Dispatch official invoice email to client
+        try {
+          fetch('/api/send-invoice-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              invoice: invoice,
+              client: client
+            })
+          }).catch(() => {});
+        } catch (e) {}
+
+        // Store notification for client
+        try {
+          const notifs = JSON.parse(localStorage.getItem('jaas_client_notifications') || '[]');
+          notifs.unshift({
+            id: 'notif-' + Date.now(),
+            title: `Official Invoice ${invoiceId} Emailed & Paid`,
+            message: `Official A4 Invoice receipt ${invoiceId} (৳${payableTotal.toLocaleString()} BDT) has been dispatched to ${email}.`,
+            date: todayStr,
+            invoiceId: invoiceId,
+            type: 'invoice'
+          });
+          localStorage.setItem('jaas_client_notifications', JSON.stringify(notifs));
+        } catch (e) {}
+
         sessionStorage.setItem('jaas_latest_invoice_id', invoiceId);
         localStorage.setItem('jaas_last_order', JSON.stringify({ invoice, service, client }));
       } catch (e) {

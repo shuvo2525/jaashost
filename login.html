@@ -251,23 +251,25 @@
       flex-direction: column;
       gap: 7px;
     }
-    .label-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
     .form-group label {
       font-size: 13.5px;
       font-weight: 700;
       color: #334155;
+    }
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 3px;
     }
     .forgot-link {
       font-size: 12.5px;
       font-weight: 600;
       color: #7c3aed;
       text-decoration: none;
+      transition: color 0.2s ease;
     }
     .forgot-link:hover {
+      color: #6d28d9;
       text-decoration: underline;
     }
 
@@ -506,13 +508,13 @@
         </div>
 
         <div class="form-group">
-          <div class="label-row">
-            <label for="passwordInput">Password</label>
-            <a href="#" onclick="alert('Password reset link has been dispatched to your email.'); return false;" class="forgot-link">Forgot Password?</a>
-          </div>
+          <label for="passwordInput">Password</label>
           <div class="input-wrapper">
             <input type="password" id="passwordInput" placeholder="••••••••" required autocomplete="current-password">
             <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()"><i class="fa fa-eye" id="passEyeIcon"></i></button>
+          </div>
+          <div class="forgot-row">
+            <a href="#" onclick="alert('Password reset link has been dispatched to your email.'); return false;" class="forgot-link">Forgot Password?</a>
           </div>
         </div>
 

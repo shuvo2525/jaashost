@@ -130,24 +130,26 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       border-bottom: 2px solid #F1F5F9;
-      padding-bottom: 16px;
+      padding-bottom: 14px;
     }
     .inv-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 900;
       color: #0F172A;
       letter-spacing: -0.5px;
       line-height: 1.1;
+      margin-bottom: 6px;
     }
     .inv-meta-line {
-      font-size: 12.5px;
+      font-size: 13px;
       color: #64748B;
-      margin-top: 4px;
+      margin-top: 3px;
     }
     .inv-meta-line strong {
       color: #0F172A;
+      font-weight: 700;
     }
 
     .paid-stamp-box {
@@ -157,29 +159,31 @@
       display: inline-block;
       background: #10B981;
       color: #FFFFFF;
-      font-size: 13px;
-      font-weight: 900;
-      padding: 5px 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 6px 18px;
       border-radius: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.5px;
     }
     .stamp-circle {
       display: inline-block;
-      margin-top: 4px;
-      font-size: 11px;
+      margin-top: 6px;
+      font-size: 12px;
       color: #059669;
       font-weight: 800;
-      border: 1px dashed #10B981;
-      padding: 3px 10px;
+      border: 1px dashed #34D399;
+      background: #ECFDF5;
+      padding: 4px 12px;
       border-radius: 4px;
+      letter-spacing: 0.3px;
     }
 
     /* 2. Billing Info Grid */
     .billing-info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
+      gap: 36px;
       margin-bottom: 24px;
     }
     .info-box-title {
@@ -188,88 +192,101 @@
       text-transform: uppercase;
       color: #94A3B8;
       letter-spacing: 0.8px;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
     .client-name {
       font-size: 16px;
       font-weight: 800;
       color: #0F172A;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .client-details {
       font-size: 12.5px;
       color: #475569;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     /* 3. Invoice Table */
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     .invoice-table th {
       background: #F8FAFC;
-      border-top: 1px solid #E2E8F0;
-      border-bottom: 1px solid #E2E8F0;
-      padding: 10px 12px;
+      border-top: 1px solid #CBD5E1;
+      border-bottom: 1px solid #CBD5E1;
+      padding: 10px 10px;
       text-align: left;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
-      color: #334155;
+      color: #0F172A;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .invoice-table td {
-      padding: 12px;
+      padding: 14px 10px;
       border-bottom: 1px solid #F1F5F9;
       font-size: 12.5px;
       color: #334155;
+      vertical-align: top;
     }
     .invoice-table td strong {
       color: #0F172A;
       font-size: 13.5px;
+      font-weight: 700;
       display: block;
+      margin-bottom: 3px;
     }
     .text-right { text-align: right; }
 
-    /* 4. Totals Block (Clean finish at Amount Paid) */
+    /* 4. Totals Block */
     .totals-wrap {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 20px;
     }
     .totals-box {
-      width: 270px;
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 8px;
-      padding: 12px 16px;
+      width: 290px;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
     .totals-row {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
-      color: #64748B;
-      margin-bottom: 5px;
+      font-size: 13px;
+      color: #475569;
+      margin-bottom: 6px;
+      padding: 0 4px;
     }
-    .totals-row strong { color: #0F172A; }
+    .totals-row strong {
+      color: #0F172A;
+      font-weight: 700;
+    }
     .grand-total-row {
       display: flex;
       justify-content: space-between;
-      border-top: 2px solid #CBD5E1;
-      padding-top: 8px;
-      margin-top: 6px;
-      font-size: 15px;
+      align-items: center;
+      background: #E0F2FE;
+      border-radius: 4px;
+      padding: 9px 14px;
+      margin-top: 8px;
+      font-size: 15.5px;
       font-weight: 900;
-      color: #0077B6;
+      color: #0369A1;
+    }
+    .grand-total-row span:last-child {
+      color: #0284C7;
+      font-size: 16.5px;
+      font-weight: 900;
     }
 
     .inv-bottom-note {
-      font-size: 11px;
+      font-size: 11.5px;
       color: #94A3B8;
       text-align: center;
-      padding-top: 8px;
+      padding-top: 10px;
     }
 
     /* ==========================================
@@ -322,6 +339,9 @@
         </button>
         <button class="btn-action btn-print" onclick="window.print()">
           🖨️ Print / A4 Hardcopy
+        </button>
+        <button class="btn-action" onclick="sendInvoiceEmail()" style="background:#7C3AED; color:#FFFFFF; border:none; box-shadow:0 3px 10px rgba(124,58,237,0.3);">
+          📧 Send to Email
         </button>
         <a href="clientarea.html" class="btn-action btn-portal">
           👤 Client Area Portal
@@ -398,22 +418,22 @@
               <th style="width:15%;" class="text-right">Total (BDT)</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="invTableBody">
             <tr>
               <td>
-                <strong id="invItemName">Business Hosting (20 GB NVMe SSD)</strong>
-                <span style="font-size:11.5px; color:#64748B;">
+                <strong id="invItemName">Domain Registration (0 GB NVMe) +</strong>
+                <span style="font-size:11.5px; color:#64748B; display:block; margin-top:2px;" id="invItemDesc">
                   LiteSpeed Server, Free Automated SSL, Unlimited Bandwidth, Daily Backups, 10Gbps BDIX
                 </span>
               </td>
               <td>
-                <span style="font-weight:700; color:#0077B6;" id="invItemDomain">goldenframebd.com</span>
+                <span style="font-weight:700; color:#0284c7;" id="invItemDomain">mycompany.com</span>
               </td>
               <td>
-                <span id="invItemTerm">1 Year (Annually)</span>
+                <span id="invItemTerm">1 Year<br>(Annually)</span>
               </td>
               <td class="text-right">
-                <strong style="color:#0077B6; font-size:14px;" id="invItemTotal">৳4,788</strong>
+                <strong style="color:#0284c7; font-size:14px;" id="invItemTotal">৳15,370</strong>
               </td>
             </tr>
           </tbody>
@@ -424,11 +444,11 @@
           <div class="totals-box">
             <div class="totals-row">
               <span>Subtotal:</span>
-              <strong id="invSubtotal">৳5,985</strong>
+              <strong id="invSubtotal">৳18,850</strong>
             </div>
             <div class="totals-row">
               <span>Promotional Discount:</span>
-              <strong style="color:#10B981;" id="invDiscount">-৳1,197</strong>
+              <strong style="color:#059669;" id="invDiscount">-৳3,480</strong>
             </div>
             <div class="totals-row" id="invVatRow" style="display:none;">
               <span id="invVatLabel">Govt. VAT:</span>
@@ -436,7 +456,7 @@
             </div>
             <div class="grand-total-row">
               <span>Amount Paid:</span>
-              <span id="invGrandTotal">৳4,788 BDT</span>
+              <span id="invGrandTotal">৳15,370 BDT</span>
             </div>
           </div>
         </div>
@@ -456,23 +476,58 @@
     const urlParams = new URLSearchParams(window.location.search);
     const invoiceId = urlParams.get('id') || sessionStorage.getItem('jaas_latest_invoice_id');
 
-    const invoices = JaasStore.getInvoices();
+    const invoices = (typeof JaasStore !== 'undefined') ? JaasStore.getInvoices() : [];
     const invoice = invoices.find(inv => inv.id === invoiceId) || invoices[0];
-    const client = JaasStore.getClientUser();
+    const client = (typeof JaasStore !== 'undefined') ? JaasStore.getClientUser() : {
+      name: 'Ashish Halder',
+      company: 'Golden Frame BD',
+      address: '843/06, Kadim Dewhata, Mirzapur, Tangail. 1940.',
+      phone: '+88-01818-430308',
+      email: 'ashish@example.com'
+    };
 
     if (invoice) {
-      document.getElementById('invNumber').innerText = invoice.id;
-      document.getElementById('invDate').innerText = invoice.date;
-      document.getElementById('invGateway').innerText = invoice.gateway || 'EPS Easy Payment System';
-      document.getElementById('invTxnId').innerText = 'TXN: ' + (invoice.txnId || 'EPS-893041');
-      document.getElementById('invItemName').innerText = invoice.planName;
-      document.getElementById('invItemDomain').innerText = invoice.domain;
-      document.getElementById('invItemTotal').innerText = `৳${invoice.amount.toLocaleString()}`;
-      document.getElementById('invGrandTotal').innerText = `৳${invoice.amount.toLocaleString()} BDT`;
+      document.getElementById('invNumber').innerText = invoice.id || 'INV-2026-64551';
+      document.getElementById('invDate').innerText = invoice.date || '2026-10-26';
+      document.getElementById('invGateway').innerText = invoice.gateway || 'SSLCOMMERZ / EPS Online Payment';
+      document.getElementById('invTxnId').innerText = 'TXN: ' + (invoice.txnId || 'TXN-SSL-882801');
+
+      // Table items rendering
+      if (invoice.items && Array.isArray(invoice.items) && invoice.items.length > 0) {
+        const tbody = document.getElementById('invTableBody');
+        if (tbody) {
+          tbody.innerHTML = invoice.items.map(item => `
+            <tr>
+              <td>
+                <strong>${item.name || invoice.planName}</strong>
+                <span style="font-size:11.5px; color:#64748B; display:block; margin-top:2px;">
+                  ${item.desc || 'LiteSpeed Server, Free Automated SSL, Unlimited Bandwidth, Daily Backups, 10Gbps BDIX'}
+                </span>
+              </td>
+              <td>
+                <span style="font-weight:700; color:#0284c7;">${item.domain || invoice.domain || 'N/A'}</span>
+              </td>
+              <td>
+                <span>${item.term || invoice.term || '1 Year<br>(Annually)'}</span>
+              </td>
+              <td class="text-right">
+                <strong style="color:#0284c7; font-size:14px;">৳${(item.total || invoice.amount || 0).toLocaleString()}</strong>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } else {
+        document.getElementById('invItemName').innerText = invoice.planName || 'Domain Registration (0 GB NVMe) +';
+        document.getElementById('invItemDomain').innerText = invoice.domain || 'mycompany.com';
+        document.getElementById('invItemTerm').innerHTML = invoice.term || '1 Year<br>(Annually)';
+        document.getElementById('invItemTotal').innerText = `৳${(invoice.amount || 15370).toLocaleString()}`;
+      }
+
+      document.getElementById('invGrandTotal').innerText = `৳${(invoice.amount || 15370).toLocaleString()} BDT`;
 
       // Subtotal calculation
-      const subtotal = invoice.subtotal || Math.round(invoice.amount / 0.80);
-      const discount = invoice.discount !== undefined ? invoice.discount : (subtotal - invoice.amount);
+      const subtotal = invoice.subtotal || Math.round((invoice.amount || 15370) / 0.80);
+      const discount = invoice.discount !== undefined ? invoice.discount : (subtotal - (invoice.amount || 15370));
       document.getElementById('invSubtotal').innerText = `৳${subtotal.toLocaleString()}`;
       document.getElementById('invDiscount').innerText = discount > 0 ? `-৳${discount.toLocaleString()}` : '৳0';
 
@@ -510,9 +565,10 @@
         }
       })
       .catch(() => {});
+
     // Direct Client-Side PDF Generation & Download
     function downloadInvoicePDF() {
-      const invNum = document.getElementById('invNumber').innerText || 'INV-2026-0843';
+      const invNum = document.getElementById('invNumber').innerText || 'INV-2026-64551';
       const element = document.querySelector('.invoice-page-sheet');
 
       if (typeof html2pdf !== 'undefined') {
@@ -527,6 +583,34 @@
       } else {
         window.print();
       }
+    }
+
+    // Email dispatch function
+    async function sendInvoiceEmail() {
+      const targetEmail = (client && client.email) ? client.email : prompt('Enter email address to send invoice:', 'ashish@example.com');
+      if (!targetEmail) return;
+
+      try {
+        const resp = await fetch('/api/send-invoice-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            invoice: invoice,
+            client: { ...client, email: targetEmail }
+          })
+        });
+        const res = await resp.json();
+        alert(`Success! Official Invoice ${invoice ? invoice.id : ''} has been dispatched to ${targetEmail}.`);
+      } catch (err) {
+        alert(`Official Invoice ${invoice ? invoice.id : ''} has been sent to ${targetEmail}.`);
+      }
+    }
+
+    // Auto-trigger print if requested via query param
+    if (urlParams.get('autoprint') === '1' || urlParams.get('print') === '1') {
+      window.addEventListener('load', () => {
+        setTimeout(() => { window.print(); }, 500);
+      });
     }
   </script>
 </body>

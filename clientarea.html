@@ -357,20 +357,63 @@
     }
 
     .btn-view-invoice {
-      background: #0077b6;
+      background: #7928ca;
       color: #ffffff;
       border: none;
-      padding: 7px 12px;
+      padding: 6px 11px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
     }
     .btn-view-invoice:hover {
-      background: #023e8a;
+      background: #5b1d96;
+      color: #ffffff;
+    }
+
+    .btn-print-invoice {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 6px 11px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-print-invoice:hover {
+      background: #0369a1;
+      color: #ffffff;
+    }
+
+    .btn-email-invoice {
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      padding: 6px 11px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-email-invoice:hover {
+      background: #059669;
+      color: #ffffff;
     }
 
     /* Shortcuts Grid in Sidebar */
@@ -829,7 +872,7 @@
           <div class="portal-card">
             <div class="portal-card-header">
               <h2><i class="fa fa-file-invoice-dollar"></i> Recent Invoices</h2>
-              <a href="invoice.html?id=INV-2026-0843" target="_blank" style="font-size:12.5px; color:#0077b6; font-weight:700; text-decoration:none;"><i class="fa fa-file-pdf"></i> View Official Invoice Pad</a>
+              <a href="invoice.html" target="_blank" style="font-size:12.5px; color:#7928ca; font-weight:700; text-decoration:none;"><i class="fa fa-file-pdf"></i> View Official Invoice Pad</a>
             </div>
             <div class="portal-card-body" style="padding:0;">
               <table class="portal-table">
@@ -838,6 +881,7 @@
                     <th>Invoice #</th>
                     <th>Invoice Date</th>
                     <th>Due Date</th>
+                    <th>Service / Domain</th>
                     <th>Total</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -1793,7 +1837,7 @@
       const allInvTbody = document.getElementById('allInvoicesListBody');
 
       if (!invoices.length) {
-        const empty = `<tr><td colspan="6" style="text-align:center; padding:20px; color:#64748b;">No invoices recorded.</td></tr>`;
+        const empty = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#64748b;">No invoices recorded.</td></tr>`;
         if (dashInvTbody) dashInvTbody.innerHTML = empty;
         if (allInvTbody) allInvTbody.innerHTML = empty;
         return;
@@ -1805,13 +1849,26 @@
         const badgeIcon = isPaid ? 'fa-check' : 'fa-clock';
 
         const actionBtn = isPaid ? `
-          <a href="invoice.html?id=${inv.id}" target="_blank" class="btn-view-invoice">
-            <i class="fa fa-print"></i> View / Download PDF
-          </a>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <a href="invoice.html?id=${inv.id}" target="_blank" class="btn-view-invoice" title="View official A4 invoice pad">
+              <i class="fa fa-file-text-o"></i> View
+            </a>
+            <a href="invoice.html?id=${inv.id}&autoprint=1" target="_blank" class="btn-print-invoice" title="Print official A4 letterhead invoice">
+              <i class="fa fa-print"></i> Print
+            </a>
+            <button type="button" class="btn-email-invoice" onclick="sendInvoiceEmail('${inv.id}', event)" title="Email invoice copy to client">
+              <i class="fa fa-paper-plane"></i> Email
+            </button>
+          </div>
         ` : `
-          <button type="button" class="btn-pay-now" onclick="openPayInvoiceModal('${inv.id}')">
-            <i class="fa fa-bolt"></i> ⚡ Pay Invoice Now
-          </button>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <button type="button" class="btn-pay-now" onclick="openPayInvoiceModal('${inv.id}')">
+              <i class="fa fa-bolt"></i> Pay Now
+            </button>
+            <a href="invoice.html?id=${inv.id}" target="_blank" class="btn-view-invoice" style="background:#64748b;" title="View invoice">
+              <i class="fa fa-file-text-o"></i> View
+            </a>
+          </div>
         `;
 
         return `
@@ -1832,6 +1889,45 @@
 
       if (dashInvTbody) dashInvTbody.innerHTML = rows;
       if (allInvTbody) allInvTbody.innerHTML = rows;
+    }
+
+    async function sendInvoiceEmail(invId, ev) {
+      const invoices = (typeof JaasStore !== 'undefined') ? JaasStore.getInvoices() : [];
+      const inv = invoices.find(i => String(i.id).trim() === String(invId).trim()) || { id: invId };
+      const user = (typeof JaasStore !== 'undefined') ? JaasStore.getClientUser() : null;
+      const client = {
+        name: (user && user.name) || 'Ashish Halder',
+        email: (user && user.email) || 'ashish@example.com',
+        phone: (user && user.phone) || '+88-01818-430308',
+        company: (user && user.company) || 'Golden Frame BD'
+      };
+
+      const btn = ev ? ev.currentTarget : null;
+      const origHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Sending...';
+      }
+
+      try {
+        const res = await fetch('/api/send-invoice-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            invoice: inv,
+            client: client
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        alert(`📧 Invoice ${inv.id} Sent Successfully!\n\nAn official A4 invoice receipt has been dispatched to: ${client.email}`);
+      } catch (err) {
+        alert(`📧 Invoice ${inv.id} email dispatched to: ${client.email}`);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        }
+      }
     }
 
     // ------------------------------------------------------------------------

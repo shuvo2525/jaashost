@@ -1262,16 +1262,19 @@ const JaasStore = {
     }
     return [
       {
-        id: 'INV-2026-0843',
-        date: '2026-03-15',
-        dueDate: '2026-03-15',
-        planName: 'Business Hosting (20 GB NVMe)',
-        domain: 'goldenframebd.com',
-        amount: 4788,
+        id: 'INV-2026-64551',
+        date: '2026-10-26',
+        dueDate: '2026-10-26',
+        planName: 'Domain Registration (0 GB NVMe) +',
+        domain: 'mycompany.com',
+        term: '1 Year<br>(Annually)',
+        subtotal: 18850,
+        discount: 3480,
+        amount: 15370,
         status: 'PAID',
-        gateway: 'EPS Easy Payment System',
-        txnId: 'TXN-EPS-893041',
-        cpanelUser: 'jaas_golden',
+        gateway: 'SSLCOMMERZ / EPS Online Payment',
+        txnId: 'TXN-SSL-882801',
+        cpanelUser: 'jaas_mycomp',
         cpanelPass: 'J@as2026!k9Fm',
         serverIP: '103.145.118.25'
       }

@@ -1,0 +1,50 @@
+/*
+Theme Name: PH Theme
+Theme URI: https://putulhost.com
+Author: Putul Host
+Author URI: https://putulhost.com
+Description: A completely standalone, modern, and lightning-fast custom theme for Putul Host. Built with raw HTML/CSS/PHP to eliminate page builder bloat.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: custom-homepage, fast-loading, hosting
+Text Domain: ph-theme
+
+This theme is developed as a completely separate and standalone theme.
+*/
+
+/* Core CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Hind Siliguri', sans-serif;
+    color: #475569;
+    background-color: #f8fafc;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #2563eb;
+}
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Base Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+

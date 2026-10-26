@@ -1,0 +1,242 @@
+{
+  "index": {
+    "key": "index",
+    "file": "index.html",
+    "metaTitle": "JAAS BD | Fastest Cheap Secure Reliable Web Hosting | Cheap Domain Registration & IT Solution",
+    "heroTitle": "Secure Your Online Future Today",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "domain": {
+    "key": "domain",
+    "file": "domain.html",
+    "metaTitle": "Domain Registration & Transfer | JAAS BD - Starting as low as ৳210/year",
+    "heroTitle": "Secure Your Online Future Today",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bd-domain": {
+    "key": "bd-domain",
+    "file": "bd-domain.html",
+    "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | Putul Host",
+    "heroTitle": "Official .BD Domain Registration",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "basic-hosting": {
+    "key": "basic-hosting",
+    "file": "basic-hosting.html",
+    "metaTitle": "Basic Web Hosting Packages | JAAS BD - High Speed LiteSpeed NVMe Hosting",
+    "heroTitle": "Basic Web Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "pro-hosting": {
+    "key": "pro-hosting",
+    "file": "pro-hosting.html",
+    "metaTitle": "Pro Web Hosting Packages | JAAS BD - Dedicated NVMe Singapore Hosting",
+    "heroTitle": "Pro Web Hosting",
+    "heroSubtitle": "Ideal for growing businesses — Powered by Dedicated NVMe SSD Storage, LiteSpeed Web Server, and Singapore Datacenter.",
+    "heroBadge": ""
+  },
+  "premium-hosting": {
+    "key": "premium-hosting",
+    "file": "premium-hosting.html",
+    "metaTitle": "Premium Web Hosting Packages | JAAS BD",
+    "heroTitle": "Premium Web Hosting Packages",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "corporate-hosting": {
+    "key": "corporate-hosting",
+    "file": "corporate-hosting.html",
+    "metaTitle": "Corporate Web Hosting Packages | JAAS BD",
+    "heroTitle": "Corporate Web Hosting",
+    "heroSubtitle": "",
+    "heroBadge": "Enterprise Grade Hosting"
+  },
+  "bdix-basic": {
+    "key": "bdix-basic",
+    "file": "bdix-basic.html",
+    "metaTitle": "BDIX Basic Web Hosting | JAAS BD",
+    "heroTitle": "BDIX Basic Web Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bdix-premium": {
+    "key": "bdix-premium",
+    "file": "bdix-premium.html",
+    "metaTitle": "BDIX Premium Web Hosting | JAAS BD",
+    "heroTitle": "BDIX Premium Web Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "charity-hosting": {
+    "key": "charity-hosting",
+    "file": "charity-hosting.html",
+    "metaTitle": "Free Web Hosting for Charities & Nonprofits | JAAS BD",
+    "heroTitle": "Free Hosting for Charities",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "reseller-hosting": {
+    "key": "reseller-hosting",
+    "file": "reseller-hosting.html",
+    "metaTitle": "Reseller Web Hosting Packages | JAAS BD",
+    "heroTitle": "White-Label Reseller Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bdix-reseller": {
+    "key": "bdix-reseller",
+    "file": "bdix-reseller.html",
+    "metaTitle": "BDIX Reseller Hosting | Ultra Fast Local Speed | JAAS BD",
+    "heroTitle": "BDIX Reseller Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "domain-reseller": {
+    "key": "domain-reseller",
+    "file": "domain-reseller.html",
+    "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | Putul Host",
+    "heroTitle": "Start Your Own Domain Business",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "vps": {
+    "key": "vps",
+    "file": "vps.html",
+    "metaTitle": "High Performance VPS Cloud Server | JAAS BD",
+    "heroTitle": "High Performance Cloud VPS Servers",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bdix-vps": {
+    "key": "bdix-vps",
+    "file": "bdix-vps.html",
+    "metaTitle": "BDIX VPS Cloud Server | Low Latency BD Routing | JAAS BD",
+    "heroTitle": "BDIX KVM VPS Server Plans",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "dedicated": {
+    "key": "dedicated",
+    "file": "dedicated.html",
+    "metaTitle": "Dedicated Bare Metal Servers | JAAS BD",
+    "heroTitle": "Dedicated Bare Metal Servers",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "rdp-server": {
+    "key": "rdp-server",
+    "file": "rdp-server.html",
+    "metaTitle": "Dedicated RDP Windows Server | Full Admin Access | JAAS BD",
+    "heroTitle": "Remote Desktop Protocol (RDP) Server",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "backup": {
+    "key": "backup",
+    "file": "backup.html",
+    "metaTitle": "Automated Backup & Storage Servers | JAAS BD",
+    "heroTitle": "Backup Storage VPS",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "email-hosting": {
+    "key": "email-hosting",
+    "file": "email-hosting.html",
+    "metaTitle": "Professional Email Hosting | JAAS BD - CrossBox, SpamExperts & NextCloud",
+    "heroTitle": "Professional Email Hosting",
+    "heroSubtitle": "Powered by CrossBox Premium with Spam Experts protection, NextCloud file storage, and MailChannels relay — business email done right.",
+    "heroBadge": ""
+  },
+  "radio-hosting": {
+    "key": "radio-hosting",
+    "file": "radio-hosting.html",
+    "metaTitle": "Radio Hosting & Shoutcast Streaming | JAAS BD",
+    "heroTitle": "Radio Hosting",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bulk-sms": {
+    "key": "bulk-sms",
+    "file": "bulk-sms.html",
+    "metaTitle": "Bulk SMS Solution | Masking & Non-Masking Gateway | JAAS BD",
+    "heroTitle": "Reach Millions Instantly with Bulk SMS Marketing",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "bulk-mail": {
+    "key": "bulk-mail",
+    "file": "bulk-mail.html",
+    "metaTitle": "Enterprise Bulk Mail Solutions | JAAS BD",
+    "heroTitle": "Every email lands in the inbox — not in spam",
+    "heroSubtitle": "OTPs, order confirmations, invoices, password resets — one panel for every transactional email your business sends. Send from your own verified domain through the dashboard, or plug the REST API straight into your application.",
+    "heroBadge": ""
+  },
+  "whmcs-solution": {
+    "key": "whmcs-solution",
+    "file": "whmcs-solution.html",
+    "metaTitle": "WHMCS Automation & Web Hosting Solutions | JAAS BD",
+    "heroTitle": "The #1 Web Hosting Billing & Automation Platform for Your Business",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "graphics-design": {
+    "key": "graphics-design",
+    "file": "graphics-design.html",
+    "metaTitle": "Creative Graphics & Web UI Design Solutions | JAAS BD",
+    "heroTitle": "Professional Graphics Design That Makes Your Brand Unforgettable",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "affiliates": {
+    "key": "affiliates",
+    "file": "affiliates.html",
+    "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | Putul Host",
+    "heroTitle": "Earn Up to 20% Commission",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "about": {
+    "key": "about",
+    "file": "about.html",
+    "metaTitle": "About Us - আমাদের সম্পর্কে | Putul Host",
+    "heroTitle": "About Putul Host",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "contact": {
+    "key": "contact",
+    "file": "contact.html",
+    "metaTitle": "Contact Us - যোগাযোগ | Putul Host",
+    "heroTitle": "Contact Us",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "terms": {
+    "key": "terms",
+    "file": "terms.html",
+    "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | Putul Host",
+    "heroTitle": "Terms of Service",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "privacy": {
+    "key": "privacy",
+    "file": "privacy.html",
+    "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | Putul Host",
+    "heroTitle": "Privacy Policy",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  },
+  "refund": {
+    "key": "refund",
+    "file": "refund.html",
+    "metaTitle": "Refund Policy - রিফান্ড পলিসি | Putul Host",
+    "heroTitle": "Refund Policy",
+    "heroSubtitle": "",
+    "heroBadge": ""
+  }
+}

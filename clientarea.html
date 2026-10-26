@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Area - JAAS BD Client Portal</title>
+  <link rel="icon" href="assets/images/jaasbd-logo.png" type="image/png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/v4-shims.min.css">
+
+  <!-- PutulHost Stylesheets -->
+  <link rel="stylesheet" href="assets/css/ph-header.css">
+  <link rel="stylesheet" href="assets/css/ph-footer.css">
+  <link rel="stylesheet" href="assets/css/ph-custom.css">
+
+  <style>
+    :root {
+      --ph-primary: #0284c7;
+      --ph-primary-dark: #0369a1;
+      --ph-primary-light: #dcfce7;
+      --ph-accent: #0077b6;
+      --ph-text-dark: #0f172a;
+      --ph-text-main: #334155;
+      --ph-text-muted: #64748b;
+      --ph-bg: #f8fafc;
+      --ph-card-bg: #ffffff;
+      --ph-border: #e2e8f0;
+      --ph-radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--ph-bg);
+      color: var(--ph-text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* WHMCS Client Sub-Header */
+    .portal-banner {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 30px 0;
+      border-bottom: 3px solid var(--ph-primary);
+    }
+    .portal-banner-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .portal-user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .portal-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+    .portal-welcome-text h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .portal-welcome-text p {
+      font-size: 13.5px;
+      color: #94a3b8;
+    }
+
+    .portal-nav-bar {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+    }
+    .portal-nav-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow-x: auto;
+    }
+    .portal-nav-tab {
+      padding: 14px 18px;
+      color: #cbd5e1;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .portal-nav-tab:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.05);
+    }
+    .portal-nav-tab.active {
+      color: #c084fc;
+      border-bottom-color: #7c3aed;
+      background: rgba(124, 58, 237, 0.15);
+    }
+
+    /* Container */
+    .portal-container {
+      max-width: 1220px;
+      margin: 30px auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 4 Stat Tiles (Putul Host WHMCS Style) */
+    .whmcs-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 900px) {
+      .whmcs-tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .whmcs-tiles-grid { grid-template-columns: 1fr; }
+    }
+
+    .whmcs-tile {
+      background: #ffffff;
+      border-radius: var(--ph-radius);
+      padding: 20px;
+      border: 1px solid var(--ph-border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .whmcs-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    }
+    .tile-data h3 {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .tile-data p {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ph-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tile-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .tile-green .tile-data h3 { color: #0284c7; }
+    .tile-green .tile-icon-box { background: #dcfce7; color: #0284c7; }
+
+    .tile-blue .tile-data h3 { color: #0077b6; }
+    .tile-blue .tile-icon-box { background: #e0f2fe; color: #0077b6; }
+
+    .tile-orange .tile-data h3 { color: #ea580c; }
+    .tile-orange .tile-icon-box { background: #ffedd5; color: #ea580c; }
+
+    .tile-purple .tile-data h3 { color: #7c3aed; }
+    .tile-purple .tile-icon-box { background: #ede9fe; color: #7c3aed; }
+
+    /* Layout Content Grid */
+    .portal-layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 25px;
+    }
+    @media (max-width: 960px) {
+      .portal-layout-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .portal-card {
+      background: #ffffff;
+      border-radius: var(--ph-radius);
+      border: 1px solid var(--ph-border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+    .portal-card-header {
+      padding: 16px 22px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--ph-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .portal-card-header h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ph-text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .portal-card-header h2 i {
+      color: var(--ph-primary);
+    }
+    .portal-card-body {
+      padding: 22px;
+    }
+
+    /* Tables */
+    .portal-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .portal-table th {
+      background: #f8fafc;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 800;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--ph-border);
+    }
+    .portal-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--ph-border);
+      font-size: 13.5px;
+      vertical-align: middle;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .badge-status.active {
+      background: #dcfce7;
+      color: #0284c7;
+    }
+    .badge-status.paid {
+      background: #dcfce7;
+      color: #0284c7;
+    }
+    .badge-status.unpaid {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .badge-status.pending {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    .badge-status.closed {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .btn-pay-now {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+    }
+    .btn-pay-now:hover {
+      background: #047857;
+      transform: translateY(-1px);
+    }
+
+    /* Buttons */
+    .btn-renew-action {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(124, 58, 237, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-renew-action:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%);
+      transform: translateY(-1px);
+    }
+
+    .btn-cpanel-action {
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-cpanel-action:hover {
+      background: #1e293b;
+    }
+
+    .btn-view-invoice {
+      background: #0077b6;
+      color: #ffffff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-view-invoice:hover {
+      background: #023e8a;
+    }
+
+    /* Shortcuts Grid in Sidebar */
+    .shortcut-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--ph-border);
+      background: #f8fafc;
+      color: var(--ph-text-dark);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    .shortcut-btn:hover {
+      border-color: var(--ph-primary);
+      background: #f0fdf4;
+      color: var(--ph-primary-dark);
+    }
+    .shortcut-btn i {
+      font-size: 16px;
+      color: var(--ph-primary);
+    }
+
+    /* Modal for Renewal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #ffffff;
+      border-radius: 14px;
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      background: #0f172a;
+      color: #fff;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-header h3 {
+      font-size: 17px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Notice Bar -->
+  <!-- Top Announcement Bar (Putulhost / JAAS BD Frame 1) -->
+<div class="ph-topbar" id="ph-notice-bar">
+    <div class="container">
+        <div class="ph-topbar-inner" id="ph-notice-content">
+            <a href="domain.html" class="ph-notice-item ph-notice-desktop active" style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:1;visibility:visible;align-items:center;justify-content:center;gap:12px;color:#fff;text-decoration:none;display:flex;">
+                <i class="fa fa-bullhorn" style="font-size:12px;opacity:0.75;flex-shrink:0;"></i>
+                <span style="color:#fff;font-size:13.5px;font-weight:600;letter-spacing:0.15px;white-space:nowrap;">.TOP ডোমেইন মাত্র ২১০ টাকা ! রিসেলার হোস্টিংয়ের ওপর সর্বোচ্চ ৫০% ছাড় ! .COM ডোমেইন রেজিস্টার ১০৫০ টাকা</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Go!</span>
+            </a>
+            <a href="basic-hosting.html" class="ph-notice-item ph-notice-mobile active" style="display:none;align-items:center;justify-content:center;gap:8px;padding:9px 14px;color:#fff;text-decoration:none;">
+                <i class="fa fa-bullhorn" style="font-size:11px;opacity:0.75;flex-shrink:0;"></i>
+                <span style="color:#fff;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">BASIC &amp; PRO WEB HOST এ পান ২০% ছাড়</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Go!</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     MAIN HEADER (PUTULHOST EXACT 1:1)
+============================================= -->
+<header class="ph-header" id="ph-site-header">
+    <div class="container">
+        <div class="ph-header-inner">
+
+            <!-- LOGO -->
+            <div class="ph-logo">
+                <a href="index.html" class="ph-logo-link">
+                    <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-logo-img" fetchpriority="high" loading="eager">
+                </a>
+            </div>
+
+            <!-- DESKTOP NAV -->
+            <nav class="ph-desktop-nav">
+                <ul class="ph-nav-menu">
+                    <!-- 1. Domain -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Registration</span><span class="ph-dd-subtext">Register Your Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="cart.html?a=add&domain=transfer"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/transfer.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Transfer</span><span class="ph-dd-subtext">Transfer to JAAS BD</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bd-domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/bd_domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">.BD Domain</span><span class="ph-dd-subtext">Register .BD Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 2. Hosting -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="basic-hosting.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Basic Web Hosting</span><span class="ph-dd-subtext">Perfect for small personal sites</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="pro-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Pro Web Hosting</span><span class="ph-dd-subtext">Ideal for growing businesses</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="premium-hosting.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Premium Web Hosting</span><span class="ph-dd-subtext">Enhanced speed and performance</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="corporate-hosting.html"><div class="ph-dd-icon" style="color:#059669;background:#ecfdf5;"><i class="fa fa-briefcase"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Corporate Web Hosting</span><span class="ph-dd-subtext">Dedicated enterprise resources &amp; SLA</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-basic.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Basic Hosting</span><span class="ph-dd-subtext">Ultra-fast local BD routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-premium.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Premium Hosting</span><span class="ph-dd-subtext">Maximum power with local routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="email-hosting.html"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Email Hosting</span><span class="ph-dd-subtext">Professional business email</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="radio-hosting.html"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-podcast"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Radio Hosting</span><span class="ph-dd-subtext">Broadcast your audio globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="charity-hosting.html"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-heart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Free Hosting for Charities</span><span class="ph-dd-subtext">Special packages for nonprofits</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 3. Reseller -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="domain-reseller.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-sitemap"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Reseller</span><span class="ph-dd-subtext">Start your own domain business</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="reseller-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Reseller Hosting</span><span class="ph-dd-subtext">White-label hosting solutions</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-reseller.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Reseller Hosting</span><span class="ph-dd-subtext">High-speed local BD reseller</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 4. Server -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Server <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-circle"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="rdp-server.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">RDP Server</span><span class="ph-dd-subtext">Remote desktop access globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="backup.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Backup Server</span><span class="ph-dd-subtext">Secure data storage &amp; recovery</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="dedicated.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Dedicated Server</span><span class="ph-dd-subtext">Ultimate power &amp; full control</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 5. Website -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Website <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-shopping-cart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">E-Commerce Website</span><span class="ph-dd-subtext">Complete online store solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Ecommerce Landing Page</span><span class="ph-dd-subtext">High-converting product pages</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-newspaper-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal Website</span><span class="ph-dd-subtext">Modern news publishing platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-file-text-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal E-Paper</span><span class="ph-dd-subtext">Digital newspaper experience</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Host &amp; IT Site</span><span class="ph-dd-subtext">Professional IT business website</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/social-media/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-microphone"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Social Media Website</span><span class="ph-dd-subtext">Online radio station platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/software/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-share-alt"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Software</span><span class="ph-dd-subtext">Community &amp; networking platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/plugin/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-tv"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WordPress Plugin</span><span class="ph-dd-subtext">Video streaming &amp; TV portal</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 6. Services -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Services <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="bulk-sms.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-cog"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk SMS</span><span class="ph-dd-subtext">Complete billing &amp; automation</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bulk-mail.html"><div class="ph-dd-icon" style="color:#723394;background:#eff6ff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk Mail</span><span class="ph-dd-subtext">Complete bulk mail solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="whmcs-solution.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WHMCS Solution</span><span class="ph-dd-subtext">Web Hosting &amp; Domain Panel</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="graphics-design.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-paint-brush"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Graphics Design</span><span class="ph-dd-subtext">Creative branding &amp; visuals</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- DESKTOP ACTIONS -->
+            <div class="ph-header-actions">
+                <a href="affiliates.html" class="ph-btn-affiliate">AFFILIATE</a>
+                
+                <div class="ph-support-dropdown">
+                    <button class="ph-btn-support"><i class="fa fa-headphones"></i> Support</button>
+                    <div class="ph-support-mega-menu">
+                        <div class="psm-section">
+                            <h4>Talk to Expert (Sales)</h4>
+                            <a href="tel:+8801818430308" class="psm-phone-box">
+                                <i class="fa fa-phone"></i> +8801818430308
+                            </a>
+                            <p class="psm-timing">Available: 24/7 Support</p>
+                        </div>
+                        
+                        <div class="psm-section">
+                            <h4>Chat with us</h4>
+                            <div class="psm-chat-btns">
+                                <a href="https://wa.me/8801818430308" class="psm-chat-btn" target="_blank" rel="noopener">
+                                    <i class="fa fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                <a href="clientarea.html" class="psm-chat-btn">
+                                    <i class="fa fa-ticket"></i>
+                                    <span>Ticket</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="psm-links">
+                            <a href="domain.html" class="psm-link"><i class="fa fa-book"></i> Visit our blog</a>
+                            <a href="clientarea.html" class="psm-link"><i class="fa fa-database"></i> Knowledgebase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="login.html" class="ph-btn-account">
+                    <i class="fa fa-user-circle"></i> Account
+                </a>
+            </div>
+
+            <!-- MOBILE ACTIONS (VISIBLE ONLY ON MOBILE) -->
+            <div class="ph-mobile-actions">
+                <a href="login.html" class="ph-mobile-btn"><i class="fa fa-user"></i></a>
+                <button class="ph-mobile-menu-toggle" id="phMenuToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- MOBILE NAVIGATION OVERLAY & SIDEBAR -->
+<div class="ph-mobile-overlay" id="phMobileOverlay"></div>
+<div class="ph-mobile-sidebar" id="phMobileSidebar">
+    <div class="ph-ms-header">
+        <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-ms-logo">
+        <button class="ph-ms-close" id="phMenuClose">&times;</button>
+    </div>
+    <div class="ph-ms-body">
+        <ul class="ph-ms-menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-ms-sub">
+                <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="domain.html">Register Domain</a></li>
+                    <li><a href="cart.html?a=add&domain=transfer">Transfer Domain</a></li>
+                    <li><a href="bd-domain.html">.BD Domain</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="basic-hosting.html">Basic Web Hosting</a></li>
+                    <li><a href="pro-hosting.html">Pro Web Hosting</a></li>
+                    <li><a href="premium-hosting.html">Premium Web Hosting</a></li>
+                    <li><a href="corporate-hosting.html">Corporate Web Hosting</a></li>
+                    <li><a href="bdix-basic.html">BDIX Basic Hosting</a></li>
+                    <li><a href="bdix-premium.html">BDIX Premium Hosting</a></li>
+                    <li><a href="email-hosting.html">Email Hosting</a></li>
+                    <li><a href="radio-hosting.html">Radio Hosting</a></li>
+                    <li><a href="charity-hosting.html">Free Hosting for Charities</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="domain-reseller.html">Domain Reseller</a></li>
+                    <li><a href="reseller-hosting.html">Reseller Hosting</a></li>
+                    <li><a href="bdix-reseller.html">BDIX Reseller Hosting</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Server <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="vps.html">VPS Server</a></li>
+                    <li><a href="bdix-vps.html">BDIX VPS Server</a></li>
+                    <li><a href="rdp-server.html">RDP Server</a></li>
+                    <li><a href="backup.html">Backup Server</a></li>
+                    <li><a href="dedicated.html">Dedicated Server</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Website <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener">E-Commerce Website</a></li>
+                    <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener">Ecommerce Landing Page</a></li>
+                    <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener">News Portal Website</a></li>
+                    <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener">News Portal E-Paper</a></li>
+                    <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener">Domain Host &amp; IT Site</a></li>
+                    <li><a href="https://putulit.com/category/social-media/" target="_blank" rel="noopener">Social Media Website</a></li>
+                    <li><a href="https://putulit.com/category/software/" target="_blank" rel="noopener">Software</a></li>
+                    <li><a href="https://putulit.com/category/plugin/" target="_blank" rel="noopener">WordPress Plugin</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Services <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="bulk-sms.html">Bulk SMS</a></li>
+                    <li><a href="bulk-mail.html">Bulk Mail</a></li>
+                    <li><a href="whmcs-solution.html">WHMCS Solution</a></li>
+                    <li><a href="graphics-design.html">Graphics Design</a></li>
+                </ul>
+            </li>
+            <li><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="tel:+8801818430308">Contact</a></li>
+        </ul>
+        <div class="ph-ms-footer">
+            <a href="login.html" class="ph-ms-btn-primary">Client Login</a>
+            <div class="ph-ms-social">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener"><i class="fa fa-facebook"></i></a>
+                <a href="https://x.com" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener"><i class="fa fa-youtube-play"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Portal Welcome Banner -->
+  <div class="portal-banner">
+    <div class="portal-banner-inner">
+      <div class="portal-user-info">
+        <div class="portal-avatar" id="portalAvatar">AH</div>
+        <div class="portal-welcome-text">
+          <h1 id="portalClientHeading">Welcome Back, Ashish Halder</h1>
+          <p id="portalClientSub"><i class="fa fa-building" style="color:#0284c7;"></i> Golden Frame BD &bull; Account #CL-8430 &bull; Mirzapur, Tangail</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <a href="cart.html?a=confproduct&plan=business-hosting" class="btn-renew-action" style="padding:10px 18px; font-size:13px;">
+          <i class="fa fa-plus-circle"></i> Order New Service
+        </a>
+        <a href="domain.html" class="btn-renew-action" style="padding:10px 18px; font-size:13px; background:#0077b6;">
+          <i class="fa fa-globe"></i> Register Domain
+        </a>
+        <button type="button" class="btn-renew-action" style="padding:10px 16px; font-size:13px; background:#334155;" onclick="clientLogout()" title="Switch client or sign out">
+          <i class="fa fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portal Secondary Navbar (WHMCS Standard Menu) -->
+  <div class="portal-nav-bar">
+    <div class="portal-nav-inner">
+      <a class="portal-nav-tab active" onclick="switchPortalTab('dashboard')"><i class="fa fa-home"></i> Dashboard</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('services')"><i class="fa fa-server"></i> My Services (<span id="navServicesCount">1</span>)</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('domains')"><i class="fa fa-globe"></i> My Domains (<span id="navDomainsCount">2</span>)</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('invoices')"><i class="fa fa-file-invoice"></i> Invoices (<span id="navInvoicesCount">1</span>)</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('tickets')"><i class="fa fa-headset"></i> Support Tickets (<span id="navTicketsCount">1</span>)</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('cpanel')"><i class="fa fa-cogs"></i> Direct cPanel SSO</a>
+      <a class="portal-nav-tab" onclick="switchPortalTab('profile')"><i class="fa fa-user-cog"></i> Profile &amp; Security</a>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="portal-container">
+
+    <!-- 4 WHMCS Stat Tiles -->
+    <div class="whmcs-tiles-grid">
+      <div class="whmcs-tile tile-green" onclick="switchPortalTab('services')" style="cursor:pointer;">
+        <div class="tile-data">
+          <h3 id="statServicesCount">1</h3>
+          <p>Active Services</p>
+        </div>
+        <div class="tile-icon-box"><i class="fa fa-server"></i></div>
+      </div>
+
+      <div class="whmcs-tile tile-blue" onclick="switchPortalTab('domains')" style="cursor:pointer;">
+        <div class="tile-data">
+          <h3 id="statDomainsCount">2</h3>
+          <p>Active Domains</p>
+        </div>
+        <div class="tile-icon-box"><i class="fa fa-globe"></i></div>
+      </div>
+
+      <div class="whmcs-tile tile-orange" onclick="switchPortalTab('invoices')" style="cursor:pointer;">
+        <div class="tile-data">
+          <h3 id="statUnpaidInvoices">0</h3>
+          <p>Unpaid Invoices</p>
+        </div>
+        <div class="tile-icon-box"><i class="fa fa-credit-card"></i></div>
+      </div>
+
+      <div class="whmcs-tile tile-purple" onclick="switchPortalTab('tickets')" style="cursor:pointer;">
+        <div class="tile-data">
+          <h3 id="statTicketsCount">1</h3>
+          <p>Support Tickets</p>
+        </div>
+        <div class="tile-icon-box"><i class="fa fa-comments"></i></div>
+      </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="portal-layout-grid">
+      
+      <!-- Left Column: Dynamic Tabs -->
+      <div>
+
+        <!-- TAB: DASHBOARD -->
+        <div id="tabDashboard">
+          <!-- Active Products Card -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-server"></i> Your Active Products/Services</h2>
+              <a href="cart.html?a=confproduct&plan=business-hosting" style="font-size:12.5px; color:#0284c7; font-weight:700; text-decoration:none;"><i class="fa fa-plus"></i> Order Service</a>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Product / Service</th>
+                    <th>Pricing</th>
+                    <th>Next Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Active Registered Domains Card -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-globe"></i> Your Active Domains</h2>
+              <a href="domain.html" style="font-size:12.5px; color:#0077b6; font-weight:700; text-decoration:none;"><i class="fa fa-plus"></i> Register Domain</a>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Domain</th>
+                    <th>Registration Date</th>
+                    <th>Next Due Date</th>
+                    <th>Auto Renew</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="dashDomainsTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Invoices Card -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-file-invoice-dollar"></i> Recent Invoices</h2>
+              <a href="invoice.html?id=INV-2026-0843" target="_blank" style="font-size:12.5px; color:#0077b6; font-weight:700; text-decoration:none;"><i class="fa fa-file-pdf"></i> View Official Invoice Pad</a>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Invoice Date</th>
+                    <th>Due Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="invoicesTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: MY SERVICES -->
+        <div id="tabServices" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-server"></i> My Hosting Services &amp; Server Details (FOSSBilling / WHMCS)</h2>
+              <a href="cart.html?a=confproduct&plan=business-hosting" class="btn-renew-action" style="font-size:12px; padding:6px 12px; text-decoration:none;">
+                <i class="fa fa-plus"></i> Order New Hosting
+              </a>
+            </div>
+            <div class="portal-card-body" id="servicesDetailsContainer">
+              <!-- Dynamically populated service cards -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: MY DOMAINS -->
+        <div id="tabDomains" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-globe"></i> Registered Domains &amp; DNS Management (FOSSBilling Style)</h2>
+              <a href="domain.html" class="btn-renew-action" style="font-size:12px; padding:6px 12px; text-decoration:none;">
+                <i class="fa fa-plus"></i> Register New Domain
+              </a>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Domain Name</th>
+                    <th>Registration Date</th>
+                    <th>Expiry Date</th>
+                    <th>Auto Renew</th>
+                    <th>Status</th>
+                    <th style="text-align:center;">Management Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="domainsTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: INVOICES -->
+        <div id="tabInvoices" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-file-invoice"></i> All Invoices &amp; Payment History</h2>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Invoice Date</th>
+                    <th>Due Date</th>
+                    <th>Service / Domain</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="allInvoicesListBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: SUPPORT TICKETS -->
+        <div id="tabTickets" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-ticket-alt"></i> Support Tickets Helpdesk (WHMCS 1:1)</h2>
+              <button type="button" class="btn-renew-action" onclick="openNewTicketModal()">
+                <i class="fa fa-plus"></i> Open New Ticket
+              </button>
+            </div>
+            <div class="portal-card-body" style="padding:0;">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th>Ticket #</th>
+                    <th>Subject</th>
+                    <th>Department</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="ticketsTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: DIRECT CPANEL SSO -->
+        <div id="tabCpanel" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-cogs"></i> Direct One-Click cPanel SSO &amp; Hosting Tools</h2>
+            </div>
+            <div class="portal-card-body">
+              <p style="font-size:14px; color:#64748b; margin-bottom:20px;">
+                Direct 1-click access to all your hosting control panel features without needing to type your login credentials:
+              </p>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px;">
+                <a href="cpanel.html" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-tachometer-alt" style="font-size:28px; color:#0284c7;"></i> cPanel Dashboard</a>
+                <a href="cpanel.html#files" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-folder-open" style="font-size:28px; color:#f59e0b;"></i> File Manager</a>
+                <a href="cpanel.html#mysql" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-database" style="font-size:28px; color:#10b981;"></i> phpMyAdmin</a>
+                <a href="cpanel.html#email" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-envelope" style="font-size:28px; color:#8b5cf6;"></i> Webmail Access</a>
+                <a href="cpanel.html#ssl" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-lock" style="font-size:28px; color:#0284c7;"></i> Free SSL / TLS</a>
+                <a href="cpanel.html#dns" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-network-wired" style="font-size:28px; color:#06b6d4;"></i> DNS Zone Editor</a>
+                <a href="cpanel.html#backup" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-archive" style="font-size:28px; color:#ef4444;"></i> JetBackup System</a>
+                <a href="cpanel.html#softaculous" class="shortcut-btn" style="flex-direction:column; text-align:center; padding:18px 12px;"><i class="fa fa-wordpress" style="font-size:28px; color:#3b82f6;"></i> 1-Click WordPress</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: PROFILE & SECURITY -->
+        <div id="tabProfile" style="display:none;">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2><i class="fa fa-user-cog"></i> My Profile &amp; Contact Information</h2>
+            </div>
+            <div class="portal-card-body">
+              <form id="clientProfileForm" onsubmit="handleSaveClientProfile(event)">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                  <div>
+                    <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Full Name</label>
+                    <input type="text" id="profClientName" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;" required>
+                  </div>
+                  <div>
+                    <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Company / Business Name</label>
+                    <input type="text" id="profClientCompany" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+                  </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                  <div>
+                    <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Email Address</label>
+                    <input type="email" id="profClientEmail" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;" required>
+                  </div>
+                  <div>
+                    <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Contact Phone / WhatsApp</label>
+                    <input type="text" id="profClientPhone" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;" required>
+                  </div>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                  <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Billing Address</label>
+                  <textarea id="profClientAddress" rows="2" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;"></textarea>
+                </div>
+
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:18px; margin-bottom:20px;">
+                  <h4 style="font-size:14px; font-weight:800; color:#0f172a; margin-bottom:10px;"><i class="fa fa-lock" style="color:#0284c7;"></i> Change Account Password</h4>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div>
+                      <label style="font-size:12.5px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">New Password</label>
+                      <input type="password" id="profNewPass" class="form-control" placeholder="••••••••" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+                    </div>
+                    <div>
+                      <label style="font-size:12.5px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Confirm Password</label>
+                      <input type="password" id="profConfirmPass" class="form-control" placeholder="••••••••" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-renew-action" style="padding:10px 22px; font-size:14px;">
+                  <i class="fa fa-save"></i> Save Profile &amp; Security Changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Account Information Sidebar -->
+      <div>
+        <div class="portal-card">
+          <div class="portal-card-header">
+            <h2><i class="fa fa-user-circle"></i> Client Summary</h2>
+          </div>
+          <div class="portal-card-body">
+            <div style="margin-bottom:14px;">
+              <span style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">Company / Client:</span>
+              <div style="font-size:15px; font-weight:800; color:#0f172a;" id="sideClientCompany">Golden Frame BD</div>
+              <div style="font-size:13.5px; color:#475569;" id="sideClientName">Ashish Halder</div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <span style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">Contact Email:</span>
+              <div style="font-size:13px; font-weight:700; color:#0284c7;" id="sideClientEmail">ashish@example.com</div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <span style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">Contact Phone:</span>
+              <div style="font-size:13.5px; font-weight:700; color:#0284c7;" id="sideClientPhone">+8801818430308</div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <span style="font-size:11px; font-weight:800; color:#64748b; text-transform:uppercase;">Billing Address:</span>
+              <div style="font-size:13px; color:#475569; line-height:1.5;" id="sideClientAddress">843/06 KD, Kadim Dewhata, Mirzapur, Tangail, Bangladesh.</div>
+            </div>
+
+            <div style="margin-top:18px; padding-top:14px; border-top:1px solid #e2e8f0;">
+              <a href="cart.html?a=confproduct&plan=business-hosting" class="shortcut-btn"><i class="fa fa-cart-plus"></i> Order New Hosting</a>
+              <a href="domain.html" class="shortcut-btn"><i class="fa fa-globe"></i> Register a New Domain</a>
+              <a href="cpanel.html" class="shortcut-btn"><i class="fa fa-tachometer-alt"></i> Access cPanel Directly</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24/7 Support Box -->
+        <div class="portal-card" style="background:linear-gradient(135deg, #070b19 0%, #0b132b 100%); color:#fff;">
+          <div class="portal-card-body" style="padding:22px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+              <div style="width:40px; height:40px; border-radius:10px; background:rgba(124, 58, 237, 0.2); color: #7c3aed; display:flex; align-items:center; justify-content:center; font-size:18px;">
+                <i class="fa fa-headphones-alt"></i>
+              </div>
+              <div>
+                <h4 style="font-size:15px; font-weight:800; color:#fff;">24/7 Priority Support</h4>
+                <p style="font-size:12px; color:#94a3b8;">Direct Helpline &amp; WhatsApp</p>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#cbd5e1; line-height:1.5; margin-bottom:16px;">
+              Need instant assistance? Our dedicated server engineers are available round the clock.
+            </p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <a href="tel:+8801818430308" class="shortcut-btn" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15); color:#fff;">
+                <i class="fa fa-phone" style="color:#7c3aed;"></i> +8801818430308
+              </a>
+              <a href="https://wa.me/8801818430308" target="_blank" class="shortcut-btn" style="background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15); color:#fff;">
+                <i class="fa fa-whatsapp" style="color:#22c55e;"></i> WhatsApp Chat Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================
+       MODALS: RENEWAL, DNS, NAMESERVERS, EPP, TICKETS, PAY INVOICE
+  ============================================= -->
+
+  <!-- Modal 1: Renewal Modal -->
+  <div class="modal-overlay" id="renewalModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa fa-bolt" style="color:#facc15;"></i> ⚡ Renew Web Hosting Service</h3>
+        <button type="button" onclick="closeRenewalModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px; color:#334155; margin-bottom:14px;">
+          Renewing: <strong id="modalServiceName">Business Hosting (20GB NVMe)</strong> (<span id="modalDomainName" style="color:#0284c7; font-weight:700;">goldenframebd.com</span>)
+        </p>
+
+        <label style="font-size:13px; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">Select Renewal Period:</label>
+        <select id="modalRenewalCycle" class="form-control" style="width:100%; margin-bottom:16px; padding:12px; border:1px solid #cbd5e1; border-radius:8px;" onchange="updateRenewalTotal()">
+          <option value="1yr" data-amt="4788" selected>1 Year Renewal &bull; ৳4,788 BDT</option>
+          <option value="2yr" data-amt="8618">2 Years Renewal &bull; ৳8,618 BDT (Save 10%)</option>
+          <option value="3yr" data-amt="12200">3 Years Renewal &bull; ৳12,200 BDT (Save 15%)</option>
+        </select>
+
+        <label style="font-size:13px; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">Payment Gateway:</label>
+        <select id="modalPaymentGateway" class="form-control" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid #cbd5e1; border-radius:8px;">
+          <option value="EPS (Easy Payment System)" selected>🟢 EPS (Easy Payment System)</option>
+          <option value="bKash Payment">🔴 bKash Payment</option>
+          <option value="Nagad Payment">🟠 Nagad Payment</option>
+          <option value="Rocket DBBL">🟣 Rocket / DBBL</option>
+          <option value="Visa / Mastercard">💳 Visa / Mastercard / Cards</option>
+        </select>
+
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:14px; margin-bottom:20px; text-align:center;">
+          <span style="font-size:12px; font-weight:700; color: #0284c7; text-transform:uppercase;">Total Amount to Pay</span>
+          <div style="font-size:26px; font-weight:900; color: #0284c7;" id="modalTotalDue">৳4,788.00 BDT</div>
+        </div>
+
+        <button type="button" class="btn-renew-action" style="width:100%; justify-content:center; padding:14px; font-size:15px;" onclick="processServiceRenewal()">
+          <i class="fa fa-lock"></i> Confirm &amp; Complete Renewal Payment
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Pay Unpaid Invoice Modal -->
+  <div class="modal-overlay" id="payInvoiceModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa fa-credit-card" style="color:#10b981;"></i> Pay Unpaid Invoice</h3>
+        <button type="button" onclick="closePayInvoiceModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:14px; margin-bottom:16px;">
+          <div style="font-size:12px; color:#64748b; text-transform:uppercase; font-weight:700;">Invoice Reference</div>
+          <div style="font-size:18px; font-weight:800; color:#0f172a;" id="payModalInvoiceId">INV-2026-0843</div>
+          <div style="font-size:13px; color:#334155; margin-top:4px;" id="payModalItemTitle">Business Hosting (20GB NVMe)</div>
+          <div style="font-size:22px; font-weight:900; color:#0284c7; margin-top:8px;" id="payModalAmount">৳4,788.00 BDT</div>
+        </div>
+
+        <label style="font-size:13px; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">Select Payment Method:</label>
+        <select id="payModalGatewaySelect" class="form-control" style="width:100%; margin-bottom:16px; padding:12px; border:1px solid #cbd5e1; border-radius:8px;">
+          <option value="bKash Online Payment">🔴 bKash (01818430308)</option>
+          <option value="Nagad Payment">🟠 Nagad (01818430308)</option>
+          <option value="Rocket DBBL">🟣 Rocket (018184303084)</option>
+          <option value="EPS Easy Payment System" selected>🟢 EPS (Bangladesh Bank PSO Licensed)</option>
+          <option value="Visa / MasterCard / AMEX">💳 Debit / Credit Cards (SSLCommerz)</option>
+        </select>
+
+        <div style="margin-bottom:16px;">
+          <label style="font-size:13px; font-weight:700; color:#0f172a; margin-bottom:6px; display:block;">Transaction ID / Ref (Optional for Demo):</label>
+          <input type="text" id="payModalTxnId" class="form-control" placeholder="e.g. TXN-893041 or leave blank for auto" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+        </div>
+
+        <button type="button" class="btn-renew-action" style="width:100%; justify-content:center; padding:14px; font-size:15px; background:linear-gradient(135deg, #10b981 0%, #059669 100%);" onclick="confirmInvoicePayment()">
+          <i class="fa fa-check-circle"></i> Complete Payment &amp; Mark as PAID
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: DNS Records Manager Modal -->
+  <div class="modal-overlay" id="dnsModal">
+    <div class="modal-box" style="max-width:720px;">
+      <div class="modal-header">
+        <h3><i class="fa fa-network-wired" style="color:#7c3aed;"></i> DNS Management &bull; <span id="dnsModalDomainName">goldenframebd.com</span></h3>
+        <button type="button" onclick="closeDnsModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px; color:#64748b; margin-bottom:16px;">
+          Configure host records, A, CNAME, MX, and TXT DNS records for this domain. Updates propagate globally within 15 minutes.
+        </p>
+
+        <!-- Existing Records Table -->
+        <div style="max-height:220px; overflow-y:auto; margin-bottom:20px; border:1px solid #e2e8f0; border-radius:8px;">
+          <table class="portal-table" style="font-size:12.5px;">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Host / Name</th>
+                <th>Destination / Value</th>
+                <th>TTL</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dnsRecordsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Add New Record Form -->
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px;">
+          <h4 style="font-size:13.5px; font-weight:800; color:#0f172a; margin-bottom:10px;">+ Add New DNS Record</h4>
+          <div style="display:grid; grid-template-columns:90px 1fr 1fr 90px; gap:8px; align-items:center;">
+            <select id="newDnsType" style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px;">
+              <option value="A">A</option>
+              <option value="CNAME">CNAME</option>
+              <option value="MX">MX</option>
+              <option value="TXT">TXT</option>
+              <option value="AAAA">AAAA</option>
+            </select>
+            <input type="text" id="newDnsHost" placeholder="Host (@, www, mail)" style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px;">
+            <input type="text" id="newDnsValue" placeholder="Value (e.g. 103.145.118.25)" style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px;">
+            <input type="text" id="newDnsTtl" value="14400" placeholder="TTL" style="padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-size:13px;">
+          </div>
+          <button type="button" class="btn-renew-action" style="margin-top:10px; padding:8px 16px; font-size:12.5px;" onclick="addNewDnsRecord()">
+            <i class="fa fa-plus"></i> Add DNS Record
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Nameservers Modal -->
+  <div class="modal-overlay" id="nameserversModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa fa-server" style="color:#38bdf8;"></i> Manage Nameservers &bull; <span id="nsModalDomainName">goldenframebd.com</span></h3>
+        <button type="button" onclick="closeNameserversModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:16px;">
+          <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700; color:#0f172a; margin-bottom:12px; cursor:pointer;">
+            <input type="radio" name="nsMode" id="nsModeDefault" checked onchange="toggleNsMode()">
+            Use JAAS BD Default High-Performance Nameservers
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700; color:#0f172a; cursor:pointer;">
+            <input type="radio" name="nsMode" id="nsModeCustom" onchange="toggleNsMode()">
+            Use Custom Third-Party Nameservers (e.g. Cloudflare)
+          </label>
+        </div>
+
+        <div id="nsInputsBox" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; margin-bottom:18px;">
+          <div style="margin-bottom:10px;">
+            <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Nameserver 1</label>
+            <input type="text" id="nsInput1" value="ns1.jaasbd.com" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:6px;">
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Nameserver 2</label>
+            <input type="text" id="nsInput2" value="ns2.jaasbd.com" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:6px;">
+          </div>
+        </div>
+
+        <button type="button" class="btn-renew-action" style="width:100%; justify-content:center; padding:12px;" onclick="saveNameservers()">
+          <i class="fa fa-save"></i> Save Nameservers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: EPP / Auth-Code Modal -->
+  <div class="modal-overlay" id="eppModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa fa-key" style="color:#facc15;"></i> Domain Authorization / EPP Code</h3>
+        <button type="button" onclick="closeEppModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13.5px; color:#475569; margin-bottom:14px;">
+          Authorization code for transferring <strong id="eppModalDomainName">goldenframebd.com</strong>:
+        </p>
+        <div style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:8px; padding:14px; display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+          <code id="eppModalCode" style="font-size:16px; font-weight:800; color:#0284c7;">JF89!kL2#jaas</code>
+          <button type="button" class="btn-renew-action" style="padding:6px 12px; font-size:12px;" onclick="copyEppCode()">
+            <i class="fa fa-copy"></i> Copy
+          </button>
+        </div>
+        <p style="font-size:12px; color:#64748b;">
+          ⚠️ Keep your EPP transfer code safe. Only share it with your new registrar if you wish to transfer the domain away.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Open New Support Ticket Modal -->
+  <div class="modal-overlay" id="newTicketModal">
+    <div class="modal-box" style="max-width:620px;">
+      <div class="modal-header">
+        <h3><i class="fa fa-plus-circle" style="color:#7c3aed;"></i> Open New Support Ticket</h3>
+        <button type="button" onclick="closeNewTicketModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleCreateSupportTicket(event)">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+            <div>
+              <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Department</label>
+              <select id="ticketDeptSelect" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:13.5px;">
+                <option value="Technical Support">Technical Support</option>
+                <option value="Billing & Invoicing">Billing &amp; Invoicing</option>
+                <option value="Domain Department">Domain Department</option>
+                <option value="Sales / Pre-Sales">Sales / Pre-Sales</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Priority</label>
+              <select id="ticketPrioritySelect" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:13.5px;">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High (Urgent Issue)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:14px;">
+            <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Subject</label>
+            <input type="text" id="ticketSubjectInput" placeholder="Brief summary of your query" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:13.5px;" required>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">Message Details</label>
+            <textarea id="ticketMessageInput" rows="4" placeholder="Describe the issue or request in detail..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:13.5px;" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-renew-action" style="width:100%; justify-content:center; padding:12px; font-size:14px;">
+            <i class="fa fa-paper-plane"></i> Submit Support Ticket
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 7: Ticket Conversation Thread Modal -->
+  <div class="modal-overlay" id="ticketThreadModal">
+    <div class="modal-box" style="max-width:700px;">
+      <div class="modal-header">
+        <h3><i class="fa fa-comments" style="color:#38bdf8;"></i> <span id="threadModalTitle">Ticket #TCK-84301</span></h3>
+        <button type="button" onclick="closeTicketThreadModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size:15px; font-weight:800; color:#0f172a; margin-bottom:12px;" id="threadModalSubject">Nameserver Delegation</div>
+        <div id="threadMessagesContainer" style="max-height:300px; overflow-y:auto; margin-bottom:16px; display:flex; flex-direction:column; gap:10px;">
+          <!-- Messages inserted dynamically -->
+        </div>
+
+        <!-- Post Reply -->
+        <div style="border-top:1px solid #e2e8f0; padding-top:14px;">
+          <textarea id="threadReplyText" rows="2" placeholder="Write your reply to staff..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px; margin-bottom:8px;"></textarea>
+          <button type="button" class="btn-renew-action" style="padding:8px 16px; font-size:13px;" onclick="submitTicketReply()">
+            <i class="fa fa-reply"></i> Post Reply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 8: Change cPanel Password Modal -->
+  <div class="modal-overlay" id="cpanelPassModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa fa-key" style="color:#f59e0b;"></i> Reset cPanel Password</h3>
+        <button type="button" onclick="closeCpanelPassModal()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13.5px; color:#475569; margin-bottom:14px;">
+          Changing cPanel password for: <strong id="cpModalDomain">goldenframebd.com</strong>
+        </p>
+        <div style="margin-bottom:14px;">
+          <label style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px; display:block;">New cPanel Password</label>
+          <input type="text" id="cpModalNewPass" class="form-control" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+        </div>
+        <button type="button" class="btn-renew-action" style="width:100%; justify-content:center; padding:12px;" onclick="saveCpanelPassword()">
+          <i class="fa fa-check"></i> Update cPanel Password
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ultra Footer (Putul Host 1:1) -->
+  <footer class="ph-ultra-footer" style="background:linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;">
+    <div class="container">
+        <!-- BOTTOM FOOTER: INFO GRID -->
+        <div class="ph-footer-bottom-grid">
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Our Address</h4>
+                <p class="ph-fb-text">
+                    <strong>JAAS BD</strong><br>
+                    Kadim Dewhata, Mirzapur, Tangail, Dhaka - Bangladesh                </p>
+                <div class="ph-footer-contact">
+                    <p style="color:#ffffff !important;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;"><i class="fa fa-phone" style="color:#7c3aed !important;font-size:16px;"></i> <span style="color:#ffffff !important;font-weight:600;">+8801818430308</span> <span style="font-size:11.5px;color:#94a3b8 !important;">(10AM-8PM)</span></p>
+                    <p style="color:#ffffff !important;font-size:14px;display:flex;align-items:center;gap:10px;"><i class="fa fa-envelope" style="color:#7c3aed !important;font-size:16px;"></i> <a href="mailto:info@jaasbd.com" style="color:#ffffff !important;font-weight:700 !important;text-decoration:none !important;letter-spacing:0.3px;font-size:14px;transition:color 0.2s;">info@jaasbd.com</a></p>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Payment Options</h4>
+                <div class="ph-payment-options">
+                    <img src="assets/images/ph/SSLCommerz-Pay.png" alt="Payment Options" style="max-width: 100%; border-radius: 8px;" loading="lazy">
+                </div>
+
+                <div class="ph-footer-membership-compact">
+                    <h5 class="ph-membership-title-small">Official Member of</h5>
+                    <div class="ph-membership-list-small">
+                        <img src="assets/images/ph/Basis-logo.png" alt="BASIS" loading="lazy">
+                        <img src="assets/images/ph/e-Cab-logo.png" alt="e-CAB" loading="lazy">
+                        <img src="assets/images/ph/Apnic-logo.png" alt="APNIC" loading="lazy">
+                        <img src="assets/images/ph/DBID11.png" alt="DBID" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Subscribe Newsletter</h4>
+                <p class="ph-fb-text">Subscribe for new offers and updates.</p>
+                <form class="ph-subscribe-form" role="form" aria-label="Newsletter Subscription">
+                    <!-- Honeypot: bots fill this, humans don't see it -->
+                    <input type="text" name="ph_website" value="" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true">
+                    <input type="hidden" name="ph_form_time" id="ph_form_time" value="">
+                    <label for="ph-newsletter-email" class="screen-reader-text">Email Address</label>
+                    <input type="email" id="ph-newsletter-email" placeholder="enter your email...." required aria-label="Email Address" autocomplete="email">
+                    <button type="submit" aria-label="Subscribe to newsletter"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
+
+                <div class="ph-social-links-wrapper">
+                    <p class="ph-social-text">To get updates follow us on Facebook, Twitters etc.</p>
+                    <div class="ph-social-links-compact">
+                        <a href="https://www.facebook.com/putulhost.official" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>                        <a href="https://x.com/putulhost" target="_blank" rel="noopener" title="X (Twitter)"><i class="fa fa-twitter"></i></a>                        <a href="https://www.instagram.com/myputulhost/" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>                        <a href="https://www.youtube.com/c/JAAS BD" target="_blank" rel="noopener" title="YouTube"><i class="fa fa-youtube-play"></i></a>                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Company</h4>
+                <ul class="ph-footer-links-small">
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li style="margin-top: 15px;"><a href="affiliates.html" class="ph-affiliate-btn">Affiliate</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BACK TO TOP BUTTON -->
+        <div class="ph-back-to-top" id="backToTop">
+            <div class="ph-btt-icon">
+                <i class="fa fa-chevron-up"></i>
+            </div>
+        </div>
+
+        <!-- FLOATING SUPPORT WIDGET (toggle controlled) -->
+        
+    <div class="ph-footer-bottom-bar">
+        <div class="container">
+            <div class="ph-bottom-bar-flex">
+                <div class="ph-copyright-text">
+                    � 2026 <span>JAAS BD</span>. All rights reserved.
+                </div>
+                <div class="ph-footer-bottom-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <span class="divider">|</span>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span class="divider">|</span>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script src="assets/js/ph-nav.js"></script>
+  <script src="assets/js/jaas-system.js"></script>
+  <!-- Script for Client Area -->
+  <!-- Script for Complete WHMCS & FOSSBilling Client Area Engine -->
+  <script>
+    // Strict Client Authentication Guard: require login to enter Client Area
+    (function guardClientAuth() {
+      try {
+        const raw = localStorage.getItem('jaas_client_user');
+        const user = raw ? JSON.parse(raw) : null;
+        if (!user || user.loggedIn !== true) {
+          window.location.replace('login.html?redirect=clientarea.html');
+          return;
+        }
+      } catch(e) {
+        window.location.replace('login.html?redirect=clientarea.html');
+      }
+    })();
+
+    let activeDnsDomain = null;
+    let activeNsDomain = null;
+    let activeThreadTicketId = null;
+    let activePayInvoiceId = null;
+    let activeCpDomain = null;
+
+    function switchPortalTab(tabId) {
+      document.querySelectorAll('.portal-nav-tab').forEach(t => t.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.portal-nav-tab')).find(el => el.innerText.toLowerCase().includes(tabId));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const tabs = ['dashboard', 'services', 'domains', 'invoices', 'tickets', 'cpanel', 'profile'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+
+      // Update URL hash without scroll
+      if (history.replaceState) {
+        history.replaceState(null, null, '#' + tabId);
+      }
+    }
+
+    // Client Logout / Switch
+    function clientLogout() {
+      if (confirm('Are you sure you want to sign out of your Client Area?')) {
+        try {
+          const raw = localStorage.getItem('jaas_client_user');
+          if (raw) {
+            const client = JSON.parse(raw);
+            client.loggedIn = false;
+            localStorage.setItem('jaas_client_user', JSON.stringify(client));
+          }
+        } catch(e) {}
+        window.location.href = 'login.html';
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // RENDER FUNCTIONS
+    // ------------------------------------------------------------------------
+    function initClientArea() {
+      if (typeof JaasStore === 'undefined') return;
+
+      const client = JaasStore.getClientUser();
+      const services = JaasStore.getServices();
+      const domains = JaasStore.getDomains();
+      const invoices = JaasStore.getInvoices();
+      const tickets = JaasStore.getTickets();
+
+      // 1. Populate Client Header & Sidebar
+      if (client) {
+        const name = client.name || 'Client';
+        const heading = document.getElementById('portalClientHeading');
+        if (heading) heading.innerText = 'Welcome Back, ' + name;
+
+        const sub = document.getElementById('portalClientSub');
+        if (sub) sub.innerHTML = `<i class="fa fa-building" style="color:#0284c7;"></i> ${client.company || 'Personal Account'} &bull; Account #${client.id || 'CL-8430'} &bull; ${client.address || 'Bangladesh'}`;
+
+        const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'JA';
+        const avatar = document.getElementById('portalAvatar');
+        if (avatar) avatar.innerText = initials;
+
+        if (document.getElementById('sideClientCompany')) document.getElementById('sideClientCompany').innerText = client.company || 'Personal Account';
+        if (document.getElementById('sideClientName')) document.getElementById('sideClientName').innerText = name;
+        if (document.getElementById('sideClientEmail')) document.getElementById('sideClientEmail').innerText = client.email || 'info@jaasbd.com';
+        if (document.getElementById('sideClientPhone')) document.getElementById('sideClientPhone').innerText = client.phone || '+8801818430308';
+        if (document.getElementById('sideClientAddress')) document.getElementById('sideClientAddress').innerText = client.address || 'Mirzapur, Tangail, Bangladesh.';
+
+        // Profile Form
+        if (document.getElementById('profClientName')) document.getElementById('profClientName').value = name;
+        if (document.getElementById('profClientCompany')) document.getElementById('profClientCompany').value = client.company || '';
+        if (document.getElementById('profClientEmail')) document.getElementById('profClientEmail').value = client.email || '';
+        if (document.getElementById('profClientPhone')) document.getElementById('profClientPhone').value = client.phone || '';
+        if (document.getElementById('profClientAddress')) document.getElementById('profClientAddress').value = client.address || '';
+      }
+
+      // 2. Stat Tile Counts & Navigation Pills
+      const unpaidInvoices = invoices.filter(i => (i.status || '').toUpperCase() === 'UNPAID');
+
+      if (document.getElementById('statServicesCount')) document.getElementById('statServicesCount').innerText = services.length;
+      if (document.getElementById('navServicesCount')) document.getElementById('navServicesCount').innerText = services.length;
+
+      if (document.getElementById('statDomainsCount')) document.getElementById('statDomainsCount').innerText = domains.length;
+      if (document.getElementById('navDomainsCount')) document.getElementById('navDomainsCount').innerText = domains.length;
+
+      if (document.getElementById('statUnpaidInvoices')) document.getElementById('statUnpaidInvoices').innerText = unpaidInvoices.length;
+      if (document.getElementById('navInvoicesCount')) document.getElementById('navInvoicesCount').innerText = invoices.length;
+
+      if (document.getElementById('statTicketsCount')) document.getElementById('statTicketsCount').innerText = tickets.length;
+      if (document.getElementById('navTicketsCount')) document.getElementById('navTicketsCount').innerText = tickets.length;
+
+      // 3. Render Each Section
+      renderServicesList(services);
+      renderDomainsList(domains);
+      renderInvoicesList(invoices);
+      renderTicketsList(tickets);
+    }
+
+    // ------------------------------------------------------------------------
+    // SERVICES RENDERING
+    // ------------------------------------------------------------------------
+    function renderServicesList(services) {
+      const dashTbody = document.getElementById('servicesTableBody');
+      const detailsContainer = document.getElementById('servicesDetailsContainer');
+
+      if (dashTbody) {
+        if (!services.length) {
+          dashTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:24px; color:#64748b;">No active services found. <a href="cart.html?plan=business-hosting" style="color:#0284c7; font-weight:700;">Order hosting now &rarr;</a></td></tr>`;
+        } else {
+          dashTbody.innerHTML = services.map(s => {
+            const isSuspended = (s.status || '').toLowerCase() === 'suspended';
+            const badgeClass = isSuspended ? 'badge-status unpaid' : 'badge-status active';
+            const badgeIcon = isSuspended ? 'fa-pause-circle' : 'fa-check-circle';
+            return `
+              <tr>
+                <td>
+                  <strong style="color:#0f172a; font-size:14.5px;">${s.name}</strong><br>
+                  <a href="https://${s.domain}" target="_blank" style="color:#0284c7; font-weight:600; font-size:13px; text-decoration:none;">
+                    <i class="fa fa-external-link-alt" style="font-size:11px;"></i> ${s.domain}
+                  </a>
+                </td>
+                <td>
+                  <strong>৳${(s.price || 0).toLocaleString()}.00 BDT</strong><br>
+                  <span style="font-size:11.5px; color:#64748b;">${s.billingCycle || 'Annually'}</span>
+                </td>
+                <td>
+                  <span style="font-weight:700; color:#0f172a;">${s.nextDue || '2027-03-15'}</span><br>
+                  <span style="font-size:11px; color:#0284c7;">Auto-renewal active</span>
+                </td>
+                <td>
+                  <span class="${badgeClass}"><i class="fa ${badgeIcon}"></i> ${s.status || 'Active'}</span>
+                </td>
+                <td>
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    <button type="button" class="btn-renew-action" onclick="openRenewalModal('${s.name}', '${s.domain}', ${s.price || 4788})">
+                      <i class="fa fa-bolt"></i> ⚡ Renew Service
+                    </button>
+                    <a href="cpanel.html" class="btn-cpanel-action">
+                      <i class="fa fa-tachometer-alt"></i> cPanel Login
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+
+      if (detailsContainer) {
+        if (!services.length) {
+          detailsContainer.innerHTML = `<div style="text-align:center; padding:30px; color:#64748b;">No active hosting services. <a href="cart.html?plan=business-hosting" class="btn-renew-action" style="margin-left:10px;">Order Hosting</a></div>`;
+        } else {
+          detailsContainer.innerHTML = services.map(s => `
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:22px; margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <h3 style="font-size:18px; font-weight:800; color:#0f172a;">${s.name}</h3>
+                    <span class="badge-status active"><i class="fa fa-check-circle"></i> ${s.status || 'Active'}</span>
+                  </div>
+                  <a href="https://${s.domain}" target="_blank" style="color:#0284c7; font-weight:700; font-size:14px; text-decoration:none;">
+                    <i class="fa fa-globe"></i> ${s.domain}
+                  </a>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:18px; font-weight:900; color:#0f172a;">৳${(s.price || 0).toLocaleString()}.00 BDT</div>
+                  <div style="font-size:12px; color:#64748b;">Next Due: <strong>${s.nextDue || '2027-03-15'}</strong> (${s.billingCycle || 'Annually'})</div>
+                </div>
+              </div>
+
+              <div style="font-size:12.5px; color:#64748b; margin-bottom:18px; background:#fff; padding:10px 14px; border-radius:8px; border:1px solid #e2e8f0; display:flex; gap:16px; flex-wrap:wrap;">
+                <span>Server IP: <code>${s.serverIP || '103.145.118.25'}</code></span>
+                <span>cPanel User: <code>${s.cpanelUser || 'jaas_golden'}</code></span>
+                <span>Nameservers: <code>${(s.nameservers || ['ns1.jaasbd.com', 'ns2.jaasbd.com']).join(', ')}</code></span>
+              </div>
+
+              <!-- Resource Usage Meters -->
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+                <div style="background:#fff; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
+                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:6px;">
+                    <span>Disk Space (${s.storage || 'NVMe SSD'})</span>
+                    <span>${s.diskUsed || '1.42 GB'} / ${s.diskLimit || s.storage || '20 GB'} (7%)</span>
+                  </div>
+                  <div style="height:8px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+                    <div style="width:7%; height:100%; background:#0284c7;"></div>
+                  </div>
+                </div>
+
+                <div style="background:#fff; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
+                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:700; margin-bottom:6px;">
+                    <span>Monthly Bandwidth</span>
+                    <span>${s.bandwidthUsed || '14.8 GB'} / Unlimited (BDIX 10Gbps)</span>
+                  </div>
+                  <div style="height:8px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+                    <div style="width:4%; height:100%; background:#0077b6;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 1-Click Launchers and Actions -->
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <a href="cpanel.html" class="btn-renew-action" style="text-decoration:none;"><i class="fa fa-tachometer-alt"></i> cPanel 1-Click SSO</a>
+                <a href="cpanel.html#email" class="btn-renew-action" style="background:#0077b6; text-decoration:none;"><i class="fa fa-envelope"></i> Webmail SSO</a>
+                <a href="cpanel.html#mysql" class="btn-renew-action" style="background:#059669; text-decoration:none;"><i class="fa fa-database"></i> phpMyAdmin</a>
+                <button type="button" class="btn-renew-action" style="background:#f59e0b;" onclick="openCpanelPassModal('${s.domain}')">
+                  <i class="fa fa-key"></i> Reset cPanel Pass
+                </button>
+                <button type="button" class="btn-renew-action" style="background:#0f172a;" onclick="openRenewalModal('${s.name}', '${s.domain}', ${s.price || 4788})">
+                  <i class="fa fa-sync"></i> ⚡ Renew Service
+                </button>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // DOMAINS RENDERING
+    // ------------------------------------------------------------------------
+    function renderDomainsList(domains) {
+      const dashTbody = document.getElementById('dashDomainsTableBody');
+      const domainsTbody = document.getElementById('domainsTableBody');
+
+      if (dashTbody) {
+        if (!domains.length) {
+          dashTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:20px; color:#64748b;">No domains registered yet. <a href="domain.html" style="color:#0284c7; font-weight:700;">Search a domain &rarr;</a></td></tr>`;
+        } else {
+          dashTbody.innerHTML = domains.map(d => `
+            <tr>
+              <td>
+                <strong style="color:#0f172a; font-size:14px;"><i class="fa fa-globe" style="color:#0284c7;"></i> ${d.domain}</strong>
+              </td>
+              <td>${d.regDate || '2026-03-15'}</td>
+              <td>${d.nextDue || d.expiryDate || '2027-03-15'}</td>
+              <td><span style="color:#0284c7; font-weight:700;"><i class="fa fa-check"></i> ${d.autoRenew ? 'Enabled' : 'Disabled'}</span></td>
+              <td><span class="badge-status active"><i class="fa fa-check-circle"></i> ${d.status || 'Active'}</span></td>
+              <td>
+                <button type="button" class="btn-sm" style="cursor:pointer;" onclick="openDnsModal('${d.domain}')"><i class="fa fa-network-wired"></i> DNS</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      if (domainsTbody) {
+        if (!domains.length) {
+          domainsTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:24px; color:#64748b;">No domains registered. <a href="domain.html" style="color:#0284c7; font-weight:700;">Register a new domain &rarr;</a></td></tr>`;
+        } else {
+          domainsTbody.innerHTML = domains.map(d => `
+            <tr>
+              <td>
+                <strong style="color:#0f172a; font-size:14.5px;"><i class="fa fa-globe" style="color:#0284c7;"></i> ${d.domain}</strong><br>
+                <span style="font-size:11px; color:#64748b;">৳${(d.price || 1150).toLocaleString()} BDT / yr</span>
+              </td>
+              <td>${d.regDate || '2026-03-15'}</td>
+              <td>
+                <strong style="color:#0f172a;">${d.nextDue || d.expiryDate || '2027-03-15'}</strong><br>
+                <span style="font-size:11px; color:#0284c7;">Auto-renewal active</span>
+              </td>
+              <td>
+                <button type="button" class="btn-sm" onclick="toggleDomainAutoRenew('${d.domain}')" style="cursor:pointer; font-size:11.5px;">
+                  <i class="fa ${d.autoRenew ? 'fa-toggle-on' : 'fa-toggle-off'}" style="color:${d.autoRenew ? '#0284c7' : '#94a3b8'};"></i> ${d.autoRenew ? 'Auto-Renew ON' : 'OFF'}
+                </button>
+              </td>
+              <td><span class="badge-status active"><i class="fa fa-check-circle"></i> ${d.status || 'Active'}</span></td>
+              <td>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+                  <button type="button" class="btn-sm" style="cursor:pointer;" onclick="openDnsModal('${d.domain}')" title="Manage DNS records">
+                    <i class="fa fa-network-wired"></i> DNS
+                  </button>
+                  <button type="button" class="btn-sm" style="cursor:pointer;" onclick="openNameserversModal('${d.domain}')" title="Change nameservers">
+                    <i class="fa fa-server"></i> Nameservers
+                  </button>
+                  <button type="button" class="btn-sm" style="cursor:pointer;" onclick="openEppModal('${d.domain}')" title="Get EPP Authorization code">
+                    <i class="fa fa-key"></i> EPP Code
+                  </button>
+                  <button type="button" class="btn-renew-action" style="padding:5px 10px; font-size:11.5px;" onclick="openRenewalModal('Domain Renewal', '${d.domain}', ${d.price || 1150})">
+                    ⚡ Renew
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // INVOICES RENDERING
+    // ------------------------------------------------------------------------
+    function renderInvoicesList(invoices) {
+      const dashInvTbody = document.getElementById('invoicesTableBody');
+      const allInvTbody = document.getElementById('allInvoicesListBody');
+
+      if (!invoices.length) {
+        const empty = `<tr><td colspan="6" style="text-align:center; padding:20px; color:#64748b;">No invoices recorded.</td></tr>`;
+        if (dashInvTbody) dashInvTbody.innerHTML = empty;
+        if (allInvTbody) allInvTbody.innerHTML = empty;
+        return;
+      }
+
+      const rows = invoices.map(inv => {
+        const isPaid = (inv.status || '').toUpperCase() === 'PAID';
+        const badgeClass = isPaid ? 'badge-status paid' : 'badge-status unpaid';
+        const badgeIcon = isPaid ? 'fa-check' : 'fa-clock';
+
+        const actionBtn = isPaid ? `
+          <a href="invoice.html?id=${inv.id}" target="_blank" class="btn-view-invoice">
+            <i class="fa fa-print"></i> View / Download PDF
+          </a>
+        ` : `
+          <button type="button" class="btn-pay-now" onclick="openPayInvoiceModal('${inv.id}')">
+            <i class="fa fa-bolt"></i> ⚡ Pay Invoice Now
+          </button>
+        `;
+
+        return `
+          <tr>
+            <td><strong>${inv.id}</strong></td>
+            <td>${inv.date || '2026-03-15'}</td>
+            <td>${inv.dueDate || '2026-03-22'}</td>
+            <td>
+              <strong style="color:#0f172a;">${inv.planName || inv.domain || 'Hosting / Domain'}</strong><br>
+              <span style="font-size:11px; color:#64748b;">${inv.gateway || 'EPS Online Gateway'}</span>
+            </td>
+            <td><strong>৳${(inv.amount || 0).toLocaleString()}.00 BDT</strong></td>
+            <td><span class="${badgeClass}"><i class="fa ${badgeIcon}"></i> ${inv.status || 'PAID'}</span></td>
+            <td>${actionBtn}</td>
+          </tr>
+        `;
+      }).join('');
+
+      if (dashInvTbody) dashInvTbody.innerHTML = rows;
+      if (allInvTbody) allInvTbody.innerHTML = rows;
+    }
+
+    // ------------------------------------------------------------------------
+    // TICKETS RENDERING
+    // ------------------------------------------------------------------------
+    function renderTicketsList(tickets) {
+      const tbody = document.getElementById('ticketsTableBody');
+      if (!tbody) return;
+
+      if (!tickets.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#64748b;">No support tickets found. Click "+ Open New Ticket" above if you need assistance.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = tickets.map(t => {
+        const isClosed = t.status === 'Closed';
+        const isAnswered = t.status === 'Answered';
+        const badgeClass = isClosed ? 'badge-status closed' : (isAnswered ? 'badge-status active' : 'badge-status pending');
+        return `
+          <tr>
+            <td><strong>${t.id}</strong></td>
+            <td>
+              <strong style="color:#0f172a; cursor:pointer;" onclick="viewTicketThread('${t.id}')">${t.subject}</strong>
+            </td>
+            <td>${t.department}</td>
+            <td><span class="badge ${t.priority === 'High' ? 'badge-warning' : 'badge-primary'}">${t.priority}</span></td>
+            <td><span class="${badgeClass}">${t.status}</span></td>
+            <td>${t.updated || t.created}</td>
+            <td>
+              <button type="button" class="btn-sm" style="cursor:pointer;" onclick="viewTicketThread('${t.id}')">
+                <i class="fa fa-comments"></i> View Thread
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ------------------------------------------------------------------------
+    // MODAL HANDLERS
+    // ------------------------------------------------------------------------
+    // 1. Renewal Modal
+    function openRenewalModal(service, domain, amount) {
+      document.getElementById('modalServiceName').innerText = service;
+      document.getElementById('modalDomainName').innerText = domain;
+      document.getElementById('renewalModal').style.display = 'flex';
+      updateRenewalTotal();
+    }
+    function closeRenewalModal() {
+      document.getElementById('renewalModal').style.display = 'none';
+    }
+    function updateRenewalTotal() {
+      const cycleSel = document.getElementById('modalRenewalCycle');
+      const opt = cycleSel.options[cycleSel.selectedIndex];
+      const amt = parseInt(opt.getAttribute('data-amt') || '4788', 10);
+      document.getElementById('modalTotalDue').innerText = '৳' + amt.toLocaleString() + '.00 BDT';
+    }
+    function processServiceRenewal() {
+      const cycleSel = document.getElementById('modalRenewalCycle');
+      const opt = cycleSel.options[cycleSel.selectedIndex];
+      const amt = parseInt(opt.getAttribute('data-amt') || '4788', 10);
+      const is2yr = opt.value === '2yr';
+      const is3yr = opt.value === '3yr';
+      const gw = document.getElementById('modalPaymentGateway').value;
+      const domain = document.getElementById('modalDomainName').innerText;
+
+      const newDueDate = is3yr ? '2030-03-15' : (is2yr ? '2029-03-15' : '2028-03-15');
+
+      // Update Service
+      const services = JaasStore.getServices();
+      const srv = services.find(s => s.domain === domain) || services[0];
+      if (srv) {
+        srv.nextDue = newDueDate;
+        JaasStore.updateService(srv);
+      }
+
+      // Record Paid Invoice
+      const newInvId = 'INV-' + Date.now().toString().slice(-4);
+      const invoice = {
+        id: newInvId,
+        date: new Date().toISOString().split('T')[0],
+        dueDate: new Date().toISOString().split('T')[0],
+        planName: 'Service Renewal - ' + (srv ? srv.name : 'Hosting'),
+        domain: domain,
+        amount: amt,
+        status: 'PAID',
+        gateway: gw,
+        txnId: 'TXN-REN-' + Math.floor(100000 + Math.random() * 900000),
+        serverIP: '103.145.118.25'
+      };
+      JaasStore.saveInvoice(invoice);
+
+      closeRenewalModal();
+      initClientArea();
+      alert('🎉 Renewal Successful! Your service has been extended to ' + newDueDate + ' via ' + gw + '.\nPaid invoice ' + newInvId + ' has been generated.');
+    }
+
+    // 2. Pay Unpaid Invoice Modal
+    function openPayInvoiceModal(invoiceId) {
+      activePayInvoiceId = invoiceId;
+      const invoices = JaasStore.getInvoices();
+      const inv = invoices.find(i => i.id === invoiceId);
+      if (!inv) return;
+
+      document.getElementById('payModalInvoiceId').innerText = inv.id;
+      document.getElementById('payModalItemTitle').innerText = inv.planName || inv.domain || 'Hosting Service';
+      document.getElementById('payModalAmount').innerText = '৳' + (inv.amount || 0).toLocaleString() + '.00 BDT';
+      document.getElementById('payInvoiceModal').style.display = 'flex';
+    }
+    function closePayInvoiceModal() {
+      document.getElementById('payInvoiceModal').style.display = 'none';
+    }
+    function confirmInvoicePayment() {
+      const invoices = JaasStore.getInvoices();
+      const inv = invoices.find(i => i.id === activePayInvoiceId);
+      if (!inv) return;
+
+      const gw = document.getElementById('payModalGatewaySelect').value;
+      const txn = document.getElementById('payModalTxnId').value.trim() || ('TXN-' + Math.floor(100000 + Math.random() * 900000));
+
+      inv.status = 'PAID';
+      inv.gateway = gw;
+      inv.txnId = txn;
+      JaasStore.updateInvoice(inv);
+
+      closePayInvoiceModal();
+      initClientArea();
+      alert(`🎉 Payment of ৳${(inv.amount || 0).toLocaleString()} BDT confirmed successfully!\nInvoice ${inv.id} has been marked as PAID via ${gw}.\nYou can now download your Official Letterhead PDF.`);
+    }
+
+    // 3. DNS Records Modal
+    function openDnsModal(domain) {
+      activeDnsDomain = domain;
+      document.getElementById('dnsModalDomainName').innerText = domain;
+      renderDnsRecordsTable();
+      document.getElementById('dnsModal').style.display = 'flex';
+    }
+    function closeDnsModal() {
+      document.getElementById('dnsModal').style.display = 'none';
+    }
+    function renderDnsRecordsTable() {
+      const tbody = document.getElementById('dnsRecordsTableBody');
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === activeDnsDomain) || domains[0];
+      const records = (d && d.dnsRecords) || [];
+
+      tbody.innerHTML = records.map((r, idx) => `
+        <tr>
+          <td><span class="badge badge-primary">${r.type}</span></td>
+          <td><strong>${r.name}</strong></td>
+          <td><code>${r.value}</code></td>
+          <td>${r.ttl || 14400}</td>
+          <td>
+            <button type="button" class="btn-sm btn-sm-danger" onclick="deleteDnsRecord(${idx})" style="padding:2px 8px; font-size:11px;">&times; Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+    function addNewDnsRecord() {
+      const type = document.getElementById('newDnsType').value;
+      const host = document.getElementById('newDnsHost').value.trim();
+      const val = document.getElementById('newDnsValue').value.trim();
+      const ttl = parseInt(document.getElementById('newDnsTtl').value, 10) || 14400;
+
+      if (!host || !val) {
+        alert('Please specify both host and value for the DNS record.');
+        return;
+      }
+
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === activeDnsDomain);
+      if (d) {
+        d.dnsRecords = d.dnsRecords || [];
+        d.dnsRecords.push({ type, name: host, value: val, ttl });
+        JaasStore.updateDomain(d);
+        renderDnsRecordsTable();
+        document.getElementById('newDnsHost').value = '';
+        document.getElementById('newDnsValue').value = '';
+        alert(`✓ DNS record ${type} (${host} -> ${val}) added successfully!`);
+      }
+    }
+    function deleteDnsRecord(idx) {
+      if (confirm('Delete this DNS record?')) {
+        const domains = JaasStore.getDomains();
+        const d = domains.find(x => x.domain === activeDnsDomain);
+        if (d && d.dnsRecords) {
+          d.dnsRecords.splice(idx, 1);
+          JaasStore.updateDomain(d);
+          renderDnsRecordsTable();
+        }
+      }
+    }
+
+    // 4. Nameservers Modal
+    function openNameserversModal(domain) {
+      activeNsDomain = domain;
+      document.getElementById('nsModalDomainName').innerText = domain;
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === domain);
+      const ns = (d && d.nameservers) || ['ns1.jaasbd.com', 'ns2.jaasbd.com'];
+      document.getElementById('nsInput1').value = ns[0] || 'ns1.jaasbd.com';
+      document.getElementById('nsInput2').value = ns[1] || 'ns2.jaasbd.com';
+      document.getElementById('nameserversModal').style.display = 'flex';
+    }
+    function closeNameserversModal() {
+      document.getElementById('nameserversModal').style.display = 'none';
+    }
+    function toggleNsMode() {
+      const isDefault = document.getElementById('nsModeDefault').checked;
+      if (isDefault) {
+        document.getElementById('nsInput1').value = 'ns1.jaasbd.com';
+        document.getElementById('nsInput2').value = 'ns2.jaasbd.com';
+      }
+    }
+    function saveNameservers() {
+      const ns1 = document.getElementById('nsInput1').value.trim();
+      const ns2 = document.getElementById('nsInput2').value.trim();
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === activeNsDomain);
+      if (d) {
+        d.nameservers = [ns1, ns2];
+        JaasStore.updateDomain(d);
+        closeNameserversModal();
+        alert(`✓ Nameservers updated successfully to:\n1. ${ns1}\n2. ${ns2}\nChanges will propagate globally within a few hours.`);
+      }
+    }
+
+    // 5. EPP Code Modal
+    function openEppModal(domain) {
+      document.getElementById('eppModalDomainName').innerText = domain;
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === domain);
+      document.getElementById('eppModalCode').innerText = (d && d.eppCode) || 'JF89!kL2#jaas';
+      document.getElementById('eppModal').style.display = 'flex';
+    }
+    function closeEppModal() {
+      document.getElementById('eppModal').style.display = 'none';
+    }
+    function copyEppCode() {
+      const code = document.getElementById('eppModalCode').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('✓ EPP code copied to clipboard: ' + code);
+      });
+    }
+
+    // 6. Domain Auto-Renew Toggle
+    function toggleDomainAutoRenew(domain) {
+      const domains = JaasStore.getDomains();
+      const d = domains.find(x => x.domain === domain);
+      if (d) {
+        d.autoRenew = !d.autoRenew;
+        JaasStore.updateDomain(d);
+        renderDomainsList(domains);
+        alert(`Auto-renew for ${domain} is now ${d.autoRenew ? 'ENABLED' : 'DISABLED'}.`);
+      }
+    }
+
+    // 7. Support Tickets Modals
+    function openNewTicketModal() {
+      document.getElementById('newTicketModal').style.display = 'flex';
+    }
+    function closeNewTicketModal() {
+      document.getElementById('newTicketModal').style.display = 'none';
+    }
+    function handleCreateSupportTicket(e) {
+      e.preventDefault();
+      const dept = document.getElementById('ticketDeptSelect').value;
+      const prio = document.getElementById('ticketPrioritySelect').value;
+      const subject = document.getElementById('ticketSubjectInput').value.trim();
+      const msg = document.getElementById('ticketMessageInput').value.trim();
+      const client = JaasStore.getClientUser();
+
+      const ticketId = 'TCK-' + Math.floor(10000 + Math.random() * 90000);
+      const newTicket = {
+        id: ticketId,
+        subject: subject,
+        department: dept,
+        priority: prio,
+        status: 'Open',
+        created: new Date().toISOString().replace('T', ' ').slice(0, 16),
+        updated: new Date().toISOString().replace('T', ' ').slice(0, 16),
+        messages: [
+          {
+            sender: client ? client.name : 'Client',
+            role: 'Client',
+            time: new Date().toISOString().replace('T', ' ').slice(0, 16),
+            message: msg
+          }
+        ]
+      };
+
+      JaasStore.saveTicket(newTicket);
+      closeNewTicketModal();
+      initClientArea();
+      alert(`🎉 Ticket ${ticketId} created successfully!\nOur engineers are reviewing your inquiry and will respond shortly.`);
+    }
+
+    function viewTicketThread(ticketId) {
+      activeThreadTicketId = ticketId;
+      const tickets = JaasStore.getTickets();
+      const t = tickets.find(x => x.id === ticketId);
+      if (!t) return;
+
+      document.getElementById('threadModalTitle').innerText = 'Ticket #' + t.id;
+      document.getElementById('threadModalSubject').innerText = t.subject + ` (${t.department} • ${t.status})`;
+
+      const container = document.getElementById('threadMessagesContainer');
+      container.innerHTML = (t.messages || []).map(m => `
+        <div style="background:${m.role === 'Staff' ? '#f0fdf4' : '#f8fafc'}; border:1px solid ${m.role === 'Staff' ? '#bbf7d0' : '#e2e8f0'}; border-radius:8px; padding:12px 16px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:12px;">
+            <strong style="color:${m.role === 'Staff' ? '#0284c7' : '#0f172a'};">${m.sender} (${m.role})</strong>
+            <span style="color:#64748b;">${m.time}</span>
+          </div>
+          <div style="font-size:13.5px; color:#334155; line-height:1.5;">${m.message}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('ticketThreadModal').style.display = 'flex';
+    }
+    function closeTicketThreadModal() {
+      document.getElementById('ticketThreadModal').style.display = 'none';
+    }
+    function submitTicketReply() {
+      const text = document.getElementById('threadReplyText').value.trim();
+      if (!text) return;
+
+      const client = JaasStore.getClientUser();
+      const reply = {
+        sender: client ? client.name : 'Client',
+        role: 'Client',
+        time: new Date().toISOString().replace('T', ' ').slice(0, 16),
+        message: text
+      };
+
+      JaasStore.addTicketReply(activeThreadTicketId, reply);
+      document.getElementById('threadReplyText').value = '';
+      viewTicketThread(activeThreadTicketId);
+      renderTicketsList(JaasStore.getTickets());
+    }
+
+    // 8. cPanel Password Reset Modal
+    function openCpanelPassModal(domain) {
+      activeCpDomain = domain;
+      document.getElementById('cpModalDomain').innerText = domain;
+      document.getElementById('cpModalNewPass').value = JaasStore.generatePassword();
+      document.getElementById('cpanelPassModal').style.display = 'flex';
+    }
+    function closeCpanelPassModal() {
+      document.getElementById('cpanelPassModal').style.display = 'none';
+    }
+    function saveCpanelPassword() {
+      const newPass = document.getElementById('cpModalNewPass').value.trim();
+      if (!newPass) return;
+
+      const services = JaasStore.getServices();
+      const s = services.find(x => x.domain === activeCpDomain);
+      if (s) {
+        s.cpanelPass = newPass;
+        JaasStore.updateService(s);
+      }
+      closeCpanelPassModal();
+      alert(`✓ cPanel Password for ${activeCpDomain} has been updated to:\n${newPass}\nYou can now log in using these new credentials.`);
+    }
+
+    // 9. Client Profile Form Save
+    function handleSaveClientProfile(e) {
+      e.preventDefault();
+      const client = JaasStore.getClientUser();
+      client.name = document.getElementById('profClientName').value.trim();
+      client.company = document.getElementById('profClientCompany').value.trim();
+      client.email = document.getElementById('profClientEmail').value.trim();
+      client.phone = document.getElementById('profClientPhone').value.trim();
+      client.address = document.getElementById('profClientAddress').value.trim();
+
+      const newPass = document.getElementById('profNewPass').value;
+      const confPass = document.getElementById('profConfirmPass').value;
+      if (newPass) {
+        if (newPass !== confPass) {
+          alert('New passwords do not match! Please check and retype.');
+          return;
+        }
+        client.password = newPass;
+      }
+
+      JaasStore.setClientUser(client);
+      initClientArea();
+      alert('✓ Profile and contact information updated successfully!');
+    }
+
+    // Hash navigation & Init on DOM load
+    window.addEventListener('DOMContentLoaded', () => {
+      initClientArea();
+      const hash = window.location.hash.replace('#', '');
+      if (['services', 'domains', 'invoices', 'tickets', 'cpanel', 'profile'].includes(hash)) {
+        switchPortalTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

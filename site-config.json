@@ -1,0 +1,929 @@
+{
+  "admin": {
+    "username": "admin",
+    "email": "admin@jaasbd.com",
+    "password": "admin123"
+  },
+  "site": {
+    "title": "JAAS BD • Fastest Cheap Secure Reliable Web Hosting & Domain in Bangladesh",
+    "favicon": "assets/images/jaasbd-logo.png",
+    "headerLogo": "assets/images/jaasbd-logo.png",
+    "footerLogo": "assets/images/jaasbd-logo.png",
+    "domain": "www.jaasbd.com",
+    "tagline": "Fastest Cheap Secure Reliable Web Hosting",
+    "subtagline": "Get high-performance NVMe SSD hosting, ultra-fast 10Gbps BDIX low latency in Bangladesh, LiteSpeed web server, and 24/7 expert technical support."
+  },
+  "contact": {
+    "company": "JAAS BD",
+    "phone": "+8801818430308",
+    "mobile": "+8801818430308",
+    "telephone": "+88096388001436",
+    "email": "info@jaasbd.com",
+    "supportEmail": "support@jaasbd.com",
+    "address": "843/06 KD, Mirzapur, Tangail.",
+    "fullAddress": "843/06, Kadim Dewhata, Mirzapur, Tangail. 1940.",
+    "whatsapp": "8801818430308",
+    "domain": "www.jaasbd.com",
+    "website": "www.jaasbd.com"
+  },
+  "gateways": {
+    "eps": {
+      "id": "eps",
+      "name": "EPS (Easy Payment System)",
+      "active": true,
+      "note": "Bangladesh Bank PSO Licensed",
+      "merchantId": "EPS-JAAS-893041"
+    },
+    "bkash": {
+      "id": "bkash",
+      "name": "bKash Online Payment",
+      "active": true,
+      "merchantNumber": "01818430308",
+      "note": "Send Money / Merchant Payment"
+    },
+    "nagad": {
+      "id": "nagad",
+      "name": "Nagad Payment",
+      "active": true,
+      "merchantNumber": "01818430308",
+      "note": "Merchant / Personal: 01818430308"
+    },
+    "rocket": {
+      "id": "rocket",
+      "name": "Rocket (DBBL)",
+      "active": true,
+      "merchantNumber": "018184303084",
+      "note": "DBBL Mobile Banking"
+    },
+    "upay": {
+      "id": "upay",
+      "name": "Upay (UCB)",
+      "active": true,
+      "merchantNumber": "01818430308",
+      "note": "UCB Fintech"
+    },
+    "card": {
+      "id": "card",
+      "name": "Visa / MasterCard / AMEX",
+      "active": true,
+      "note": "Credit & Debit Cards via EPS Gateway"
+    }
+  },
+  "clients": [
+    {
+      "id": "CL-8430",
+      "name": "Ashish Halder",
+      "firstName": "Ashish",
+      "lastName": "Halder",
+      "email": "ashish@gmail.com",
+      "password": "admin123",
+      "phone": "+8801818430308",
+      "company": "Golden Frame BD",
+      "address": "Kadim Dewhata, Mirzapur, Tangail, Dhaka 1940",
+      "district": "Tangail",
+      "regDate": "2026-03-15"
+    },
+    {
+      "id": "CL-2026",
+      "name": "Valued Customer",
+      "firstName": "Valued",
+      "lastName": "Customer",
+      "email": "customer@jaasbd.com",
+      "password": "PutulHost@2026#Secure",
+      "phone": "+8801818430308",
+      "company": "Personal Account",
+      "address": "Hat Masjid Road, Rajbari",
+      "district": "Rajbari",
+      "regDate": "2026-03-20"
+    },
+    {
+      "password": "MySecurePass2026!",
+      "firstName": "Rahim",
+      "lastName": "Uddin",
+      "address": "Mirpur-10, Dhaka",
+      "loggedIn": true,
+      "name": "Rahim Uddin",
+      "company": "Rahim Traders Ltd",
+      "district": "Dhaka",
+      "phone": "+8801711223344",
+      "email": "rahim@mybusinessbd.com"
+    },
+    {
+      "password": "KarimPass@2026",
+      "name": "Karim Mia",
+      "phone": "+8801912345678",
+      "lastName": "Mia",
+      "email": "karim@karimtraders.com",
+      "firstName": "Karim",
+      "address": "Gulshan 1, Dhaka"
+    }
+  ],
+  "domainPricing": [
+    {
+      "ext": ".com",
+      "regPrice": 1150,
+      "renewPrice": 1550,
+      "transferPrice": 1150,
+      "popular": true
+    },
+    {
+      "ext": ".bd",
+      "regPrice": 1800,
+      "renewPrice": 1800,
+      "transferPrice": 1800,
+      "popular": true
+    },
+    {
+      "ext": ".com.bd",
+      "regPrice": 2200,
+      "renewPrice": 2200,
+      "transferPrice": 2200,
+      "note": "2 Years"
+    },
+    {
+      "ext": ".net",
+      "regPrice": 1850,
+      "renewPrice": 1950,
+      "transferPrice": 1850
+    },
+    {
+      "ext": ".org",
+      "regPrice": 1750,
+      "renewPrice": 1850,
+      "transferPrice": 1750
+    },
+    {
+      "ext": ".xyz",
+      "regPrice": 450,
+      "renewPrice": 1450,
+      "transferPrice": 1450,
+      "popular": true
+    },
+    {
+      "ext": ".info",
+      "regPrice": 650,
+      "renewPrice": 1950,
+      "transferPrice": 1950
+    },
+    {
+      "ext": ".biz",
+      "regPrice": 1250,
+      "renewPrice": 1650,
+      "transferPrice": 1250
+    }
+  ],
+  "packages": [
+    {
+      "id": "ph-bdix-1gb",
+      "name": "PH BDIX 1GB",
+      "category": "BDIX Hosting",
+      "badge": "Basic",
+      "basePrice": 130,
+      "regularPrice": 180,
+      "discountPrice": 130,
+      "discountPercent": 28,
+      "annualPrice": 1200,
+      "vatRate": 0,
+      "storage": "1 GB NVMe SSD",
+      "websites": "2 Domains",
+      "subdomains": "10 Subdomains",
+      "emails": "10 Email Accounts",
+      "bandwidth": "250 GB BDIX",
+      "ram": "1 GB RAM",
+      "cpu": "1 Core CPU",
+      "features": [
+        "2 Hosted Domains",
+        "1 GB Pure NVMe SSD",
+        "250 GB Bandwidth",
+        "LiteSpeed Web Server + LSCache",
+        "Free Automated SSL Certificate",
+        "cPanel Control Panel",
+        "10Gbps BDIX Network"
+      ]
+    },
+    {
+      "id": "ph-bdix-5gb",
+      "name": "PH BDIX 5GB",
+      "category": "BDIX Hosting",
+      "badge": "Popular",
+      "basePrice": 199,
+      "regularPrice": 280,
+      "discountPrice": 199,
+      "discountPercent": 29,
+      "annualPrice": 1990,
+      "vatRate": 0,
+      "storage": "5 GB NVMe SSD",
+      "websites": "5 Domains",
+      "subdomains": "25 Subdomains",
+      "emails": "25 Email Accounts",
+      "bandwidth": "1 TB BDIX",
+      "ram": "2 GB RAM",
+      "cpu": "2 Cores CPU",
+      "features": [
+        "5 Hosted Domains",
+        "5 GB Pure NVMe SSD",
+        "1 TB Bandwidth",
+        "LiteSpeed Enterprise + LSCache",
+        "Free Wildcard SSL Certificate",
+        "Daily Automated JetBackup",
+        "10Gbps BDIX Connectivity"
+      ]
+    },
+    {
+      "id": "ph-bdix-20gb",
+      "name": "PH BDIX 20GB",
+      "category": "BDIX Hosting",
+      "badge": "Best Value",
+      "basePrice": 350,
+      "regularPrice": 480,
+      "discountPrice": 350,
+      "discountPercent": 27,
+      "annualPrice": 3150,
+      "vatRate": 0,
+      "storage": "20 GB NVMe SSD",
+      "websites": "100 Domains",
+      "subdomains": "100 Subdomains",
+      "emails": "100 Email Accounts",
+      "bandwidth": "5 TB BDIX",
+      "ram": "3 GB RAM",
+      "cpu": "3 Cores CPU",
+      "features": [
+        "100 Hosted Domains",
+        "20 GB Pure NVMe SSD",
+        "5 TB Bandwidth",
+        "LiteSpeed Enterprise + LSCache",
+        "Free Automated SSL",
+        "Daily Remote Backups",
+        "10Gbps BDIX Direct Peering"
+      ]
+    },
+    {
+      "id": "business-hosting",
+      "name": "Business Hosting (20 GB NVMe)",
+      "category": "Web Hosting",
+      "badge": "Official Plan",
+      "basePrice": 399,
+      "regularPrice": 499,
+      "discountPrice": 399,
+      "discountPercent": 20,
+      "annualPrice": 4788,
+      "vatRate": 0,
+      "storage": "20 GB NVMe SSD",
+      "websites": "Unlimited Websites",
+      "subdomains": "Unlimited",
+      "emails": "Unlimited Business Email",
+      "bandwidth": "Unlimited Bandwidth",
+      "ram": "4 GB Dedicated RAM",
+      "cpu": "2 Cores CPU",
+      "features": [
+        "LiteSpeed Enterprise Server",
+        "Free Automated SSL Certificate",
+        "Unlimited Bandwidth",
+        "Daily Backups (15-Day Retention)",
+        "10Gbps Direct BDIX Peering",
+        "Pure NVMe Storage in RAID-10",
+        "Free White-Glove Migration"
+      ]
+    },
+    {
+      "id": "bdix-prm-5",
+      "name": "BDIX PRM 5",
+      "category": "Web Hosting",
+      "badge": "High Resource",
+      "basePrice": 500,
+      "regularPrice": 700,
+      "discountPrice": 500,
+      "discountPercent": 28,
+      "annualPrice": 5500,
+      "vatRate": 0,
+      "storage": "Unlimited NVMe",
+      "websites": "Unlimited Websites",
+      "ram": "3 GB RAM",
+      "cpu": "3 Cores CPU",
+      "bandwidth": "Unlimited BDIX",
+      "features": [
+        "3 Cores CPU & 3 GB RAM",
+        "50 MB/s I/O Speed",
+        "Unlimited Websites & NVMe",
+        "LiteSpeed Web Server",
+        "Free Automated SSL",
+        "JetBackup Daily Backups",
+        "10Gbps BDIX Peering"
+      ]
+    },
+    {
+      "id": "bdix-prm-10",
+      "name": "BDIX PRM 10",
+      "category": "Web Hosting",
+      "badge": "Top Speed",
+      "basePrice": 750,
+      "regularPrice": 1050,
+      "discountPrice": 750,
+      "discountPercent": 28,
+      "annualPrice": 7500,
+      "vatRate": 0,
+      "storage": "Unlimited NVMe",
+      "websites": "Unlimited Websites",
+      "ram": "4 GB RAM",
+      "cpu": "4 Cores CPU",
+      "bandwidth": "Unlimited BDIX",
+      "features": [
+        "4 Cores CPU & 4 GB RAM",
+        "100 MB/s I/O Speed",
+        "Unlimited Websites & Storage",
+        "LiteSpeed Enterprise",
+        "CloudLinux CageFS Isolation",
+        "Free SSL & Daily Backups",
+        "VIP Priority Support"
+      ]
+    },
+    {
+      "id": "reseller-50gb",
+      "name": "PH Reseller 50GB",
+      "category": "Reseller Hosting",
+      "badge": "Reseller Starter",
+      "basePrice": 650,
+      "regularPrice": 850,
+      "discountPrice": 650,
+      "discountPercent": 24,
+      "annualPrice": 6500,
+      "vatRate": 0,
+      "storage": "50 GB NVMe SSD",
+      "websites": "25 cPanel Accounts",
+      "ram": "WHM Reseller Access",
+      "cpu": "Multi-Core",
+      "bandwidth": "Unlimited Bandwidth",
+      "features": [
+        "50 GB Pure NVMe SSD",
+        "25 cPanel Accounts (WHM)",
+        "100% White-Label Private Nameservers",
+        "Free Automated SSL for Clients",
+        "LiteSpeed Web Server",
+        "Automated JetBackup System"
+      ]
+    },
+    {
+      "id": "reseller-100gb",
+      "name": "PH Reseller 100GB",
+      "category": "Reseller Hosting",
+      "badge": "Best Reseller",
+      "basePrice": 1100,
+      "regularPrice": 1450,
+      "discountPrice": 1100,
+      "discountPercent": 24,
+      "annualPrice": 11000,
+      "vatRate": 0,
+      "storage": "100 GB NVMe SSD",
+      "websites": "50 cPanel Accounts",
+      "ram": "WHM Reseller Access",
+      "cpu": "High Performance",
+      "bandwidth": "Unlimited Bandwidth",
+      "features": [
+        "100 GB Pure NVMe SSD",
+        "50 cPanel Accounts (WHM)",
+        "Private Custom Nameservers",
+        "LiteSpeed Enterprise + LSCache",
+        "Free Client Area Billing Panel",
+        "24/7 Priority Support"
+      ]
+    },
+    {
+      "id": "vps-1",
+      "name": "BDIX Cloud VPS 1",
+      "category": "Server (VPS)",
+      "badge": "Cloud VPS",
+      "basePrice": 375,
+      "regularPrice": 500,
+      "discountPrice": 375,
+      "discountPercent": 25,
+      "annualPrice": 3750,
+      "vatRate": 0,
+      "storage": "30 GB NVMe SSD",
+      "websites": "Root SSH Access",
+      "ram": "2 GB RAM",
+      "cpu": "1 vCPU Core",
+      "bandwidth": "1 TB BDIX Bandwidth",
+      "features": [
+        "1 vCPU High-Frequency Core",
+        "2 GB Dedicated RAM",
+        "30 GB Enterprise NVMe SSD",
+        "1 Dedicated IPv4 Address",
+        "Full Root SSH Access",
+        "1Gbps BDIX Port Speed"
+      ]
+    },
+    {
+      "id": "vps-2",
+      "name": "BDIX Cloud VPS 2",
+      "category": "Server (VPS)",
+      "badge": "High Power",
+      "basePrice": 750,
+      "regularPrice": 950,
+      "discountPrice": 750,
+      "discountPercent": 21,
+      "annualPrice": 7500,
+      "vatRate": 0,
+      "storage": "60 GB NVMe SSD",
+      "websites": "Root SSH Access",
+      "ram": "4 GB RAM",
+      "cpu": "2 vCPU Cores",
+      "bandwidth": "2 TB BDIX Bandwidth",
+      "features": [
+        "2 vCPU High-Frequency Cores",
+        "4 GB Dedicated RAM",
+        "60 GB Enterprise NVMe SSD",
+        "1 Dedicated IPv4 Address",
+        "Full Root SSH Access",
+        "1Gbps BDIX Port Speed"
+      ]
+    },
+    {
+      "id": "dedicated-ryzen",
+      "name": "AMD RYZEN 5600X",
+      "category": "Server (VPS)",
+      "badge": "Dedicated Server",
+      "basePrice": 11900,
+      "regularPrice": 14500,
+      "discountPrice": 11900,
+      "discountPercent": 18,
+      "annualPrice": 142800,
+      "vatRate": 0,
+      "storage": "512 GB NVMe PCIe 4.0",
+      "websites": "Full Bare-Metal Server",
+      "ram": "64 GB DDR4 ECC RAM",
+      "cpu": "6 Cores 12 Threads 3.40 GHz",
+      "bandwidth": "1 Gbps Port",
+      "features": [
+        "AMD Ryzen 5600X (6 Cores / 12 Threads)",
+        "64 GB DDR4 ECC RAM",
+        "512 GB NVMe PCIe 4.0 SSD",
+        "1 Gbps Dedicated Port Speed",
+        "1 Usable IPv4 Address",
+        "Fully Managed Server Option",
+        "Hardware DDoS Protection"
+      ]
+    },
+    {
+      "id": "workspace-30gb",
+      "name": "Workspace 30GB",
+      "category": "Email Hosting",
+      "badge": "Business Mail",
+      "basePrice": 799,
+      "regularPrice": 999,
+      "discountPrice": 799,
+      "discountPercent": 20,
+      "annualPrice": 7990,
+      "vatRate": 0,
+      "storage": "30 GB Mail Storage",
+      "websites": "5 Email Accounts",
+      "ram": "CrossBox Suite Panel",
+      "cpu": "SpamExperts Security",
+      "bandwidth": "250 Emails / Hour",
+      "features": [
+        "Up To 5 Email Accounts",
+        "30 GB Dedicated Mail Storage",
+        "CrossBox Webmail Suite",
+        "SpamExperts Inbound & Outbound Filter",
+        "IMAP, POP3, SMTP with SSL/TLS",
+        "Works with Any Custom Domain"
+      ]
+    }
+  ],
+  "hero": {
+    "title": "Fastest Cheap Secure Reliable Web Hosting",
+    "priceHighlight": "starts from ৳99/mo",
+    "subtitle": "Get high-performance NVMe SSD hosting, ultra-fast 10Gbps BDIX low latency in Bangladesh, LiteSpeed web server, and 24/7 expert technical support.",
+    "domainSearchPlaceholder": "Type your domain name here... (e.g. yourbrand.com)",
+    "pills": [
+      "99.9% Uptime SLA",
+      "LiteSpeed Web Server",
+      "Free SSL Certificate",
+      "NVMe SSD Storage",
+      "Daily JetBackup"
+    ]
+  },
+  "homepageBenefits": [
+    {
+      "icon": "assets/images/ph/data-migration.png",
+      "title": "Free Migration Service",
+      "desc": "Migrate your existing website to our servers effortlessly. We handle the entire migration for you at no extra cost."
+    },
+    {
+      "icon": "assets/images/ph/1click.png",
+      "title": "One-Click Deploy",
+      "desc": "Install WordPress, Joomla, and 400+ apps with a single click using our Softaculous auto-installer."
+    },
+    {
+      "icon": "assets/images/ph/support.png",
+      "title": "24/7 Chat with Experts",
+      "desc": "Our experienced support team is available around the clock. Get expert help any time via live chat or ticket."
+    },
+    {
+      "icon": "assets/images/ph/refund.png",
+      "title": "7 Days Money Back Guarantee",
+      "desc": "If you are not satisfied within the first 7 days, we will issue a full refund — absolutely no questions asked."
+    },
+    {
+      "icon": "assets/images/ph/Uptime.png",
+      "title": "99.99% Uptime Guarantee",
+      "desc": "We guarantee 99.99% uptime backed by enterprise-grade infrastructure and 24/7 server monitoring."
+    },
+    {
+      "icon": "assets/images/ph/ssl1.png",
+      "title": "Free SSL Certificate",
+      "desc": "All plans include a free Let's Encrypt SSL certificate to secure your website and boost SEO rankings."
+    }
+  ],
+  "homepageStats": [
+    {
+      "value": "15,000+",
+      "label": "Websites Hosted",
+      "icon": "fa-globe"
+    },
+    {
+      "value": "99.99%",
+      "label": "Uptime SLA Guarantee",
+      "icon": "fa-shield-alt"
+    },
+    {
+      "value": "10 Gbps",
+      "label": "BDIX Direct Peering",
+      "icon": "fa-bolt"
+    },
+    {
+      "value": "24/7/365",
+      "label": "Live Technical Support",
+      "icon": "fa-headset"
+    }
+  ],
+  "homepageFaqs": [
+    {
+      "question": "ডোমেইন ও হোস্টিং অ্যাক্টিভেশন হতে কতক্ষণ সময় লাগে?",
+      "answer": "পেমেন্ট সফল হওয়ার সাথে সাথে অটোমেটিক ইনস্ট্যান্ট অ্যাক্টিভেশন হয়ে যায়। আপনি তাৎক্ষণিকভাবে cPanel লগইন তথ্য ও ইনভয়েস ইমেইলে পেয়ে যাবেন।"
+    },
+    {
+      "question": "হোস্টিং প্যাকেজের সাথে কি ফ্রি SSL সার্টিফিকেট পাওয়া যাবে?",
+      "answer": "হ্যাঁ, আমাদের প্রতিটি হোস্টিং প্যাকেজের সাথে আজীবনের জন্য আনলিমিটেড ফ্রি AutoSSL অন্তর্ভুক্ত রয়েছে।"
+    },
+    {
+      "question": "আমার বর্তমান ওয়েবসাইট কি আপনারা ফ্রিতে মাইগ্রেশন করে দিবেন?",
+      "answer": "হ্যাঁ, যেকোনো হোস্ট থেকে আমাদের সার্ভারে আপনার সমস্ত ওয়েবসাইট ও ইমেইল সম্পূর্ণ ফ্রিতে ও জিরো ডাউনটাইমে আমাদের টেকনিক্যাল টিম ট্রান্সফার করে দিবে।"
+    },
+    {
+      "question": "পেমেন্ট কিভাবে করতে পারবো?",
+      "answer": "আপনি bKash, Nagad, Rocket, Upay, ডেবিট ও ক্রেডিট কার্ডের মাধ্যমে স্বয়ংক্রিয়ভাবে ইনস্ট্যান্ট পেমেন্ট করতে পারবেন।"
+    }
+  ],
+  "packageCategories": [
+    {
+      "id": "web-hosting",
+      "name": "Web Hosting",
+      "icon": "💻"
+    },
+    {
+      "id": "bdix-hosting",
+      "name": "BDIX Web Hosting",
+      "icon": "🇧🇩"
+    },
+    {
+      "id": "cloud-vps",
+      "name": "BDIX Cloud VPS",
+      "icon": "⚡"
+    },
+    {
+      "id": "reseller-hosting",
+      "name": "Reseller Hosting",
+      "icon": "🏢"
+    },
+    {
+      "id": "dedicated-server",
+      "name": "Dedicated Server",
+      "icon": "🖥️"
+    },
+    {
+      "id": "software",
+      "name": "Software",
+      "icon": "🚀"
+    }
+  ],
+  "footer": {
+    "aboutText": "JAAS BD is Bangladesh's premier web hosting, BDIX NVMe servers, domain registration, and cloud solution provider. We empower individuals, businesses, and enterprises with blazing-fast LiteSpeed servers and 24/7 technical support.",
+    "copyrightText": "© 2026 <span>JAAS BD</span>. All rights reserved.",
+    "address": "Kadim Dewhata, Mirzapur, Tangail, Dhaka - Bangladesh",
+    "phone": "+8801818430308",
+    "hours": "(10AM-8PM)",
+    "email": "info@jaasbd.com",
+    "website": "www.jaasbd.com",
+    "paymentBannerImg": "assets/images/ph/SSLCommerz-Pay.png",
+    "showPaymentGateways": true
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/putulhost.official",
+    "twitter": "https://x.com/putulhost",
+    "instagram": "https://www.instagram.com/myputulhost/",
+    "youtube": "https://www.youtube.com/c/JAAS BD",
+    "whatsapp": "8801818430308"
+  },
+  "notice": {
+    "active": true,
+    "icon": "fa-bullhorn",
+    "text": ".TOP ডোমেন মাত্র ৩৯৯ টাকা ! যেকোনো প্যাকেজে পান অতিরিক্ত ২০% ছাড় ! .COM ডোমেইন স্পেশাল অফার চলছে",
+    "btnText": "Go!",
+    "btnLink": "#domain-search"
+  },
+  "pages": {
+    "index": {
+      "key": "index",
+      "name": "Index",
+      "file": "index.html",
+      "metaTitle": "JAAS BD | Fastest Cheap Secure Reliable Web Hosting | Cheap Domain Registration & IT Solution",
+      "heroTitle": "Secure Your Online Future Today",
+      "heroSubtitle": "Get high-performance NVMe SSD hosting, ultra-fast 10Gbps BDIX low latency in Bangladesh, LiteSpeed web server, and 24/7 expert technical support.",
+      "heroBadge": "Official Service"
+    },
+    "domain": {
+      "key": "domain",
+      "name": "Domain",
+      "file": "domain.html",
+      "metaTitle": "Domain Registration & Transfer | JAAS BD - Starting as low as ৳210/year",
+      "heroTitle": "Secure Your Online Future Today",
+      "heroSubtitle": "Find and register your perfect domain name today. Instant activation, free DNS management and WHOIS privacy protection.",
+      "heroBadge": "Official Service"
+    },
+    "bd-domain": {
+      "key": "bd-domain",
+      "name": "Bd Domain",
+      "file": "bd-domain.html",
+      "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | Putul Host",
+      "heroTitle": "Official .BD Domain Registration",
+      "heroSubtitle": "Official BTCL .bd and .bangla domain registration in Bangladesh with fast approval and dedicated document support.",
+      "heroBadge": "Official Service"
+    },
+    "basic-hosting": {
+      "key": "basic-hosting",
+      "name": "Basic Hosting",
+      "file": "basic-hosting.html",
+      "metaTitle": "Basic Web Hosting Packages | JAAS BD - High Speed LiteSpeed NVMe Hosting",
+      "heroTitle": "Basic Web Hosting",
+      "heroSubtitle": "Affordable shared cPanel hosting powered by LiteSpeed, NVMe SSD storage, and free SSL certificates.",
+      "heroBadge": "Official Service"
+    },
+    "pro-hosting": {
+      "key": "pro-hosting",
+      "name": "Pro Hosting",
+      "file": "pro-hosting.html",
+      "metaTitle": "Pro Web Hosting Packages | JAAS BD - Dedicated NVMe Singapore Hosting",
+      "heroTitle": "Pro Web Hosting",
+      "heroSubtitle": "Ideal for growing businesses — Powered by Dedicated NVMe SSD Storage, LiteSpeed Web Server, and Singapore Datacenter.",
+      "heroBadge": "Official Service"
+    },
+    "premium-hosting": {
+      "key": "premium-hosting",
+      "name": "Premium Hosting",
+      "file": "premium-hosting.html",
+      "metaTitle": "Premium Web Hosting Packages | JAAS BD",
+      "heroTitle": "Premium Web Hosting Packages",
+      "heroSubtitle": "High-speed LiteSpeed NVMe Web Hosting with isolated cloud resources for high-traffic websites.",
+      "heroBadge": "Official Service"
+    },
+    "corporate-hosting": {
+      "key": "corporate-hosting",
+      "name": "Corporate Hosting",
+      "file": "corporate-hosting.html",
+      "metaTitle": "Corporate Web Hosting Packages | JAAS BD",
+      "heroTitle": "Corporate Web Hosting",
+      "heroSubtitle": "কর্পোরেট প্রতিষ্ঠান, ই-কমার্স ও উচ্চ ভিজিটর সাইটের জন্য সম্পূর্ণ ডেডিকেটেড ক্লাউড রিসোর্স, লাইটস্পিড এন্টারপ্রাইজ ইঞ্জিন, স্প্যামএক্সপার্টস এবং ৯৯.৯৯% আপটাইম এসএলএ গ্যারান্টি।",
+      "heroBadge": "Enterprise Grade Hosting"
+    },
+    "bdix-basic": {
+      "key": "bdix-basic",
+      "name": "Bdix Basic",
+      "file": "bdix-basic.html",
+      "metaTitle": "BDIX Basic Web Hosting | JAAS BD",
+      "heroTitle": "BDIX Basic Web Hosting",
+      "heroSubtitle": "Ultra-fast 10Gbps direct BDIX connectivity with 1ms ping across all Bangladeshi ISPs.",
+      "heroBadge": "Official Service"
+    },
+    "bdix-premium": {
+      "key": "bdix-premium",
+      "name": "Bdix Premium",
+      "file": "bdix-premium.html",
+      "metaTitle": "BDIX Premium Web Hosting | JAAS BD",
+      "heroTitle": "BDIX Premium Web Hosting",
+      "heroSubtitle": "High-resource BDIX web hosting with dedicated RAM and CPU for high-traffic Bangladeshi websites.",
+      "heroBadge": "Official Service"
+    },
+    "charity-hosting": {
+      "key": "charity-hosting",
+      "name": "Charity Hosting",
+      "file": "charity-hosting.html",
+      "metaTitle": "Free Web Hosting for Charities & Nonprofits | JAAS BD",
+      "heroTitle": "Free Hosting for Charities",
+      "heroSubtitle": "We support registered charities, orphanages, and educational non-profits with 100% free high-speed web hosting and SSL.",
+      "heroBadge": "Official Service"
+    },
+    "reseller-hosting": {
+      "key": "reseller-hosting",
+      "name": "Reseller Hosting",
+      "file": "reseller-hosting.html",
+      "metaTitle": "Reseller Web Hosting Packages | JAAS BD",
+      "heroTitle": "White-Label Reseller Hosting",
+      "heroSubtitle": "Start your own web hosting business with 100% white-label cPanel/WHM reseller hosting and automated billing.",
+      "heroBadge": "Official Service"
+    },
+    "bdix-reseller": {
+      "key": "bdix-reseller",
+      "name": "Bdix Reseller",
+      "file": "bdix-reseller.html",
+      "metaTitle": "BDIX Reseller Hosting | Ultra Fast Local Speed | JAAS BD",
+      "heroTitle": "BDIX Reseller Hosting",
+      "heroSubtitle": "High-speed BDIX cPanel/WHM Reseller Hosting with 10Gbps local BD network and private nameservers.",
+      "heroBadge": "Official Service"
+    },
+    "domain-reseller": {
+      "key": "domain-reseller",
+      "name": "Domain Reseller",
+      "file": "domain-reseller.html",
+      "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | Putul Host",
+      "heroTitle": "Start Your Own Domain Business",
+      "heroSubtitle": "Start your domain business with our wholesale domain reseller API, free WHMCS module, and 500+ TLDs.",
+      "heroBadge": "Official Service"
+    },
+    "vps": {
+      "key": "vps",
+      "name": "Vps",
+      "file": "vps.html",
+      "metaTitle": "High Performance VPS Cloud Server | JAAS BD",
+      "heroTitle": "High Performance Cloud VPS Servers",
+      "heroSubtitle": "High-performance KVM Cloud VPS with pure NVMe storage, dedicated IPv4, and 99.9% uptime SLA.",
+      "heroBadge": "Official Service"
+    },
+    "bdix-vps": {
+      "key": "bdix-vps",
+      "name": "Bdix Vps",
+      "file": "bdix-vps.html",
+      "metaTitle": "BDIX VPS Cloud Server | Low Latency BD Routing | JAAS BD",
+      "heroTitle": "BDIX KVM VPS Server Plans",
+      "heroSubtitle": "Ultra-low latency Bangladesh BDIX Cloud VPS with 10Gbps direct connectivity and root access.",
+      "heroBadge": "Official Service"
+    },
+    "dedicated": {
+      "key": "dedicated",
+      "name": "Dedicated",
+      "file": "dedicated.html",
+      "metaTitle": "Dedicated Bare Metal Servers | JAAS BD",
+      "heroTitle": "Dedicated Bare Metal Servers",
+      "heroSubtitle": "Enterprise bare-metal dedicated servers with 100% dedicated hardware and DDoS protection.",
+      "heroBadge": "Official Service"
+    },
+    "rdp-server": {
+      "key": "rdp-server",
+      "name": "Rdp Server",
+      "file": "rdp-server.html",
+      "metaTitle": "Dedicated RDP Windows Server | Full Admin Access | JAAS BD",
+      "heroTitle": "Remote Desktop Protocol (RDP) Server",
+      "heroSubtitle": "High-speed 1Gbps / 10Gbps port Windows RDP / Admin VPS with pure NVMe storage and full administrator privileges.",
+      "heroBadge": "Official Service"
+    },
+    "backup": {
+      "key": "backup",
+      "name": "Backup",
+      "file": "backup.html",
+      "metaTitle": "Automated Backup & Storage Servers | JAAS BD",
+      "heroTitle": "Backup Storage VPS",
+      "heroSubtitle": "Automated disaster recovery cloud backups with multi-datacenter replication and ransomware defense.",
+      "heroBadge": "Official Service"
+    },
+    "email-hosting": {
+      "key": "email-hosting",
+      "name": "Email Hosting",
+      "file": "email-hosting.html",
+      "metaTitle": "Professional Email Hosting | JAAS BD - CrossBox, SpamExperts & NextCloud",
+      "heroTitle": "Professional Email Hosting",
+      "heroSubtitle": "Powered by CrossBox Premium with Spam Experts protection, NextCloud file storage, and MailChannels relay — business email done right.",
+      "heroBadge": "Official Service"
+    },
+    "radio-hosting": {
+      "key": "radio-hosting",
+      "name": "Radio Hosting",
+      "file": "radio-hosting.html",
+      "metaTitle": "Radio Hosting & Shoutcast Streaming | JAAS BD",
+      "heroTitle": "Radio Hosting",
+      "heroSubtitle": "Broadcast your online radio 24/7 with Centova Cast, AutoDJ, unlimited listeners, and crystal-clear audio quality.",
+      "heroBadge": "Official Service"
+    },
+    "bulk-sms": {
+      "key": "bulk-sms",
+      "name": "Bulk Sms",
+      "file": "bulk-sms.html",
+      "metaTitle": "Bulk SMS Solution | Masking & Non-Masking Gateway | JAAS BD",
+      "heroTitle": "Reach Millions Instantly with Bulk SMS Marketing",
+      "heroSubtitle": "Masking & Non-masking SMS gateway in Bangladesh with 99.9% delivery rate and instant HTTP API.",
+      "heroBadge": "Official Service"
+    },
+    "bulk-mail": {
+      "key": "bulk-mail",
+      "name": "Bulk Mail",
+      "file": "bulk-mail.html",
+      "metaTitle": "Enterprise Bulk Mail Solutions | JAAS BD",
+      "heroTitle": "Every email lands in the inbox — not in spam",
+      "heroSubtitle": "Enterprise bulk email marketing & transactional SMTP relay with dedicated IP rotation and high deliverability.",
+      "heroBadge": "Official Service"
+    },
+    "whmcs-solution": {
+      "key": "whmcs-solution",
+      "name": "Whmcs Solution",
+      "file": "whmcs-solution.html",
+      "metaTitle": "WHMCS Automation & Web Hosting Solutions | JAAS BD",
+      "heroTitle": "The #1 Web Hosting Billing & Automation Platform for Your Business",
+      "heroSubtitle": "Complete WHMCS setup, security hardening, and local bKash/Nagad payment gateway automation.",
+      "heroBadge": "Official Service"
+    },
+    "graphics-design": {
+      "key": "graphics-design",
+      "name": "Graphics Design",
+      "file": "graphics-design.html",
+      "metaTitle": "Creative Graphics & Web UI Design Solutions | JAAS BD",
+      "heroTitle": "Professional Graphics Design That Makes Your Brand Unforgettable",
+      "heroSubtitle": "Creative branding, logo design, banners, social media kits, and UI/UX design services.",
+      "heroBadge": "Official Service"
+    },
+    "affiliates": {
+      "key": "affiliates",
+      "name": "Affiliates",
+      "file": "affiliates.html",
+      "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | Putul Host",
+      "heroTitle": "Earn Up to 20% Commission",
+      "heroSubtitle": "Join the JAAS BD affiliate program and earn up to 25% recurring commissions with instant tracking.",
+      "heroBadge": "Official Service"
+    },
+    "about": {
+      "key": "about",
+      "name": "About",
+      "file": "about.html",
+      "metaTitle": "About Us - আমাদের সম্পর্কে | Putul Host",
+      "heroTitle": "About Putul Host",
+      "heroSubtitle": "Learn about JAAS BD — leading web hosting, cloud server infrastructure, and IT solutions in Bangladesh.",
+      "heroBadge": "Official Service"
+    },
+    "contact": {
+      "key": "contact",
+      "name": "Contact",
+      "file": "contact.html",
+      "metaTitle": "Contact Us - যোগাযোগ | Putul Host",
+      "heroTitle": "Contact Us",
+      "heroSubtitle": "24/7 customer support, sales inquiries, and billing assistance. We are always ready to help you.",
+      "heroBadge": "Official Service"
+    },
+    "terms": {
+      "key": "terms",
+      "name": "Terms",
+      "file": "terms.html",
+      "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | Putul Host",
+      "heroTitle": "Terms of Service",
+      "heroSubtitle": "Please read our terms and conditions governing the use of JAAS BD services and hosting infrastructure.",
+      "heroBadge": "Official Service"
+    },
+    "privacy": {
+      "key": "privacy",
+      "name": "Privacy",
+      "file": "privacy.html",
+      "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | Putul Host",
+      "heroTitle": "Privacy Policy",
+      "heroSubtitle": "Our commitment to protecting your personal data, privacy, and account security at JAAS BD.",
+      "heroBadge": "Official Service"
+    },
+    "refund": {
+      "key": "refund",
+      "name": "Refund",
+      "file": "refund.html",
+      "metaTitle": "Refund Policy - রিফান্ড পলিসি | Putul Host",
+      "heroTitle": "Refund Policy",
+      "heroSubtitle": "Transparent and hassle-free 30-day money back guarantee on all our shared and reseller hosting plans.",
+      "heroBadge": "Official Service"
+    }
+  },
+  "orders": [
+    {
+      "client": {
+        "password": "KarimPass@2026",
+        "name": "Karim Mia",
+        "phone": "+8801912345678",
+        "lastName": "Mia",
+        "email": "karim@karimtraders.com",
+        "firstName": "Karim",
+        "address": "Gulshan 1, Dhaka"
+      },
+      "invoice": {
+        "domain": "rahimtraders.com",
+        "dueDate": "2 November 2026",
+        "id": "INV-2026-9999",
+        "amount": 3588,
+        "status": "PAID",
+        "planName": "Pro Hosting (Annual)",
+        "date": "26 October 2026",
+        "gateway": "bKash Automated"
+      }
+    }
+  ]
+}

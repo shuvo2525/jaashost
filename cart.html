@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart &amp; Checkout - Putul Host / JAAS BD</title>
+  <link rel="icon" type="image/png" href="assets/images/jaasbd-logo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/ph-header.css">
+  <link rel="stylesheet" href="assets/css/ph-footer.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* Subnav bar */
+    .bh-subnav-bar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 0;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .bh-subnav-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .bh-subnav-inner span { color: #0284c7; font-weight: 800; }
+    .bh-subnav-inner a {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .bh-subnav-inner a:hover, .bh-subnav-inner a.active {
+      color: #0284c7;
+      font-weight: 700;
+    }
+
+    /* Steppers */
+    .stepper-wrapper {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 0;
+    }
+    .stepper-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #94a3b8;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+    }
+    .step-item.active { color: #0284c7; }
+    .step-item.completed { color: #0f172a; }
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .step-item.active .step-circle { background: linear-gradient(135deg, #7c3aed, #9333ea); color: #ffffff; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25); }
+    .step-item.completed .step-circle {
+      background: #dcfce7;
+      color: #0284c7;
+    }
+    .step-connector {
+      width: 36px;
+      height: 2px;
+      background: #e2e8f0;
+    }
+    .step-connector.active { background: #7c3aed; }
+
+    /* Congrats Green Banner */
+    .congrats-banner {
+      background: linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%); color: #ffffff; padding: 24px; border-radius: 14px; margin: 20px 0; text-align: center; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2);
+    }
+    .congrats-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .congrats-sub {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 16px;
+    }
+    .congrats-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .congrats-price {
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .btn-add-cart-white {
+      background: #ffffff;
+      color: #0284c7;
+      font-weight: 800;
+      padding: 10px 26px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-add-cart-white:hover {
+      background: #f0fdf4;
+      transform: translateY(-1px);
+    }
+
+    /* 6 Offer Ribbon Cards */
+    .offer-tlds-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 1024px) {
+      .offer-tlds-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .offer-tlds-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .offer-tld-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px 14px 14px 14px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      transition: transform 0.2s;
+    }
+    .offer-tld-card:hover { transform: translateY(-3px); }
+    .offer-ribbon {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+    .offer-tld-name {
+      font-size: 20px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+    .offer-price-old {
+      font-size: 11.5px;
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .offer-price-current {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0284c7;
+      margin: 4px 0 12px 0;
+    }
+    .btn-offer-add {
+      background: #f1f5f9;
+      color: #0284c7;
+      border: none;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .btn-offer-add:hover {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+    }
+    .btn-offer-add.added {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+    }
+
+    /* 4 Domain Choice Horizontal Radio Cards */
+    .domain-choice-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+      .domain-choice-bar { grid-template-columns: 1fr; }
+    }
+    .choice-tab-card {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .choice-tab-card.active {
+      border-color: #0284c7;
+      color: #0284c7;
+      background: #f0fdf4;
+    }
+    .choice-body-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .ph-select-full {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 14.5px;
+      font-family: inherit;
+      outline: none;
+      background: #ffffff;
+      min-width: 220px;
+    }
+    .btn-go-green {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 14.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-go-green:hover {
+      background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+    }
+
+    /* Billing Cycle & Configuration */
+    .billing-conf-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 880px) {
+      .billing-conf-grid { grid-template-columns: 1fr; }
+    }
+    .conf-card-white {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .conf-card-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cycle-btn-card {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #ffffff;
+    }
+    .cycle-btn-card.selected {
+      border-color: #0284c7;
+      background: #f0fdf4;
+    }
+    .cycle-btn-card:hover {
+      border-color: #0284c7;
+    }
+    .cycle-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cycle-price {
+      font-weight: 800;
+      color: #0284c7;
+      font-size: 14px;
+    }
+    .cycle-save-badge {
+      background: #fef08a;
+      color: #854d0e;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    /* Location selector */
+    .location-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .loc-card {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .loc-card.selected {
+      border-color: #0284c7;
+      background: #f0fdf4;
+    }
+
+    /* Right Summary Card */
+    .summary-card-light {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .summary-light-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+    .summary-item-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13.5px;
+    }
+    .summary-total-box {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 14px;
+      margin-top: 16px;
+    }
+    .btn-continue-darkgreen {
+      display: block;
+      width: 100%;
+      background: #070b19;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 16px;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-continue-darkgreen:hover {
+      background: #022c22;
+    }
+
+    /* Addons Grid */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 800px) {
+      .addons-grid { grid-template-columns: 1fr; }
+    }
+    .addon-card {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .addon-card.selected {
+      border-color: #0284c7;
+      background: #f0fdf4;
+    }
+    .addon-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .addon-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: #0284c7;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+    .addon-title {
+      font-weight: 800;
+      font-size: 14px;
+      color: #0f172a;
+    }
+    .addon-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    .addon-price {
+      font-weight: 800;
+      color: #0284c7;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    /* Cart Main Grid */
+    .cart-main-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 28px;
+      margin: 30px 0 60px 0;
+    }
+    @media (max-width: 900px) {
+      .cart-main-grid { grid-template-columns: 1fr; }
+    }
+    .cart-item-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .cart-no-domain-card {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .btn-sm-domain {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-sm-domain:hover { background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%); }
+    .item-info-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .conf-globe {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .item-title-bold {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .item-domain-green {
+      color: #0284c7;
+      font-weight: 700;
+      font-size: 13.5px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .item-links {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 8px;
+    }
+    .item-link-act {
+      cursor: pointer;
+      color: #64748b;
+      transition: color 0.2s;
+    }
+    .item-link-act:hover { color: #ef4444; }
+
+    /* Right Column: Dark Navy Order Summary */
+    .summary-card-darknavy {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.2);
+    }
+    .darknavy-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    .darknavy-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 13.5px;
+      color: #94a3b8;
+    }
+    .darknavy-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 18px 0;
+      text-align: center;
+    }
+    .darknavy-due-label {
+      font-size: 12px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+    .darknavy-due-val {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0284c7;
+      margin-top: 4px;
+    }
+    .promo-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .promo-input-dark {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+    .promo-input-dark::placeholder { color: #94a3b8; }
+    .btn-promo-apply {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      border: none;
+      font-weight: 800;
+      padding: 0 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .btn-promo-apply:hover { background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%); }
+    .btn-checkout-green {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .btn-checkout-green:hover { background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%); }
+
+    /* Pink NID Alert Notice */
+    .nid-alert-box {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 10px;
+      padding: 14px 20px;
+      color: #e11d48;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    /* Form Fields Styling */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 650px) {
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+    }
+    .ph-form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .ph-form-input:focus {
+      background: #ffffff;
+      border-color: #0284c7;
+    }
+
+    /* Payment Gateway Selection */
+    .gateway-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    @media (max-width: 750px) {
+      .gateway-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .gw-card {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 16px 10px;
+      text-align: center;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .gw-card.selected {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+      background: #f0fdf4;
+    }
+    .gw-badge-auto { position: absolute; top: -8px; right: 10px; background: #7c3aed; color: #ffffff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+    .gw-name {
+      font-weight: 800;
+      font-size: 14px;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+    .gw-sub {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Manual Payment Instructions Box */
+    .manual-payment-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .manual-steps-list {
+      margin: 10px 0 16px 20px;
+      color: #334155;
+    }
+    .manual-steps-list li {
+      margin-bottom: 6px;
+    }
+    .copy-num-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e2e8f0;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      color: #0f172a;
+      cursor: pointer;
+    }
+
+    /* Floating Cart Button */
+    .floating-cart-btn {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+      cursor: pointer;
+      z-index: 99;
+      text-decoration: none;
+    }
+    .floating-cart-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+
+    /* ========================================================
+       MODAL: AUTHENTIC SSLCOMMERZ / BKASH PAYMENT POPUP
+    ======================================================== */
+    .pay-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+    }
+    .pay-modal-container {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .pay-modal-header {
+      background: #070b19;
+      color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pay-modal-header.bkash-mode {
+      background: #d12053;
+    }
+    .pay-modal-header.nagad-mode {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%) !important;
+    }
+    .pay-modal-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .pay-tab-btn {
+      padding: 12px 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #64748b;
+      transition: all 0.2s;
+    }
+    .pay-tab-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: inset 0 -2px 0 #0284c7;
+    }
+    .pay-tab-btn.bkash-active {
+      color: #d12053;
+      box-shadow: inset 0 -2px 0 #d12053;
+    }
+    .pay-tab-btn.nagad-active {
+      color: #ea580c;
+      box-shadow: inset 0 -2px 0 #ea580c;
+    }
+    .pay-modal-body {
+      padding: 24px;
+    }
+    .pay-amount-badge {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Putulhost Frame 1) -->
+  <div class="ph-topbar" id="ph-notice-bar">
+    <div class="container">
+      <div class="ph-topbar-inner" id="ph-notice-content">
+        <a href="domain.html" class="ph-notice-item ph-notice-desktop active" style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:1;visibility:visible;align-items:center;justify-content:center;gap:12px;color:#fff;text-decoration:none;display:flex;">
+          <i class="fa fa-bullhorn" style="font-size:12px;opacity:0.75;flex-shrink:0;"></i>
+          <span style="color:#fff;font-size:13.5px;font-weight:600;letter-spacing:0.15px;white-space:nowrap;">.TOP ডোমেইন মাত্র ২১০ টাকা ! রিসেলার হোস্টিংয়ের ওপর সর্বোচ্চ ৫০% ছাড় ! .COM ডোমেইন রেজিস্টার ১০৫০ টাকা</span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Go!</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="ph-header" id="ph-site-header">
+    <div class="container">
+      <div class="ph-header-inner">
+        <!-- Logo -->
+        <div class="ph-logo">
+          <a href="index.html" class="ph-logo-link">
+            <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-logo-img" fetchpriority="high">
+          </a>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="ph-desktop-nav">
+          <ul class="ph-nav-menu">
+            <!-- 1. Domain -->
+            <li class="has-ph-dropdown">
+              <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#e0f2fe;"><img src="assets/images/ph/domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Registration</span><span class="ph-dd-subtext">Register Your Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="cart.html?a=add&domain=transfer"><div class="ph-dd-icon" style="color:#0284c7;background:#e0f2fe;"><img src="assets/images/ph/transfer.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Transfer</span><span class="ph-dd-subtext">Transfer to JAAS BD</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bd-domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#e0f2fe;"><img src="assets/images/ph/bd_domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">.BD Domain</span><span class="ph-dd-subtext">Official BTCL .BD Domains</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 2. Hosting -->
+            <li class="has-ph-dropdown">
+              <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="basic-hosting.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Basic Web Hosting</span><span class="ph-dd-subtext">Perfect for small personal sites</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="pro-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Pro Web Hosting</span><span class="ph-dd-subtext">Ideal for growing businesses</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="premium-hosting.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Premium Web Hosting</span><span class="ph-dd-subtext">Enhanced speed &amp; cPanel NVMe</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-basic.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Basic Hosting</span><span class="ph-dd-subtext">Ultra-fast local BD routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-premium.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Premium Hosting</span><span class="ph-dd-subtext">Maximum power with local routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="email-hosting.html"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Email Hosting</span><span class="ph-dd-subtext">Professional business email</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="radio-hosting.html"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-podcast"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Radio Hosting</span><span class="ph-dd-subtext">Broadcast your audio globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="charity-hosting.html"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-heart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Free Hosting for Charities</span><span class="ph-dd-subtext">Special packages for nonprofits</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 3. Reseller -->
+            <li class="has-ph-dropdown">
+              <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="domain-reseller.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-sitemap"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Reseller</span><span class="ph-dd-subtext">Start your wholesale domain business</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="reseller-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Reseller Hosting</span><span class="ph-dd-subtext">White-label hosting solutions</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-reseller.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Reseller Hosting</span><span class="ph-dd-subtext">High-speed local BD reseller</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 4. Server -->
+            <li class="has-ph-dropdown">
+              <a href="#">Server <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-circle"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX VPS Server</span><span class="ph-dd-subtext">Ultra low-ping Bangladesh VPS</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="rdp-server.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">RDP Server</span><span class="ph-dd-subtext">Remote desktop access globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="backup.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Backup Server</span><span class="ph-dd-subtext">Secure data storage &amp; recovery</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="dedicated.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Dedicated Server</span><span class="ph-dd-subtext">Ultimate power &amp; full control</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 5. Website -->
+            <li class="has-ph-dropdown">
+              <a href="#">Website <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-shopping-cart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">E-Commerce Website</span><span class="ph-dd-subtext">Complete online store solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Ecommerce Landing Page</span><span class="ph-dd-subtext">High-converting product pages</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-newspaper"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal Website</span><span class="ph-dd-subtext">Modern news publishing platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-file-alt"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal E-Paper</span><span class="ph-dd-subtext">Digital newspaper experience</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Host &amp; IT Site</span><span class="ph-dd-subtext">Professional IT business website</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 6. Services -->
+            <li class="has-ph-dropdown">
+              <a href="#">Services <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="bulk-sms.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-comment-dots"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk SMS</span><span class="ph-dd-subtext">Complete SMS marketing portal</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bulk-mail.html"><div class="ph-dd-icon" style="color:#723394;background:#eff6ff;"><i class="fa fa-envelope-open-text"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk Mail</span><span class="ph-dd-subtext">Complete bulk email server</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="whmcs-solution.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WHMCS Solution</span><span class="ph-dd-subtext">Web Hosting &amp; Billing Panel</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="graphics-design.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-paint-brush"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Graphics Design</span><span class="ph-dd-subtext">Creative branding &amp; visuals</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Actions -->
+        <div class="ph-header-actions">
+          <a href="affiliates.html" class="ph-btn-affiliate">AFFILIATE</a>
+          
+          <div class="ph-support-dropdown">
+            <button class="ph-btn-support"><i class="fa fa-headphones"></i> Support</button>
+            <div class="ph-support-mega-menu">
+              <div class="psm-section">
+                <h4>Talk to Expert (Sales)</h4>
+                <a href="tel:+8801818430308" class="psm-phone-box">
+                  <i class="fa fa-phone"></i> +8801818430308
+                </a>
+                <p class="psm-timing">Available: 24/7 Support Hotline</p>
+              </div>
+              <div class="psm-section">
+                <h4>Chat with us</h4>
+                <div class="psm-chat-btns">
+                  <a href="https://wa.me/8801818430308" class="psm-chat-btn" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                  </a>
+                  <a href="clientarea.html" class="psm-chat-btn">
+                    <i class="fa fa-ticket-alt"></i> Ticket
+                  </a>
+                </div>
+              </div>
+              <div class="psm-links">
+                <a href="terms.html" class="psm-link"><i class="fa fa-shield-alt"></i> Terms of Service</a>
+                <a href="refund.html" class="psm-link"><i class="fa fa-undo"></i> Refund Policy</a>
+                <a href="contact.html" class="psm-link"><i class="fa fa-envelope"></i> Contact Us</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="login.html" class="ph-btn-account">
+            <i class="fa fa-user-circle"></i> Account
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <div class="ph-mobile-actions">
+          <a href="login.html" class="ph-mobile-btn"><i class="fa fa-user"></i></a>
+          <button class="ph-mobile-menu-toggle" id="phMenuToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Overlay & Sidebar -->
+  <div class="ph-mobile-overlay" id="phMobileOverlay"></div>
+  <div class="ph-mobile-sidebar" id="phMobileSidebar">
+    <div class="ph-ms-header">
+      <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-ms-logo">
+      <button class="ph-ms-close" id="phMenuClose">&times;</button>
+    </div>
+    <div class="ph-ms-body">
+      <ul class="ph-ms-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="has-ms-sub">
+          <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="domain.html">Register Domain</a></li>
+            <li><a href="cart.html?a=add&domain=transfer">Transfer Domain</a></li>
+            <li><a href="bd-domain.html">.BD Domain</a></li>
+          </ul>
+        </li>
+        <li class="has-ms-sub">
+          <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="basic-hosting.html">Basic Web Hosting</a></li>
+            <li><a href="pro-hosting.html">Pro Web Hosting</a></li>
+            <li><a href="premium-hosting.html">Premium Web Hosting</a></li>
+                    <li><a href="corporate-hosting.html">Corporate Web Hosting</a></li>
+            <li><a href="bdix-basic.html">BDIX Basic Hosting</a></li>
+            <li><a href="bdix-premium.html">BDIX Premium Hosting</a></li>
+            <li><a href="email-hosting.html">Email Hosting</a></li>
+            <li><a href="radio-hosting.html">Radio Hosting</a></li>
+            <li><a href="charity-hosting.html">Free Hosting for Charities</a></li>
+          </ul>
+        </li>
+        <li class="has-ms-sub">
+          <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="domain-reseller.html">Domain Reseller</a></li>
+            <li><a href="reseller-hosting.html">Reseller Hosting</a></li>
+            <li><a href="bdix-reseller.html">BDIX Reseller Hosting</a></li>
+          </ul>
+        </li>
+        <li class="has-ms-sub">
+          <a href="#">Server <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="vps.html">VPS Server</a></li>
+            <li><a href="bdix-vps.html">BDIX VPS Server</a></li>
+            <li><a href="rdp-server.html">RDP Server</a></li>
+            <li><a href="backup.html">Backup Server</a></li>
+            <li><a href="dedicated.html">Dedicated Server</a></li>
+          </ul>
+        </li>
+        <li><a href="affiliates.html">Affiliates</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="ph-ms-footer">
+        <a href="login.html" class="ph-ms-btn-primary">Client Login</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subnav Bar -->
+  <div class="bh-subnav-bar">
+    <div class="container bh-subnav-inner">
+      <span>Hosting =&gt;</span>
+      <a href="basic-hosting.html">Basic Hosting</a>
+      <a href="pro-hosting.html">Pro Hosting</a>
+      <a href="premium-hosting.html">Premium Hosting</a>
+      <a href="bdix-basic.html">BDIX Basic</a>
+      <a href="bdix-premium.html">BDIX Premium</a>
+      <a href="email-hosting.html">Email Hosting</a>
+      <a href="radio-hosting.html">Radio Hosting</a>
+    </div>
+  </div>
+
+  <!-- Step Bar -->
+  <div class="stepper-wrapper">
+    <div class="container">
+      <div class="stepper-flex" id="globalStepper">
+        <div class="step-item active" id="stStep1" onclick="showDomainView()" title="Choose Domain">
+          <div class="step-circle">1</div> <span>Choose Domain</span>
+        </div>
+        <div class="step-connector" id="stConn1"></div>
+        <div class="step-item" id="stStep2" onclick="showBillingView()" title="Configure Product">
+          <div class="step-circle">2</div> <span>Configure Product</span>
+        </div>
+        <div class="step-connector" id="stConn2"></div>
+        <div class="step-item" id="stStep3" onclick="showAddonsView()" title="Domain Addons">
+          <div class="step-circle">3</div> <span>Domain Addons</span>
+        </div>
+        <div class="step-connector" id="stConn3"></div>
+        <div class="step-item" id="stStep4" onclick="showCartView()" title="Review Cart">
+          <div class="step-circle">4</div> <span>Review Cart</span>
+        </div>
+        <div class="step-connector" id="stConn4"></div>
+        <div class="step-item" id="stStep5" onclick="showCheckoutView()" title="Checkout &amp; Payment">
+          <div class="step-circle">5</div> <span>Checkout &amp; Payment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button -->
+  <a href="javascript:showCartView()" class="floating-cart-btn" id="floatingCartBtn">
+    <i class="fa fa-shopping-cart"></i>
+    <span class="floating-cart-badge" id="cartCountBadge">0</span>
+  </a>
+
+  <!-- ======================================================== -->
+  <!-- STEP 1: CHOOSE DOMAIN                                   -->
+  <!-- ======================================================== -->
+  <div class="container" id="viewStep1Domain" style="display:none; margin-top:24px;">
+    <h2 style="font-size:20px; font-weight:800; color:#0f172a; margin-bottom:14px;">Choose a Domain for Your Service</h2>
+
+    <!-- 4 Domain Tabs -->
+    <div class="domain-choice-bar">
+      <div class="choice-tab-card active" id="tabOptRegister" onclick="switchDomainChoiceTab('register')">
+        <input type="radio" name="domain_choice_radio" id="rRegNew" checked>
+        <label for="rRegNew" style="cursor:pointer;">Register a new domain</label>
+      </div>
+      <div class="choice-tab-card" id="tabOptTransfer" onclick="switchDomainChoiceTab('transfer')">
+        <input type="radio" name="domain_choice_radio" id="rTrans">
+        <label for="rTrans" style="cursor:pointer;">Transfer your domain</label>
+      </div>
+      <div class="choice-tab-card" id="tabOptOwn" onclick="switchDomainChoiceTab('own')">
+        <input type="radio" name="domain_choice_radio" id="rOwn">
+        <label for="rOwn" style="cursor:pointer;">I will use my existing domain</label>
+      </div>
+      <div class="choice-tab-card" id="tabOptSubdomain" onclick="switchDomainChoiceTab('subdomain')">
+        <input type="radio" name="domain_choice_radio" id="rSub">
+        <label for="rSub" style="cursor:pointer;">Use a free subdomain</label>
+      </div>
+    </div>
+
+    <!-- Body Tab: Register New Domain -->
+    <div class="choice-body-box" id="boxOptRegister">
+      <div style="display:flex; flex:1; gap:10px; flex-wrap:wrap;">
+        <input type="text" class="ph-select-full" id="regDomainNameInput" placeholder="Enter domain name without extension (e.g. mycompany)">
+        <select class="ph-select-full" style="max-width:140px;" id="regDomainTldSelect">
+          <option value=".com">.com</option>
+          <option value=".net">.net</option>
+          <option value=".org">.org</option>
+          <option value=".top">.top</option>
+          <option value=".xyz">.xyz</option>
+          <option value=".cyou">.cyou</option>
+          <option value=".com.bd">.com.bd</option>
+          <option value=".bd">.bd</option>
+        </select>
+      </div>
+      <button type="button" class="btn-go-green" onclick="checkDomainAvailability()"><i class="fa fa-search"></i> Check</button>
+    </div>
+
+    <!-- Body Tab: Transfer -->
+    <div class="choice-body-box" id="boxOptTransfer" style="display:none;">
+      <input type="text" class="ph-select-full" id="transferDomainInput" placeholder="example.com">
+      <button type="button" class="btn-go-green" onclick="submitTransferDomain()">Transfer &rarr;</button>
+    </div>
+
+    <!-- Body Tab: Own Domain -->
+    <div class="choice-body-box" id="boxOptOwn" style="display:none;">
+      <input type="text" class="ph-select-full" id="ownDomainInput" placeholder="myexistingwebsite.com">
+      <button type="button" class="btn-go-green" onclick="submitOwnDomain()">Use Domain &rarr;</button>
+    </div>
+
+    <!-- Body Tab: Subdomain -->
+    <div class="choice-body-box" id="boxOptSubdomain" style="display:none;">
+      <div style="display:flex; flex:1; gap:8px; align-items:center;">
+        <input type="text" class="ph-select-full" id="subdomainPrefixInput" placeholder="mysite">
+        <span style="font-weight:700; color:#475569;">.jaasbd.com</span>
+      </div>
+      <button type="button" class="btn-go-green" onclick="submitSubdomain()">Use Subdomain &rarr;</button>
+    </div>
+
+    <!-- Green Congrats Banner -->
+    <div class="congrats-banner" id="congratsBannerBox" style="display:none;">
+      <div class="congrats-title"><i class="fa fa-check-circle"></i> Congratulations! <span id="congratsDomainText"></span> is available!</div>
+      <div class="congrats-sub">Secure this exclusive domain now before someone else grabs it!</div>
+      <div class="congrats-actions">
+        <span class="congrats-price" id="congratsDomainPrice">TK 1080.00 BDT</span>
+        <button type="button" class="btn-add-cart-white" onclick="selectAndContinueDomain()"><i class="fa fa-arrow-right"></i> Continue with this Domain</button>
+      </div>
+    </div>
+
+    <!-- 6 TLD Offer Cards Ribbon -->
+    <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin:24px 0 14px 0;">Popular Suggested TLD Offers</h3>
+    <div class="offer-tlds-grid">
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">POPULAR</div>
+        <div class="offer-tld-name">.com</div>
+        <div class="offer-price-old">TK 1350.00</div>
+        <div class="offer-price-current">TK 1080.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.com', 1080, this)">Select</button>
+      </div>
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">OFFER</div>
+        <div class="offer-tld-name">.top</div>
+        <div class="offer-price-old">TK 450.00</div>
+        <div class="offer-price-current">TK 210.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.top', 210, this)">Select</button>
+      </div>
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">OFFER</div>
+        <div class="offer-tld-name">.xyz</div>
+        <div class="offer-price-old">TK 1200.00</div>
+        <div class="offer-price-current">TK 340.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.xyz', 340, this)">Select</button>
+      </div>
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">OFFER</div>
+        <div class="offer-tld-name">.cyou</div>
+        <div class="offer-price-old">TK 400.00</div>
+        <div class="offer-price-current">TK 249.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.cyou', 249, this)">Select</button>
+      </div>
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">BTCL</div>
+        <div class="offer-tld-name">.com.bd</div>
+        <div class="offer-price-old">TK 1000.00</div>
+        <div class="offer-price-current">TK 800.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.com.bd', 800, this)">Select</button>
+      </div>
+      <div class="offer-tld-card">
+        <div class="offer-ribbon">OFFER</div>
+        <div class="offer-tld-name">.net</div>
+        <div class="offer-price-old">TK 1600.00</div>
+        <div class="offer-price-current">TK 1350.00</div>
+        <button type="button" class="btn-offer-add" onclick="selectQuickTLD('.net', 1350, this)">Select</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- STEP 2: CONFIGURE PRODUCT & BILLING CYCLE               -->
+  <!-- ======================================================== -->
+  <div class="container" id="viewStep2Billing" style="display:none; margin-top:24px;">
+    <div class="billing-conf-grid">
+      <!-- Left Column: Options -->
+      <div>
+        <div class="conf-card-white" style="margin-bottom:20px;">
+          <div class="conf-card-title"><i class="fa fa-calendar-alt" style="color:#0284c7;"></i> Choose Billing Cycle</div>
+          
+          <div class="cycle-btn-card selected" id="c1m" onclick="setBillingCycle('1m')">
+            <span class="cycle-title">1 Month</span>
+            <span class="cycle-price" id="priceLabel1m">TK 130.00 BDT</span>
+          </div>
+          <div class="cycle-btn-card" id="c3m" onclick="setBillingCycle('3m')">
+            <span class="cycle-title">3 Month</span>
+            <span class="cycle-price" id="priceLabel3m">TK 390.00 BDT</span>
+          </div>
+          <div class="cycle-btn-card" id="c6m" onclick="setBillingCycle('6m')">
+            <span class="cycle-title">6 Month</span>
+            <span class="cycle-price" id="priceLabel6m">TK 780.00 BDT</span>
+          </div>
+          <div class="cycle-btn-card" id="c1y" onclick="setBillingCycle('1y')">
+            <span class="cycle-title">
+              1 Year (Annually)
+              <span class="cycle-save-badge">Save 10% / 2 Months Free</span>
+            </span>
+            <span class="cycle-price" id="priceLabel1y">TK 1200.00 BDT</span>
+          </div>
+        </div>
+
+        <!-- Server Location -->
+        <div class="conf-card-white">
+          <div class="conf-card-title"><i class="fa fa-map-marker-alt" style="color:#0284c7;"></i> Select Server Location</div>
+          <p style="font-size:12.5px; color:#64748b; margin-bottom:12px;">Choose where your website data is hosted for best latency.</p>
+          
+          <div class="location-selector-grid">
+            <div class="loc-card selected" id="locUsa" onclick="selectLocation('usa')">
+              <span style="font-size:20px;">🇺🇸</span>
+              <div>
+                <div style="font-weight:800; font-size:13.5px; color:#0f172a;">USA Datacenter</div>
+                <div style="font-size:11.5px; color:#64748b;">Fastest Global CDN</div>
+              </div>
+            </div>
+            <div class="loc-card" id="locBd" onclick="selectLocation('bd')">
+              <span style="font-size:20px;">🇧🇩</span>
+              <div>
+                <div style="font-weight:800; font-size:13.5px; color:#0f172a;">Bangladesh BDIX</div>
+                <div style="font-size:11.5px; color:#64748b;">Ultra low 2ms ping in BD</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Summary Card -->
+      <div>
+        <div class="summary-card-light">
+          <div class="summary-light-title">Order Summary</div>
+          <div style="font-weight:800; font-size:16px; color:#0f172a; margin-bottom:2px;" id="sumPlanName">PH 1GB HOST</div>
+          <div style="font-size:12px; color:#64748b; margin-bottom:14px;" id="sumPlanSub">Linux Shared NVMe Hosting</div>
+
+          <div class="summary-item-line">
+            <span id="sumItemLineTitle">Hosting Plan</span>
+            <span style="font-weight:700;" id="sumItemLinePrice">TK 130.00 BDT</span>
+          </div>
+
+          <div class="summary-item-line" style="font-size:12.5px; color:#64748b;">
+            <span id="sumCyclePeriodLabel">Billing Cycle:</span>
+            <span id="sumCyclePriceLabel">1 Month</span>
+          </div>
+
+          <div class="summary-item-line" id="sumDomainLine" style="display:none;">
+            <span id="sumDomainNameLabel">Domain Registration</span>
+            <span style="font-weight:700;" id="sumDomainPriceLabel">TK 1080.00 BDT</span>
+          </div>
+
+          <div class="summary-total-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:17px; font-weight:900;">
+              <span>Total Due Today:</span>
+              <span style="color:#0284c7;" id="sumTotalDueGreen">TK 130.00 BDT</span>
+            </div>
+            <button type="button" class="btn-continue-darkgreen" onclick="showAddonsView()">Continue &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- STEP 3: DOMAIN ADDONS & CONFIGURATION                   -->
+  <!-- ======================================================== -->
+  <div class="container" id="viewStep3Addons" style="display:none; margin-top:24px;">
+    <h2 style="font-size:20px; font-weight:800; color:#0f172a; margin-bottom:8px;">Domains Configuration &amp; Addons</h2>
+    <p style="font-size:13.5px; color:#64748b; margin-bottom:20px;">Please review your domain name selections and any addons that are available for them.</p>
+
+    <!-- Domain Card -->
+    <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div class="conf-globe"><i class="fa fa-globe"></i></div>
+        <div>
+          <div style="font-size:16px; font-weight:800; color:#0f172a;" id="addonsDomainName">example.com</div>
+          <div style="font-size:12.5px; color:#64748b;">Assigned to <span id="addonsHostingPlanName" style="color:#0284c7; font-weight:700;">PH 1GB HOST</span></div>
+        </div>
+      </div>
+      <button type="button" class="btn-sm-domain" onclick="showDomainView()"><i class="fa fa-edit"></i> Change Domain</button>
+    </div>
+
+    <!-- 3 Addons -->
+    <div class="addons-grid">
+      <div class="addon-card selected" id="addonDnsCard" onclick="toggleAddon('dns')">
+        <div>
+          <div class="addon-header">
+            <input type="checkbox" class="addon-checkbox" id="addonDnsCheck" checked>
+            <div>
+              <div class="addon-title">DNS Management</div>
+              <span style="background:#e0f2fe; color: #0284c7; font-size:10px; font-weight:800; padding:1px 6px; border-radius:4px;">RECOMMENDED</span>
+            </div>
+          </div>
+          <p class="addon-desc">External DNS Hosting can help speed up your website and improve availability with increased redundancy.</p>
+        </div>
+        <div class="addon-price">FREE! (৳0.00 / 1 Year)</div>
+      </div>
+
+      <div class="addon-card" id="addonIdCard" onclick="toggleAddon('id')">
+        <div>
+          <div class="addon-header">
+            <input type="checkbox" class="addon-checkbox" id="addonIdCheck">
+            <div>
+              <div class="addon-title">ID Protection (WHOIS)</div>
+              <span style="background:#fef08a; color:#854d0e; font-size:10px; font-weight:800; padding:1px 6px; border-radius:4px;">SECURITY</span>
+            </div>
+          </div>
+          <p class="addon-desc">Protect your personal identity, email and phone number from WHOIS crawlers and reduce spam.</p>
+        </div>
+        <div class="addon-price">TK 300.00 BDT / 1 Year</div>
+      </div>
+
+      <div class="addon-card selected" id="addonEmailCard" onclick="toggleAddon('email')">
+        <div>
+          <div class="addon-header">
+            <input type="checkbox" class="addon-checkbox" id="addonEmailCheck" checked>
+            <div>
+              <div class="addon-title">Email Forwarding</div>
+              <span style="background:#e0f2fe; color: #0284c7; font-size:10px; font-weight:800; padding:1px 6px; border-radius:4px;">FREE</span>
+            </div>
+          </div>
+          <p class="addon-desc">Get emails forwarded to alternate email addresses of your choice so that you can monitor all from a single account.</p>
+        </div>
+        <div class="addon-price">FREE! (৳0.00 / 1 Year)</div>
+      </div>
+    </div>
+
+    <!-- Nameservers Box -->
+    <div class="conf-card-white" style="margin-bottom:24px;">
+      <div class="conf-card-title"><i class="fa fa-network-wired" style="color:#0284c7;"></i> Nameservers</div>
+      <p style="font-size:12.5px; color:#64748b; margin-bottom:14px;">By default, new domains will use our high-speed nameservers for hosting on our network.</p>
+      
+      <div class="form-grid-2">
+        <div>
+          <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Nameserver 1</label>
+          <input type="text" class="ph-form-input" id="ns1" value="ns1.jaasbd.com">
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Nameserver 2</label>
+          <input type="text" class="ph-form-input" id="ns2" value="ns2.jaasbd.com">
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <button type="button" class="btn-go-green" style="background:#64748b;" onclick="showBillingView()">&larr; Back to Billing</button>
+      <button type="button" class="btn-go-green" onclick="showCartView()">Continue to Review Cart &rarr;</button>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- STEP 4: REVIEW CART (Frame 21)                          -->
+  <!-- ======================================================== -->
+  <div class="container" id="viewStep4Cart" style="display:none;">
+    <div class="cart-main-grid">
+      <!-- Left Column: Items List -->
+      <div>
+        <!-- Notice if no domain is added -->
+        <div class="cart-no-domain-card" id="cartNoDomainPrompt" style="display:none;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <i class="fa fa-globe" style="font-size:26px; color:#94a3b8;"></i>
+              <div>
+                <div style="font-weight:800; color:#334155; font-size:14.5px;">No Domain Added to Cart</div>
+                <div style="font-size:12.5px; color:#64748b;">Would you like to register a new domain or connect an existing domain?</div>
+              </div>
+            </div>
+            <button type="button" class="btn-sm-domain" onclick="showDomainView()"><i class="fa fa-plus"></i> Search &amp; Add Domain</button>
+          </div>
+        </div>
+
+        <!-- Domain Item Card -->
+        <div class="cart-item-card" id="cartCardDomain" style="display:none;">
+          <div class="item-info-left">
+            <div class="conf-globe"><i class="fa fa-globe"></i></div>
+            <div>
+              <div class="item-title-bold">Domain Registration</div>
+              <a href="#" class="item-domain-green" id="cartViewDomainName"><i class="fa fa-link"></i> example.com</a>
+              <div class="item-links">
+                <span class="item-link-act" onclick="showDomainView()"><i class="fa fa-edit"></i> Edit</span>
+                <span class="item-link-act" onclick="removeDomainItem()"><i class="fa fa-times"></i> Remove</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px; font-weight:800; color:#0284c7;" id="cartViewDomainPrice">TK 1080.00 BDT</div>
+            <div style="font-size:12px; color:#64748b; margin-top:2px;">1 Year Term</div>
+            <div style="font-size:11px; color:#94a3b8; margin-top:4px;" id="cartViewDomainRenewal">Renewal: TK 1500.00/1 Year</div>
+          </div>
+        </div>
+
+        <!-- Hosting Item Card -->
+        <div class="cart-item-card" id="cartCardHosting" style="display:none;">
+          <div class="item-info-left">
+            <div class="conf-globe" style="background:#eff6ff; color:#3b82f6;"><i class="fa fa-server"></i></div>
+            <div>
+              <div class="item-title-bold" id="cartViewHostingTitle">PH 1GB HOST</div>
+              <div style="font-size:12px; color:#64748b;" id="cartViewHostingSub">Linux NVMe Web Hosting</div>
+              <div class="item-links">
+                <span class="item-link-act" onclick="showBillingView()"><i class="fa fa-edit"></i> Edit</span>
+                <span class="item-link-act" onclick="removeHostingItem()"><i class="fa fa-times"></i> Remove</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px; font-weight:800; color:#0284c7;" id="cartViewHostingPrice">TK 130.00 BDT</div>
+            <div style="font-size:12px; font-weight:600; color:#0f172a;" id="cartViewHostingCycle">1 Month</div>
+          </div>
+        </div>
+
+        <!-- ID Protection Addon Card -->
+        <div class="cart-item-card" id="cartCardAddonId" style="display:none;">
+          <div class="item-info-left">
+            <div class="conf-globe" style="background:#fef3c7; color:#d97706;"><i class="fa fa-user-shield"></i></div>
+            <div>
+              <div class="item-title-bold">ID Protection (WHOIS Privacy)</div>
+              <div style="font-size:12px; color:#64748b;">Domain privacy protection</div>
+              <div class="item-links">
+                <span class="item-link-act" onclick="removeIdAddon()"><i class="fa fa-times"></i> Remove</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:18px; font-weight:800; color:#0284c7;">TK 300.00 BDT</div>
+            <div style="font-size:12px; color:#64748b;">1 Year</div>
+          </div>
+        </div>
+
+        <!-- Empty Cart Notice -->
+        <div class="cart-item-card" id="cartEmptyNotice" style="display:none; text-align:center; padding:40px 20px; flex-direction:column; gap:16px;">
+          <i class="fa fa-shopping-cart" style="font-size:42px; color:#cbd5e1;"></i>
+          <div style="font-size:18px; font-weight:800; color:#334155;">Your Shopping Cart is Empty</div>
+          <p style="font-size:13.5px; color:#64748b;">Browse our web hosting plans or register your dream domain to get started!</p>
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+            <a href="basic-hosting.html" class="btn-go-green" style="text-decoration:none;"><i class="fa fa-server"></i> Browse Hosting Plans</a>
+            <button type="button" class="btn-go-green" style="background:linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);" onclick="showDomainView()"><i class="fa fa-globe"></i> Search Domain</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Dark Navy Order Summary -->
+      <div>
+        <div class="summary-card-darknavy">
+          <h3 class="darknavy-title">Order Summary</h3>
+
+          <div class="darknavy-row">
+            <span>Subtotal</span>
+            <span style="font-weight:700; color:#fff;" id="navySubtotal">TK 0.00 BDT</span>
+          </div>
+
+          <div class="darknavy-row" id="navyDiscountRow" style="display:none; color: #7c3aed;">
+            <span>Discount</span>
+            <span style="font-weight:700;" id="navyDiscountVal">-TK 0.00 BDT</span>
+          </div>
+
+          <div class="darknavy-row" style="font-size:12.5px;">
+            <span>RENEW COST (RECURRING)</span>
+            <span style="font-weight:700; color: #7c3aed;" id="navyRenew">TK 0.00 BDT for 1 Years</span>
+          </div>
+
+          <div class="darknavy-box">
+            <div class="darknavy-due-label">Total Due Today</div>
+            <div class="darknavy-due-val" id="navyTotalDue">TK 0.00 BDT</div>
+          </div>
+
+          <div class="promo-input-row">
+            <input type="text" class="promo-input-dark" id="navyPromoInput" placeholder="Promo code (e.g. BSC10)">
+            <button type="button" class="btn-promo-apply" onclick="applyPromoCode()">Apply</button>
+          </div>
+
+          <button type="button" class="btn-checkout-green" id="btnCartCheckout" onclick="showCheckoutView()">Proceed to Checkout &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- STEP 5: CHECKOUT & PAYMENT                              -->
+  <!-- ======================================================== -->
+  <div class="container" id="viewStep5Checkout" style="display:none; margin:24px auto 60px auto;">
+    <!-- Pink NID Alert Notice (Frame 29) -->
+    <div class="nid-alert-box">
+      <i class="fa fa-exclamation-triangle"></i> আপনার NID Card/Birth Certificate এর সাথে মিল রেখে রেজিস্টার করুন, অন্যথায় একাউন্ট বাতিল হতে পারে।
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.8fr 1fr; gap:28px;">
+      <!-- Left Column: Form & Payment -->
+      <div>
+        <!-- Personal Information Section -->
+        <div class="conf-card-white" style="margin-bottom:20px;">
+          <h3 style="font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px;"><i class="fa fa-user" style="color:#0284c7;"></i> Personal Information</h3>
+          
+          <div class="form-grid-2">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">First Name *</label>
+              <input type="text" class="ph-form-input" id="cFirstName" value="Md" required>
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Last Name *</label>
+              <input type="text" class="ph-form-input" id="cLastName" value="Karim" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Email Address *</label>
+              <input type="email" class="ph-form-input" id="cEmail" value="customer@jaasbd.com" required>
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Phone Number (+880) *</label>
+              <input type="text" class="ph-form-input" id="cPhone" value="+8801818430308" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing Address Section -->
+        <div class="conf-card-white" style="margin-bottom:20px;">
+          <h3 style="font-size:16px; font-weight:800; color:#0f172a; margin-bottom:16px;"><i class="fa fa-map-marker-alt" style="color:#0284c7;"></i> Billing Address</h3>
+          
+          <div style="margin-bottom:16px;">
+            <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Street Address *</label>
+            <input type="text" class="ph-form-input" id="cAddress" value="Hat Masjid Road, Belgachi Bazar">
+          </div>
+
+          <div class="form-grid-3">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">City / District *</label>
+              <input type="text" class="ph-form-input" id="cDistrict" value="Rajbari Sadar">
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Country</label>
+              <select class="ph-form-input" id="cCountry">
+                <option value="BD" selected>Bangladesh</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Postcode</label>
+              <input type="text" class="ph-form-input" id="cPostcode" value="7700">
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Security / Password -->
+        <div class="conf-card-white" style="margin-bottom:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="font-size:16px; font-weight:800; color:#0f172a;"><i class="fa fa-lock" style="color:#0284c7;"></i> Account Security</h3>
+            <button type="button" onclick="generatePassword()" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; font-size:12px; font-weight:700; padding:4px 10px; border-radius:6px; cursor:pointer;">
+              <i class="fa fa-key"></i> Generate Password
+            </button>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Password</label>
+              <input type="password" class="ph-form-input" id="cPass" value="PutulHost@2026#Secure">
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Confirm Password</label>
+              <input type="password" class="ph-form-input" id="cConfirmPass" value="PutulHost@2026#Secure">
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Gateway Selection -->
+        <div class="conf-card-white" style="margin-bottom:20px;">
+          <h3 style="font-size:16px; font-weight:800; color:#0f172a;"><i class="fa fa-credit-card" style="color:#0284c7;"></i> Payment Method</h3>
+          <p style="font-size:12.5px; color:#64748b; margin-top:2px;">Select an instant automated gateway or manual mobile payment.</p>
+
+          <div class="gateway-cards-grid">
+            <div class="gw-card selected" id="gwAuto" onclick="selectGW('auto')">
+              <span class="gw-badge-auto">INSTANT</span>
+              <img src="assets/images/ph/SSLCommerz-Pay.png" alt="SSLCommerz" style="height:26px; object-fit:contain; margin-bottom:4px;">
+              <div class="gw-name">SSLCommerz / EPS</div>
+              <div class="gw-sub">bKash, Nagad, Cards</div>
+            </div>
+            <div class="gw-card" id="gwBkash" onclick="selectGW('bkash')">
+              <div style="font-size:24px; color:#d12053;"><i class="fa fa-mobile-alt"></i></div>
+              <div class="gw-name" style="color:#d12053;">bKash Manual</div>
+              <div class="gw-sub">Personal / Send Money</div>
+            </div>
+            <div class="gw-card" id="gwNagad" onclick="selectGW('nagad')">
+              <div style="font-size:24px; color:#ea580c;"><i class="fa fa-mobile-alt"></i></div>
+              <div class="gw-name" style="color:#ea580c;">Nagad Manual</div>
+              <div class="gw-sub">Personal / Send Money</div>
+            </div>
+            <div class="gw-card" id="gwRocket" onclick="selectGW('rocket')">
+              <div style="font-size:24px; color:#8b5cf6;"><i class="fa fa-mobile-alt"></i></div>
+              <div class="gw-name" style="color:#8b5cf6;">Rocket Manual</div>
+              <div class="gw-sub">DBBL Rocket 12 Digits</div>
+            </div>
+          </div>
+
+          <!-- Manual Payment Instructions Box (Shown if manual selected) -->
+          <div class="manual-payment-box" id="boxManualInstructions" style="display:none;">
+            <div style="font-weight:800; color:#0f172a; margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+              <i class="fa fa-info-circle" style="color:#0284c7;"></i>
+              <span id="manualGwTitle">Manual bKash Payment Instructions</span>
+            </div>
+            <ol class="manual-steps-list">
+              <li>Open your mobile banking app or dial USSD.</li>
+              <li>Select <strong>Send Money</strong> option.</li>
+              <li>Enter our Account Number: <span class="copy-num-badge" id="manualAccountNum" onclick="copyNumber()">01818430308 <i class="fa fa-copy"></i></span></li>
+              <li>Enter Exact Amount: <strong id="manualPayAmount">TK 0.00 BDT</strong></li>
+              <li>Enter Reference: <strong>JAAS</strong></li>
+              <li>Confirm payment and enter your Sender Number &amp; Transaction ID (TrxID) below.</li>
+            </ol>
+            <div class="form-grid-2">
+              <div>
+                <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Sender Mobile Number</label>
+                <input type="text" class="ph-form-input" id="manualSenderNumber" placeholder="017xxxxxxxx">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Transaction ID (TrxID)</label>
+                <input type="text" class="ph-form-input" id="manualTrxId" placeholder="e.g. BL92A8ZK91">
+              </div>
+            </div>
+          </div>
+
+          <!-- TOS Checkbox -->
+          <div style="margin-top:20px; display:flex; align-items:flex-start; gap:10px;">
+            <input type="checkbox" id="chkAgreeTOS" checked style="width:18px; height:18px; accent-color:#0284c7; margin-top:2px; cursor:pointer;">
+            <label for="chkAgreeTOS" style="font-size:13px; color:#475569; line-height:1.5; cursor:pointer;">
+              আমি <a href="terms.html" target="_blank" style="color:#0284c7; font-weight:700; text-decoration:none;">Terms of Service</a> এবং <a href="refund.html" target="_blank" style="color:#0284c7; font-weight:700; text-decoration:none;">Refund Policy</a> পড়েছি এবং এতে সম্মতি জানাচ্ছি।
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Final Order Review -->
+      <div>
+        <div class="summary-card-darknavy">
+          <h3 class="darknavy-title">Final Order Review</h3>
+          
+          <div class="darknavy-row">
+            <span id="finalItemDomainLabel">Domain Item</span>
+            <span style="font-weight:700; color:#fff;" id="finalItemDomainPrice">TK 0.00 BDT</span>
+          </div>
+
+          <div class="darknavy-row">
+            <span id="finalItemHostingLabel">Hosting Item</span>
+            <span style="font-weight:700; color:#fff;" id="finalItemHostingPrice">TK 0.00 BDT</span>
+          </div>
+
+          <div class="darknavy-row" id="finalItemAddonRow" style="display:none;">
+            <span>ID Protection Addon</span>
+            <span style="font-weight:700; color:#fff;">TK 300.00 BDT</span>
+          </div>
+
+          <div class="darknavy-row" id="finalDiscountRow" style="display:none; color: #7c3aed;">
+            <span>Discount Applied</span>
+            <span style="font-weight:700;" id="finalDiscountVal">-TK 0.00 BDT</span>
+          </div>
+
+          <div class="darknavy-box">
+            <div class="darknavy-due-label">Total Amount Payable</div>
+            <div class="darknavy-due-val" id="finalTotalPayable">TK 0.00 BDT</div>
+          </div>
+
+          <button type="button" class="btn-checkout-green" id="btnSubmitOrder" onclick="handleCheckoutSubmission()">
+            <i class="fa fa-lock"></i> Complete Order &amp; Pay &rarr;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL: AUTHENTIC SSLCOMMERZ / BKASH PAYMENT POPUP
+  ======================================================== -->
+  <div class="pay-modal-backdrop" id="paymentModal">
+    <div class="pay-modal-container">
+      <div class="pay-modal-header" id="payModalHeader">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <i class="fa fa-shield-alt" style="font-size:20px;"></i>
+          <div>
+            <div style="font-weight:800; font-size:15px;" id="payModalTitle">SSLCommerz Secure Payment</div>
+            <div style="font-size:11px; opacity:0.85;">256-bit Bank Grade Encrypted</div>
+          </div>
+        </div>
+        <button type="button" onclick="closePaymentModal()" style="background:transparent; border:none; color:#ffffff; font-size:22px; cursor:pointer;">&times;</button>
+      </div>
+
+      <!-- Payment Tabs -->
+      <div class="pay-modal-tabs">
+        <button type="button" class="pay-tab-btn active" id="tabBkash" onclick="switchModalTab('bkash')">bKash</button>
+        <button type="button" class="pay-tab-btn" id="tabNagad" onclick="switchModalTab('nagad')">Nagad</button>
+        <button type="button" class="pay-tab-btn" id="tabCards" onclick="switchModalTab('cards')">Cards</button>
+        <button type="button" class="pay-tab-btn" id="tabNet" onclick="switchModalTab('net')">Net Banking</button>
+      </div>
+
+      <div class="pay-modal-body">
+        <div class="pay-amount-badge">
+          <div style="font-size:11.5px; color:#64748b; font-weight:700;">TOTAL AMOUNT DUE</div>
+          <div style="font-size:22px; font-weight:900; color:#0284c7;" id="modalPayAmountVal">TK 130.00 BDT</div>
+          <div style="font-size:11.5px; color:#475569;" id="modalInvoiceIdRef">Invoice #INV-2026-0843</div>
+        </div>
+
+        <!-- 1. bKash View -->
+        <div id="modalBodyBkash">
+          <div id="bkashStep1">
+            <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Your bKash Account Number</label>
+            <input type="text" class="ph-form-input" id="bkashNumberInput" placeholder="01XXXXXXXXX" value="01818430308" style="margin-bottom:14px;">
+            <button type="button" class="btn-checkout-green" style="background:#d12053;" onclick="nextBkashStep(2)">Proceed with bKash &rarr;</button>
+          </div>
+          <div id="bkashStep2" style="display:none;">
+            <div style="background:#fff1f2; border:1px solid #fecdd3; border-radius:8px; padding:10px; margin-bottom:12px; font-size:12.5px; color:#be123c;">
+              A 6-digit verification code (OTP) was sent to your bKash number.
+            </div>
+            <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Enter Verification Code (OTP)</label>
+            <input type="text" class="ph-form-input" id="bkashOtpInput" placeholder="123456" value="784920" style="margin-bottom:14px;">
+            <button type="button" class="btn-checkout-green" style="background:#d12053;" onclick="nextBkashStep(3)">Confirm OTP &rarr;</button>
+          </div>
+          <div id="bkashStep3" style="display:none;">
+            <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Enter 5-Digit bKash PIN</label>
+            <input type="password" class="ph-form-input" id="bkashPinInput" placeholder="•••••" value="12345" style="margin-bottom:14px;">
+            <button type="button" class="btn-checkout-green" style="background:#d12053;" onclick="processFinalModalPayment('bKash')">
+              <i class="fa fa-lock"></i> Confirm Payment of <span class="modalPayAmountText"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Nagad View -->
+        <div id="modalBodyNagad" style="display:none;">
+          <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Your Nagad Mobile Account</label>
+          <input type="text" class="ph-form-input" id="nagadNumberInput" placeholder="01XXXXXXXXX" value="01818430308" style="margin-bottom:14px;">
+          <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Nagad 4-Digit PIN</label>
+          <input type="password" class="ph-form-input" id="nagadPinInput" placeholder="••••" value="1234" style="margin-bottom:14px;">
+          <button type="button" class="btn-checkout-green" style="background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%) !important;" onclick="processFinalModalPayment('Nagad')">
+            <i class="fa fa-lock"></i> Pay with Nagad
+          </button>
+        </div>
+
+        <!-- 3. Cards View -->
+        <div id="modalBodyCards" style="display:none;">
+          <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Card Number</label>
+          <input type="text" class="ph-form-input" placeholder="4242 •••• •••• 4242" value="4242 4242 4242 4242" style="margin-bottom:12px;">
+          <div class="form-grid-2">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Expiry Date</label>
+              <input type="text" class="ph-form-input" placeholder="MM/YY" value="12/28">
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">CVV / CVC</label>
+              <input type="password" class="ph-form-input" placeholder="123" value="789">
+            </div>
+          </div>
+          <button type="button" class="btn-checkout-green" style="background:#0284c7; margin-top:14px;" onclick="processFinalModalPayment('Visa / MasterCard')">
+            <i class="fa fa-lock"></i> Pay with Card
+          </button>
+        </div>
+
+        <!-- 4. Net Banking View -->
+        <div id="modalBodyNet" style="display:none;">
+          <label style="font-size:12.5px; font-weight:700; color:#334155; display:block; margin-bottom:6px;">Select Bank</label>
+          <select class="ph-form-input" style="margin-bottom:14px;">
+            <option>Islami Bank Bangladesh Ltd (iBanking)</option>
+            <option>Dutch-Bangla Bank (NexusPay / Rocket)</option>
+            <option>City Bank (City Touch)</option>
+            <option>BRAC Bank (Astha)</option>
+          </select>
+          <button type="button" class="btn-checkout-green" style="background:linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);" onclick="processFinalModalPayment('Net Banking')">
+            <i class="fa fa-university"></i> Continue to Bank Portal &rarr;
+          </button>
+        </div>
+
+        <!-- Processing State Animation -->
+        <div id="modalProcessing" style="display:none; text-align:center; padding:30px 10px;">
+          <i class="fa fa-circle-notch fa-spin" style="font-size:42px; color:#0284c7; margin-bottom:16px;"></i>
+          <div style="font-size:16px; font-weight:800; color:#0f172a;" id="procStatusText">Processing Secure Payment...</div>
+          <p style="font-size:13px; color:#64748b; margin-top:6px;">Please do not close or refresh this window.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard Footer (Putulhost 1:1) -->
+  <footer class="ph-ultra-footer" style="background:linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;">
+    <div class="container">
+        <!-- BOTTOM FOOTER: INFO GRID -->
+        <div class="ph-footer-bottom-grid">
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Our Address</h4>
+                <p class="ph-fb-text">
+                    <strong>JAAS BD</strong><br>
+                    Kadim Dewhata, Mirzapur, Tangail, Dhaka - Bangladesh                </p>
+                <div class="ph-footer-contact">
+                    <p style="color:#ffffff !important;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;"><i class="fa fa-phone" style="color:#7c3aed !important;font-size:16px;"></i> <span style="color:#ffffff !important;font-weight:600;">+8801818430308</span> <span style="font-size:11.5px;color:#94a3b8 !important;">(10AM-8PM)</span></p>
+                    <p style="color:#ffffff !important;font-size:14px;display:flex;align-items:center;gap:10px;"><i class="fa fa-envelope" style="color:#7c3aed !important;font-size:16px;"></i> <a href="mailto:info@jaasbd.com" style="color:#ffffff !important;font-weight:700 !important;text-decoration:none !important;letter-spacing:0.3px;font-size:14px;transition:color 0.2s;">info@jaasbd.com</a></p>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Payment Options</h4>
+                <div class="ph-payment-options">
+                    <img src="assets/images/ph/SSLCommerz-Pay.png" alt="Payment Options" style="max-width: 100%; border-radius: 8px;" loading="lazy">
+                </div>
+
+                <div class="ph-footer-membership-compact">
+                    <h5 class="ph-membership-title-small">Official Member of</h5>
+                    <div class="ph-membership-list-small">
+                        <img src="assets/images/ph/Basis-logo.png" alt="BASIS" loading="lazy">
+                        <img src="assets/images/ph/e-Cab-logo.png" alt="e-CAB" loading="lazy">
+                        <img src="assets/images/ph/Apnic-logo.png" alt="APNIC" loading="lazy">
+                        <img src="assets/images/ph/DBID11.png" alt="DBID" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Subscribe Newsletter</h4>
+                <p class="ph-fb-text">Subscribe for new offers and updates.</p>
+                <form class="ph-subscribe-form" role="form" aria-label="Newsletter Subscription">
+                    <!-- Honeypot: bots fill this, humans don't see it -->
+                    <input type="text" name="ph_website" value="" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true">
+                    <input type="hidden" name="ph_form_time" id="ph_form_time" value="">
+                    <label for="ph-newsletter-email" class="screen-reader-text">Email Address</label>
+                    <input type="email" id="ph-newsletter-email" placeholder="enter your email...." required aria-label="Email Address" autocomplete="email">
+                    <button type="submit" aria-label="Subscribe to newsletter"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
+
+                <div class="ph-social-links-wrapper">
+                    <p class="ph-social-text">To get updates follow us on Facebook, Twitters etc.</p>
+                    <div class="ph-social-links-compact">
+                        <a href="https://www.facebook.com/putulhost.official" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>                        <a href="https://x.com/putulhost" target="_blank" rel="noopener" title="X (Twitter)"><i class="fa fa-twitter"></i></a>                        <a href="https://www.instagram.com/myputulhost/" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>                        <a href="https://www.youtube.com/c/JAAS BD" target="_blank" rel="noopener" title="YouTube"><i class="fa fa-youtube-play"></i></a>                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Company</h4>
+                <ul class="ph-footer-links-small">
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li style="margin-top: 15px;"><a href="affiliates.html" class="ph-affiliate-btn">Affiliate</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BACK TO TOP BUTTON -->
+        <div class="ph-back-to-top" id="backToTop">
+            <div class="ph-btt-icon">
+                <i class="fa fa-chevron-up"></i>
+            </div>
+        </div>
+
+        <!-- FLOATING SUPPORT WIDGET (toggle controlled) -->
+        
+    <div class="ph-footer-bottom-bar">
+        <div class="container">
+            <div class="ph-bottom-bar-flex">
+                <div class="ph-copyright-text">
+                    � 2026 <span>JAAS BD</span>. All rights reserved.
+                </div>
+                <div class="ph-footer-bottom-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <span class="divider">|</span>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span class="divider">|</span>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script src="assets/js/ph-nav.js"></script>
+  <script src="assets/js/jaas-system.js"></script>
+  <script>
+    // Application State
+    const app = {
+      domain: '',
+      domainPrice: 0,
+      domainRenew: 0,
+      hasDomain: false,
+      hasHosting: false,
+      planId: 'ph-1gb-host',
+      planName: 'PH 1GB HOST',
+      cycle: '1m',
+      cyclePrice: 130,
+      cyclePeriodLabel: '1 Month',
+      serverLocation: 'USA',
+      hasIdAddon: false,
+      discount: 0,
+      promoCode: '',
+      gateway: 'auto'
+    };
+
+    const CATALOG = {
+      // Basic Shared Plans
+      'ph-1gb-host': { name: 'PH 1GB HOST', p1m: 130, p3m: 390, p6m: 780, p1y: 1200, storage: '1 GB NVMe' },
+      'ph-5gb-host': { name: 'PH 5GB HOST', p1m: 150, p3m: 450, p6m: 900, p1y: 1600, storage: '5 GB NVMe' },
+      'ph-10gb-host': { name: 'PH 10GB HOST', p1m: 200, p3m: 600, p6m: 1200, p1y: 2200, storage: '10 GB NVMe' },
+      'ph-20gb-host': { name: 'PH 20GB HOST', p1m: 350, p3m: 1050, p6m: 2100, p1y: 3150, storage: '20 GB NVMe' },
+      'ph-50gb-host': { name: 'PH 50GB HOST', p1m: 500, p3m: 1500, p6m: 3000, p1y: 4950, storage: '50 GB NVMe' },
+
+      // Pro Hosting Plans
+      'pro-5gb': { name: 'PRO 5GB HOST', p1m: 200, p3m: 600, p6m: 1100, p1y: 2200, storage: '5 GB NVMe' },
+      'pro-5gb-host': { name: 'PRO 5GB HOST', p1m: 200, p3m: 600, p6m: 1100, p1y: 2200, storage: '5 GB NVMe' },
+      'pro-10gb': { name: 'PRO 10GB HOST', p1m: 350, p3m: 1000, p6m: 1900, p1y: 3500, storage: '10 GB NVMe' },
+      'pro-10gb-host': { name: 'PRO 10GB HOST', p1m: 350, p3m: 1000, p6m: 1900, p1y: 3500, storage: '10 GB NVMe' },
+      'pro-20gb': { name: 'PRO 20GB HOST', p1m: 550, p3m: 1600, p6m: 3100, p1y: 5500, storage: '20 GB NVMe' },
+      'pro-20gb-host': { name: 'PRO 20GB HOST', p1m: 550, p3m: 1600, p6m: 3100, p1y: 5500, storage: '20 GB NVMe' },
+      'pro-50gb': { name: 'PRO 50GB HOST', p1m: 800, p3m: 2350, p6m: 4500, p1y: 8000, storage: '50 GB NVMe' },
+      'pro-50gb-host': { name: 'PRO 50GB HOST', p1m: 800, p3m: 2350, p6m: 4500, p1y: 8000, storage: '50 GB NVMe' },
+
+      // Premium & Business Hosting Plans
+      'business-hosting': { name: 'Business Hosting', p1m: 399, p3m: 1197, p6m: 2394, p1y: 4548, storage: '50 GB NVMe' },
+      'premium-5': { name: 'PREMIUM 5 HOST', p1m: 500, p3m: 1500, p6m: 2900, p1y: 5500, storage: '5 GB NVMe' },
+      'premium-10': { name: 'PREMIUM 10 HOST', p1m: 800, p3m: 2400, p6m: 4600, p1y: 8800, storage: '10 GB NVMe' },
+      'premium-20': { name: 'PREMIUM 20 HOST', p1m: 1400, p3m: 4200, p6m: 8000, p1y: 15000, storage: '20 GB NVMe' },
+      'premium-50': { name: 'PREMIUM 50 HOST', p1m: 2500, p3m: 7500, p6m: 14500, p1y: 27000, storage: '50 GB NVMe' },
+
+      // BDIX Basic Hosting Plans
+      'bdix-1gb': { name: 'BDIX 1GB HOST', p1m: 120, p3m: 360, p6m: 720, p1y: 1200, storage: '1 GB NVMe' },
+      'bdix-5gb': { name: 'BDIX 5GB HOST', p1m: 250, p3m: 750, p6m: 1450, p1y: 2500, storage: '5 GB NVMe' },
+      'bdix-10gb': { name: 'BDIX 10GB HOST', p1m: 450, p3m: 1350, p6m: 2600, p1y: 4500, storage: '10 GB NVMe' },
+      'bdix-20gb': { name: 'BDIX 20GB HOST', p1m: 800, p3m: 2400, p6m: 4600, p1y: 8000, storage: '20 GB NVMe' },
+
+      // Reseller Hosting Plans
+      'rh-linux-10': { name: 'RH LINUX 10', p1m: 650, p3m: 1950, p6m: 3900, p1y: 7800, storage: '10 GB NVMe' },
+      'rh-linux-20': { name: 'RH LINUX 20', p1m: 1100, p3m: 3300, p6m: 6600, p1y: 13200, storage: '20 GB NVMe' },
+      'rh-linux-50': { name: 'RH LINUX 50', p1m: 1650, p3m: 4950, p6m: 9900, p1y: 19800, storage: '50 GB NVMe' },
+      'bdix-rh-20': { name: 'BDIX RH 20', p1m: 750, p3m: 2250, p6m: 4500, p1y: 9000, storage: '20 GB NVMe' },
+      'bdix-rh50': { name: 'BDIX RH 50', p1m: 1800, p3m: 5400, p6m: 10800, p1y: 21600, storage: '50 GB NVMe' },
+
+      // VPS & Cloud
+      'vps-1': { name: 'USA VPS 1 CORE', p1m: 750, p3m: 2250, p6m: 4500, p1y: 8500, storage: '25 GB SSD' },
+      'vps-2': { name: 'USA VPS 2 CORE', p1m: 1500, p3m: 4500, p6m: 9000, p1y: 16000, storage: '50 GB SSD' },
+      'bdix-vps': { name: 'BDIX VPS 1 CORE', p1m: 750, p3m: 2250, p6m: 4300, p1y: 7500, storage: '20 GB NVMe' },
+      'bdix-vps1': { name: 'BDIX VPS 1 CORE', p1m: 750, p3m: 2250, p6m: 4300, p1y: 7500, storage: '20 GB NVMe' },
+      'bdix-vps2': { name: 'BDIX VPS 2 CORE', p1m: 1450, p3m: 4350, p6m: 8500, p1y: 15000, storage: '40 GB NVMe' },
+      'bdix-vps3': { name: 'BDIX VPS 3 CORE', p1m: 2100, p3m: 6300, p6m: 12500, p1y: 22000, storage: '60 GB NVMe' },
+      'bdix-vps4': { name: 'BDIX VPS 4 CORE', p1m: 2800, p3m: 8400, p6m: 16500, p1y: 29000, storage: '80 GB NVMe' },
+      'dedicated-1': { name: 'AMD RYZEN DEDICATED', p1m: 11900, p3m: 35700, p6m: 68000, p1y: 119000, storage: '512 GB NVMe' },
+
+      // Email & Other
+      'mail-10gb': { name: 'MAIL STARTER 10GB', p1m: 160, p3m: 480, p6m: 900, p1y: 1600, storage: '10 GB SSD' },
+      'mail-25gb': { name: 'MAIL BUSINESS 25GB', p1m: 300, p3m: 900, p6m: 1700, p1y: 3000, storage: '25 GB SSD' },
+      'mail-30gb': { name: 'Workspace 30GB', p1m: 799, p3m: 2397, p6m: 4550, p1y: 7990, storage: '30 GB Mail' },
+      'mail-100gb': { name: 'Workspace 100GB', p1m: 1250, p3m: 3750, p6m: 7200, p1y: 12500, storage: '100 GB Mail' },
+      'mail-250gb': { name: 'Workspace 250GB', p1m: 1799, p3m: 5397, p6m: 10500, p1y: 17990, storage: '250 GB Mail' },
+      'radio-64': { name: 'RADIO 64 (Centova)', p1m: 450, p3m: 1350, p6m: 2700, p1y: 4500, storage: 'Unlimited' },
+      'ph-charity-free': { name: 'Charity Free Web Hosting', p1m: 0, p3m: 0, p6m: 0, p1y: 0, storage: '2 GB NVMe' },
+
+      // Corporate Hosting Plans
+      'corp-starter': { name: 'Corporate Standard (20GB NVMe)', p1m: 999, p3m: 2997, p6m: 5994, p1y: 9990, storage: '20 GB NVMe' },
+      'corp-business': { name: 'Corporate Business (50GB NVMe)', p1m: 1750, p3m: 5250, p6m: 10500, p1y: 17500, storage: '50 GB NVMe' },
+      'corp-enterprise': { name: 'Corporate Enterprise (100GB NVMe)', p1m: 3200, p3m: 9600, p6m: 19200, p1y: 32000, storage: '100 GB NVMe' },
+      'corporate-standard': { name: 'Corporate Standard (20GB NVMe)', p1m: 999, p3m: 2997, p6m: 5994, p1y: 9990, storage: '20 GB NVMe' },
+      'corporate-business': { name: 'Corporate Business (50GB NVMe)', p1m: 1750, p3m: 5250, p6m: 10500, p1y: 17500, storage: '50 GB NVMe' },
+      'corporate-enterprise': { name: 'Corporate Enterprise (100GB NVMe)', p1m: 3200, p3m: 9600, p6m: 19200, p1y: 32000, storage: '100 GB NVMe' },
+
+      // Domain Reseller PIDs
+      'dres-starter': { name: 'Domain Reseller Starter', p1m: 1000, p3m: 1000, p6m: 1000, p1y: 1000, storage: 'WHMCS API' },
+      'dres-pro': { name: 'Domain Reseller Pro', p1m: 3000, p3m: 3000, p6m: 3000, p1y: 3000, storage: 'Wholesale TLD' },
+      'dres-enterprise': { name: 'Domain Reseller Enterprise', p1m: 5000, p3m: 5000, p6m: 5000, p1y: 5000, storage: 'Dedicated Support' }
+    };
+
+    function initPage() {
+      const url = window.location.href;
+      const params = new URLSearchParams(window.location.search);
+      const action = params.get('a') || '';
+      const domainParam = params.get('domain') || '';
+      const query = params.get('query') || '';
+      const tldParam = params.get('tld') || '';
+      let planParam = params.get('plan') || params.get('pid') || '';
+
+      const ALIASES = {
+        'pro-5gb': 'pro-5gb-host',
+        'pro-10gb': 'pro-10gb-host',
+        'pro-20gb': 'pro-20gb-host',
+        'pro-50gb': 'pro-50gb-host',
+        'corporate-standard': 'corp-starter',
+        'corporate-business': 'corp-business',
+        'corporate-enterprise': 'corp-enterprise'
+      };
+      if (ALIASES[planParam]) planParam = ALIASES[planParam];
+
+      if (planParam && CATALOG[planParam]) {
+        app.planId = planParam;
+        app.planName = CATALOG[planParam].name;
+        app.cyclePrice = CATALOG[planParam].p1m;
+        app.hasHosting = true;
+      }
+
+      // Domain query handling
+      if (query) {
+        app.domain = query.toLowerCase();
+        app.domainPrice = 1080;
+        app.domainRenew = 1500;
+        app.hasDomain = true;
+      } else if (domainParam && domainParam !== 'register' && domainParam !== 'transfer') {
+        app.domain = domainParam.toLowerCase();
+        app.domainPrice = 1080;
+        app.domainRenew = 1500;
+        app.hasDomain = true;
+      }
+
+      if (tldParam) {
+        document.getElementById('regDomainTldSelect').value = tldParam;
+      }
+
+      // Route to correct step
+      if (action === 'checkout') {
+        showCheckoutView();
+      } else if (action === 'view') {
+        showCartView();
+      } else if (action === 'confaddons' || action === 'confdomains') {
+        showAddonsView();
+      } else if (action === 'confproduct') {
+        showBillingView();
+      } else if (planParam) {
+        // If ordering a hosting plan, start at Step 1 (Choose domain for this plan)
+        showDomainView();
+      } else if (app.hasDomain) {
+        showCartView();
+      } else {
+        showDomainView();
+      }
+    }
+
+    function hideAllSteps() {
+      document.getElementById('viewStep1Domain').style.display = 'none';
+      document.getElementById('viewStep2Billing').style.display = 'none';
+      document.getElementById('viewStep3Addons').style.display = 'none';
+      document.getElementById('viewStep4Cart').style.display = 'none';
+      document.getElementById('viewStep5Checkout').style.display = 'none';
+    }
+
+    function setStepper(step) {
+      for (let i = 1; i <= 5; i++) {
+        const item = document.getElementById('stStep' + i);
+        if (!item) continue;
+        if (i < step) {
+          item.className = 'step-item completed';
+        } else if (i === step) {
+          item.className = 'step-item active';
+        } else {
+          item.className = 'step-item';
+        }
+      }
+      for (let c = 1; c <= 4; c++) {
+        const conn = document.getElementById('stConn' + c);
+        if (conn) {
+          conn.className = 'step-connector' + (c < step ? ' active' : '');
+        }
+      }
+    }
+
+    // STEP 1: DOMAIN
+    function showDomainView() {
+      hideAllSteps();
+      document.getElementById('viewStep1Domain').style.display = 'block';
+      setStepper(1);
+
+      if (app.domain) {
+        document.getElementById('congratsDomainText').innerText = app.domain;
+        document.getElementById('congratsDomainPrice').innerText = `TK ${app.domainPrice}.00 BDT`;
+        document.getElementById('congratsBannerBox').style.display = 'block';
+      }
+    }
+
+    function switchDomainChoiceTab(tab) {
+      ['Register', 'Transfer', 'Own', 'Subdomain'].forEach(t => {
+        const tabEl = document.getElementById('tabOpt' + t);
+        const boxEl = document.getElementById('boxOpt' + t);
+        if (tabEl) tabEl.classList.remove('active');
+        if (boxEl) boxEl.style.display = 'none';
+      });
+
+      if (tab === 'register') {
+        document.getElementById('tabOptRegister').classList.add('active');
+        document.getElementById('boxOptRegister').style.display = 'flex';
+      } else if (tab === 'transfer') {
+        document.getElementById('tabOptTransfer').classList.add('active');
+        document.getElementById('boxOptTransfer').style.display = 'flex';
+      } else if (tab === 'own') {
+        document.getElementById('tabOptOwn').classList.add('active');
+        document.getElementById('boxOptOwn').style.display = 'flex';
+      } else if (tab === 'subdomain') {
+        document.getElementById('tabOptSubdomain').classList.add('active');
+        document.getElementById('boxOptSubdomain').style.display = 'flex';
+      }
+    }
+
+    function checkDomainAvailability() {
+      const name = document.getElementById('regDomainNameInput').value.trim();
+      const tld = document.getElementById('regDomainTldSelect').value;
+      if (!name) return alert('Please enter a domain name.');
+
+      const cleanName = name.replace(/\..*$/, '');
+      app.domain = cleanName.toLowerCase() + tld;
+      app.hasDomain = true;
+
+      let price = 1080;
+      if (tld === '.top') price = 210;
+      else if (tld === '.xyz') price = 340;
+      else if (tld === '.cyou') price = 249;
+      else if (tld === '.com.bd') price = 800;
+      else if (tld === '.net') price = 1350;
+      else if (tld === '.org') price = 1450;
+      else if (tld === '.bd') price = 2500;
+
+      app.domainPrice = price;
+      app.domainRenew = price + 400;
+
+      document.getElementById('congratsDomainText').innerText = app.domain;
+      document.getElementById('congratsDomainPrice').innerText = `TK ${price}.00 BDT`;
+      document.getElementById('congratsBannerBox').style.display = 'block';
+    }
+
+    function selectQuickTLD(tld, price, btn) {
+      let base = app.domain ? app.domain.split('.')[0] : 'mybrand';
+      if (!base || base === 'register') base = 'mycompany';
+      app.domain = base + tld;
+      app.domainPrice = price;
+      app.domainRenew = price + 400;
+      app.hasDomain = true;
+
+      btn.innerText = '✓ Selected';
+      btn.classList.add('added');
+      setTimeout(() => {
+        selectAndContinueDomain();
+      }, 300);
+    }
+
+    function submitTransferDomain() {
+      const d = document.getElementById('transferDomainInput').value.trim();
+      if (!d) return alert('Please enter domain to transfer.');
+      app.domain = d.toLowerCase();
+      app.hasDomain = true;
+      app.domainPrice = 1080;
+      app.domainRenew = 1500;
+      selectAndContinueDomain();
+    }
+
+    function submitOwnDomain() {
+      const d = document.getElementById('ownDomainInput').value.trim();
+      if (!d) return alert('Please enter your existing domain.');
+      app.domain = d.toLowerCase();
+      app.hasDomain = false; // user owned, no charge
+      app.domainPrice = 0;
+      selectAndContinueDomain();
+    }
+
+    function submitSubdomain() {
+      const p = document.getElementById('subdomainPrefixInput').value.trim();
+      if (!p) return alert('Please enter subdomain name.');
+      app.domain = p.toLowerCase() + '.jaasbd.com';
+      app.hasDomain = false; // free subdomain
+      app.domainPrice = 0;
+      selectAndContinueDomain();
+    }
+
+    function selectAndContinueDomain() {
+      if (app.hasHosting) {
+        showBillingView();
+      } else {
+        showCartView();
+      }
+    }
+
+    // STEP 2: BILLING & CONFIGURATION
+    function showBillingView() {
+      hideAllSteps();
+      document.getElementById('viewStep2Billing').style.display = 'block';
+      setStepper(2);
+
+      const p = CATALOG[app.planId] || CATALOG['ph-1gb-host'];
+      document.getElementById('sumPlanName').innerText = p.name;
+      document.getElementById('sumItemLineTitle').innerText = p.name;
+      document.getElementById('addonsHostingPlanName').innerText = p.name;
+
+      document.getElementById('priceLabel1m').innerText = `TK ${p.p1m}.00 BDT`;
+      document.getElementById('priceLabel3m').innerText = `TK ${p.p3m}.00 BDT`;
+      document.getElementById('priceLabel6m').innerText = `TK ${p.p6m}.00 BDT`;
+      document.getElementById('priceLabel1y').innerText = `TK ${p.p1y}.00 BDT`;
+
+      setBillingCycle(app.cycle);
+    }
+
+    function setBillingCycle(c) {
+      app.cycle = c;
+      const p = CATALOG[app.planId] || CATALOG['ph-1gb-host'];
+      const price = p['p' + c] || p.p1m;
+      app.cyclePrice = price;
+
+      ['c1m', 'c3m', 'c6m', 'c1y'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('selected');
+      });
+      const activeEl = document.getElementById('c' + c);
+      if (activeEl) activeEl.classList.add('selected');
+
+      const period = c === '1m' ? '1 Month' : (c === '3m' ? '3 Months' : (c === '6m' ? '6 Months' : '1 Year'));
+      app.cyclePeriodLabel = period;
+      document.getElementById('sumCyclePeriodLabel').innerText = `Billing Cycle:`;
+      document.getElementById('sumCyclePriceLabel').innerText = `${period}`;
+      document.getElementById('sumItemLinePrice').innerText = `TK ${price}.00 BDT`;
+
+      const domainLine = document.getElementById('sumDomainLine');
+      let due = price;
+      if (app.hasDomain && app.domainPrice > 0) {
+        domainLine.style.display = 'flex';
+        document.getElementById('sumDomainNameLabel').innerText = `Domain (${app.domain}):`;
+        document.getElementById('sumDomainPriceLabel').innerText = `TK ${app.domainPrice}.00 BDT`;
+        due += app.domainPrice;
+      } else {
+        domainLine.style.display = 'none';
+      }
+
+      document.getElementById('sumTotalDueGreen').innerText = `TK ${due}.00 BDT`;
+    }
+
+    function selectLocation(loc) {
+      app.serverLocation = loc === 'bd' ? 'Bangladesh BDIX' : 'USA';
+      document.getElementById('locUsa').classList.toggle('selected', loc === 'usa');
+      document.getElementById('locBd').classList.toggle('selected', loc === 'bd');
+    }
+
+    // STEP 3: DOMAIN ADDONS
+    function showAddonsView() {
+      hideAllSteps();
+      document.getElementById('viewStep3Addons').style.display = 'block';
+      setStepper(3);
+
+      document.getElementById('addonsDomainName').innerText = app.domain ? app.domain : 'Primary Service Domain';
+    }
+
+    function toggleAddon(type) {
+      if (type === 'id') {
+        app.hasIdAddon = !app.hasIdAddon;
+        document.getElementById('addonIdCheck').checked = app.hasIdAddon;
+        document.getElementById('addonIdCard').classList.toggle('selected', app.hasIdAddon);
+      } else if (type === 'dns') {
+        const chk = document.getElementById('addonDnsCheck');
+        chk.checked = !chk.checked;
+        document.getElementById('addonDnsCard').classList.toggle('selected', chk.checked);
+      } else if (type === 'email') {
+        const chk = document.getElementById('addonEmailCheck');
+        chk.checked = !chk.checked;
+        document.getElementById('addonEmailCard').classList.toggle('selected', chk.checked);
+      }
+    }
+
+    // STEP 4: CART VIEW
+    function showCartView() {
+      hideAllSteps();
+      document.getElementById('viewStep4Cart').style.display = 'block';
+      setStepper(4);
+      updateCartTotals();
+    }
+
+    function updateCartTotals() {
+      let subtotal = 0;
+      let renew = 0;
+      let count = 0;
+
+      // Domain card
+      if (app.hasDomain && app.domain) {
+        document.getElementById('cartCardDomain').style.display = 'flex';
+        document.getElementById('cartNoDomainPrompt').style.display = 'none';
+        document.getElementById('cartViewDomainName').innerHTML = `<i class="fa fa-link"></i> ${app.domain}`;
+        document.getElementById('cartViewDomainPrice').innerText = `TK ${app.domainPrice}.00 BDT`;
+        document.getElementById('cartViewDomainRenewal').innerText = `Renewal: TK ${app.domainRenew}.00/1 Year`;
+        subtotal += app.domainPrice;
+        renew += app.domainRenew;
+        count++;
+      } else {
+        document.getElementById('cartCardDomain').style.display = 'none';
+        if (app.hasHosting) {
+          document.getElementById('cartNoDomainPrompt').style.display = 'block';
+        } else {
+          document.getElementById('cartNoDomainPrompt').style.display = 'none';
+        }
+      }
+
+      // Hosting card
+      if (app.hasHosting) {
+        document.getElementById('cartCardHosting').style.display = 'flex';
+        document.getElementById('cartViewHostingTitle').innerText = app.planName;
+        document.getElementById('cartViewHostingPrice').innerText = `TK ${app.cyclePrice}.00 BDT`;
+        document.getElementById('cartViewHostingCycle').innerText = app.cyclePeriodLabel;
+        subtotal += app.cyclePrice;
+        renew += (app.cycle === '1y' ? app.cyclePrice : app.cyclePrice * 12);
+        count++;
+      } else {
+        document.getElementById('cartCardHosting').style.display = 'none';
+      }
+
+      // ID Protection Addon
+      if (app.hasIdAddon) {
+        document.getElementById('cartCardAddonId').style.display = 'flex';
+        subtotal += 300;
+        renew += 300;
+        count++;
+      } else {
+        document.getElementById('cartCardAddonId').style.display = 'none';
+      }
+
+      // Empty State
+      const emptyEl = document.getElementById('cartEmptyNotice');
+      const checkoutBtn = document.getElementById('btnCartCheckout');
+      if (count === 0) {
+        emptyEl.style.display = 'flex';
+        checkoutBtn.disabled = true;
+        checkoutBtn.style.opacity = '0.5';
+      } else {
+        emptyEl.style.display = 'none';
+        checkoutBtn.disabled = false;
+        checkoutBtn.style.opacity = '1';
+      }
+
+      const finalTotal = Math.max(0, subtotal - app.discount);
+
+      document.getElementById('navySubtotal').innerText = `TK ${subtotal}.00 BDT`;
+      document.getElementById('navyRenew').innerText = `TK ${renew}.00 BDT for 1 Years`;
+      document.getElementById('navyTotalDue').innerText = `TK ${finalTotal}.00 BDT`;
+      document.getElementById('cartCountBadge').innerText = count;
+
+      if (app.discount > 0) {
+        document.getElementById('navyDiscountRow').style.display = 'flex';
+        document.getElementById('navyDiscountVal').innerText = `-TK ${app.discount}.00 BDT`;
+      } else {
+        document.getElementById('navyDiscountRow').style.display = 'none';
+      }
+    }
+
+    function removeDomainItem() {
+      app.hasDomain = false;
+      app.domain = '';
+      app.domainPrice = 0;
+      updateCartTotals();
+    }
+
+    function removeHostingItem() {
+      app.hasHosting = false;
+      updateCartTotals();
+    }
+
+    function removeIdAddon() {
+      app.hasIdAddon = false;
+      document.getElementById('addonIdCheck').checked = false;
+      document.getElementById('addonIdCard').classList.remove('selected');
+      updateCartTotals();
+    }
+
+    function applyPromoCode() {
+      const code = document.getElementById('navyPromoInput').value.trim().toUpperCase();
+      if (!code) return;
+
+      if (code === 'BSC10' || code === 'PRO10' || code === 'PUTUL10' || code === 'WELCOME' || code === 'EID2026') {
+        const subtotal = (app.hasDomain ? app.domainPrice : 0) + (app.hasHosting ? app.cyclePrice : 0) + (app.hasIdAddon ? 300 : 0);
+        app.discount = Math.round(subtotal * 0.10);
+        app.promoCode = code;
+        alert(`🎉 Promotional Code "${code}" Applied Successfully! 10% Discount Added.`);
+        updateCartTotals();
+      } else {
+        alert('Invalid or expired promotional code. Try BSC10 or PRO10');
+      }
+    }
+
+    // STEP 5: CHECKOUT & PAYMENT
+    function showCheckoutView() {
+      hideAllSteps();
+      document.getElementById('viewStep5Checkout').style.display = 'block';
+      setStepper(5);
+
+      let total = 0;
+      if (app.hasDomain && app.domainPrice > 0) {
+        document.getElementById('finalItemDomainLabel').innerText = `Domain: ${app.domain}`;
+        document.getElementById('finalItemDomainPrice').innerText = `TK ${app.domainPrice}.00 BDT`;
+        total += app.domainPrice;
+      } else {
+        document.getElementById('finalItemDomainLabel').innerText = 'Domain';
+        document.getElementById('finalItemDomainPrice').innerText = app.domain ? `${app.domain} (Included)` : 'None';
+      }
+
+      if (app.hasHosting) {
+        document.getElementById('finalItemHostingLabel').innerText = `Hosting: ${app.planName} (${app.cyclePeriodLabel})`;
+        document.getElementById('finalItemHostingPrice').innerText = `TK ${app.cyclePrice}.00 BDT`;
+        total += app.cyclePrice;
+      } else {
+        document.getElementById('finalItemHostingLabel').innerText = 'Hosting';
+        document.getElementById('finalItemHostingPrice').innerText = 'None';
+      }
+
+      if (app.hasIdAddon) {
+        document.getElementById('finalItemAddonRow').style.display = 'flex';
+        total += 300;
+      } else {
+        document.getElementById('finalItemAddonRow').style.display = 'none';
+      }
+
+      if (app.discount > 0) {
+        document.getElementById('finalDiscountRow').style.display = 'flex';
+        document.getElementById('finalDiscountVal').innerText = `-TK ${app.discount}.00 BDT`;
+        total = Math.max(0, total - app.discount);
+      } else {
+        document.getElementById('finalDiscountRow').style.display = 'none';
+      }
+
+      document.getElementById('finalTotalPayable').innerText = `TK ${total}.00 BDT`;
+      document.getElementById('manualPayAmount').innerText = `TK ${total}.00 BDT`;
+
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+    }
+
+    function generatePassword() {
+      const chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%&*';
+      let pass = '';
+      for (let i = 0; i < 14; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      document.getElementById('cPass').value = pass;
+      document.getElementById('cConfirmPass').value = pass;
+      alert('Generated Strong Password: ' + pass);
+    }
+
+    function selectGW(gw) {
+      app.gateway = gw;
+      ['gwAuto', 'gwBkash', 'gwNagad', 'gwRocket'].forEach(id => {
+        document.getElementById(id).classList.remove('selected');
+      });
+
+      const manBox = document.getElementById('boxManualInstructions');
+      if (gw === 'auto') {
+        document.getElementById('gwAuto').classList.add('selected');
+        manBox.style.display = 'none';
+      } else {
+        manBox.style.display = 'block';
+        if (gw === 'bkash') {
+          document.getElementById('gwBkash').classList.add('selected');
+          document.getElementById('manualGwTitle').innerText = 'Manual bKash Payment Instructions';
+          document.getElementById('manualAccountNum').innerHTML = '01818430308 <i class="fa fa-copy"></i>';
+        } else if (gw === 'nagad') {
+          document.getElementById('gwNagad').classList.add('selected');
+          document.getElementById('manualGwTitle').innerText = 'Manual Nagad Payment Instructions';
+          document.getElementById('manualAccountNum').innerHTML = '01818430308 <i class="fa fa-copy"></i>';
+        } else if (gw === 'rocket') {
+          document.getElementById('gwRocket').classList.add('selected');
+          document.getElementById('manualGwTitle').innerText = 'Manual DBBL Rocket Payment Instructions';
+          document.getElementById('manualAccountNum').innerHTML = '018184303084 <i class="fa fa-copy"></i>';
+        }
+      }
+    }
+
+    function copyNumber() {
+      const num = app.gateway === 'rocket' ? '018184303084' : '01818430308';
+      navigator.clipboard.writeText(num);
+      alert('Copied Account Number: ' + num);
+    }
+
+    function handleCheckoutSubmission() {
+      if (!document.getElementById('chkAgreeTOS').checked) {
+        return alert('Please agree to the Terms of Service and Refund Policy to proceed.');
+      }
+
+      const total = calculatePayableTotal();
+
+      if (app.gateway === 'auto') {
+        openPaymentModal(total);
+      } else {
+        // Manual submission
+        const sender = document.getElementById('manualSenderNumber').value.trim();
+        const trxId = document.getElementById('manualTrxId').value.trim();
+        if (!sender || !trxId) {
+          return alert('Please enter your Sender Mobile Number and Transaction ID (TrxID).');
+        }
+        submitOrderFinal({
+          gateway: app.gateway.toUpperCase() + ' Manual',
+          status: 'UNPAID', // Pending manual admin verification
+          txnId: trxId
+        });
+      }
+    }
+
+    function calculatePayableTotal() {
+      let total = (app.hasDomain ? app.domainPrice : 0) + (app.hasHosting ? app.cyclePrice : 0) + (app.hasIdAddon ? 300 : 0);
+      return Math.max(0, total - app.discount);
+    }
+
+    // ========================================================
+    // MODAL LOGIC
+    // ========================================================
+    function openPaymentModal(amount) {
+      document.getElementById('modalPayAmountVal').innerText = `TK ${amount}.00 BDT`;
+      document.querySelectorAll('.modalPayAmountText').forEach(el => el.innerText = `TK ${amount}.00 BDT`);
+      document.getElementById('paymentModal').style.display = 'flex';
+      switchModalTab('bkash');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+      document.getElementById('modalProcessing').style.display = 'none';
+    }
+
+    function switchModalTab(tab) {
+      ['Bkash', 'Nagad', 'Cards', 'Net'].forEach(t => {
+        const bodyEl = document.getElementById('modalBody' + t);
+        const btnEl = document.getElementById('tab' + t);
+        if (bodyEl) bodyEl.style.display = 'none';
+        if (btnEl) btnEl.className = 'pay-tab-btn';
+      });
+
+      const header = document.getElementById('payModalHeader');
+      header.className = 'pay-modal-header';
+
+      if (tab === 'bkash') {
+        document.getElementById('modalBodyBkash').style.display = 'block';
+        document.getElementById('tabBkash').className = 'pay-tab-btn active bkash-active';
+        header.classList.add('bkash-mode');
+        document.getElementById('payModalTitle').innerText = 'bKash Instant Gateway';
+        document.getElementById('bkashStep1').style.display = 'block';
+        document.getElementById('bkashStep2').style.display = 'none';
+        document.getElementById('bkashStep3').style.display = 'none';
+      } else if (tab === 'nagad') {
+        document.getElementById('modalBodyNagad').style.display = 'block';
+        document.getElementById('tabNagad').className = 'pay-tab-btn active nagad-active';
+        header.classList.add('nagad-mode');
+        document.getElementById('payModalTitle').innerText = 'Nagad Online Gateway';
+      } else if (tab === 'cards') {
+        document.getElementById('modalBodyCards').style.display = 'block';
+        document.getElementById('tabCards').className = 'pay-tab-btn active';
+        document.getElementById('payModalTitle').innerText = 'Debit / Credit Card';
+      } else if (tab === 'net') {
+        document.getElementById('modalBodyNet').style.display = 'block';
+        document.getElementById('tabNet').className = 'pay-tab-btn active';
+        document.getElementById('payModalTitle').innerText = 'Internet Banking Gateway';
+      }
+    }
+
+    function nextBkashStep(step) {
+      if (step === 2) {
+        const num = document.getElementById('bkashNumberInput').value.trim();
+        if (!num || num.length < 11) return alert('Please enter valid 11-digit bKash account number.');
+        document.getElementById('bkashStep1').style.display = 'none';
+        document.getElementById('bkashStep2').style.display = 'block';
+      } else if (step === 3) {
+        const otp = document.getElementById('bkashOtpInput').value.trim();
+        if (!otp) return alert('Please enter verification code.');
+        document.getElementById('bkashStep2').style.display = 'none';
+        document.getElementById('bkashStep3').style.display = 'block';
+      }
+    }
+
+    function processFinalModalPayment(channel) {
+      document.getElementById('modalBodyBkash').style.display = 'none';
+      document.getElementById('modalBodyNagad').style.display = 'none';
+      document.getElementById('modalBodyCards').style.display = 'none';
+      document.getElementById('modalBodyNet').style.display = 'none';
+      document.getElementById('modalProcessing').style.display = 'block';
+
+      const randTrx = 'TXN-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('procStatusText').innerText = `Verifying ${channel} Payment...`;
+
+      setTimeout(() => {
+        document.getElementById('procStatusText').innerText = 'Payment Successful! Generating Invoice...';
+        setTimeout(() => {
+          submitOrderFinal({
+            gateway: channel + ' Automated',
+            status: 'PAID',
+            txnId: randTrx
+          });
+        }, 600);
+      }, 900);
+    }
+
+    // FINAL SUBMISSION & INVOICE CREATION
+    function submitOrderFinal(payInfo) {
+      const randNum = Math.floor(1000 + Math.random() * 9000);
+      const invoiceId = 'INV-2026-' + randNum;
+
+      const firstName = document.getElementById('cFirstName').value.trim() || 'Valued';
+      const lastName = document.getElementById('cLastName').value.trim() || 'Customer';
+      const fullName = (firstName + ' ' + lastName).trim();
+      const email = document.getElementById('cEmail').value.trim() || 'customer@jaasbd.com';
+      const phone = document.getElementById('cPhone').value.trim() || '+8801818430308';
+      const street = document.getElementById('cAddress').value.trim() || 'Hat Masjid Road';
+      const district = document.getElementById('cDistrict').value.trim() || 'Rajbari';
+      const address = street + ', ' + district;
+      const pass = (document.getElementById('cPass') ? document.getElementById('cPass').value.trim() : '') || 'PutulHost@2026#Secure';
+
+      const client = {
+        id: 'CL-' + Math.floor(1000 + Math.random() * 9000),
+        name: fullName,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: pass,
+        phone: phone,
+        company: 'Personal / Business Account',
+        address: address,
+        district: district,
+        loggedIn: true,
+        regDate: new Date().toISOString().split('T')[0],
+        loginTime: new Date().toISOString()
+      };
+
+      const payableTotal = calculatePayableTotal();
+      const subtotalTotal = (app.hasDomain ? app.domainPrice : 0) + (app.hasHosting ? app.cyclePrice : 0) + (app.hasIdAddon ? 300 : 0);
+
+      const cpUser = 'jaas_' + (firstName.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 5) || 'user') + Math.floor(10 + Math.random() * 90);
+      const cpPass = 'Putul#' + Math.random().toString(36).slice(-8);
+
+      const todayStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      const dueStr = new Date(Date.now() + 7 * 86400000).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      const invoice = {
+        id: invoiceId,
+        date: todayStr,
+        dueDate: dueStr,
+        planName: app.hasHosting ? `${app.planName} (${app.cyclePeriodLabel})` : `Domain Registration (${app.domain})`,
+        domain: app.domain || 'N/A',
+        amount: payableTotal,
+        subtotal: subtotalTotal,
+        discount: app.discount,
+        vatRate: 0,
+        vatAmount: 0,
+        status: payInfo.status || 'PAID',
+        gateway: payInfo.gateway || 'SSLCommerz Automated',
+        txnId: payInfo.txnId || 'TXN-' + Math.floor(100000 + Math.random() * 900000),
+        cpanelUser: cpUser,
+        cpanelPass: cpPass,
+        serverIP: '103.145.118.25'
+      };
+
+      let service = null;
+      if (app.hasHosting) {
+        const planInfo = CATALOG[app.planId] || CATALOG['ph-1gb-host'];
+        service = {
+          id: 'srv-' + Math.floor(100 + Math.random() * 900),
+          planId: app.planId,
+          name: app.planName,
+          domain: app.domain || 'mysite.com',
+          storage: planInfo.storage || '10 GB NVMe',
+          billingCycle: app.cyclePeriodLabel,
+          price: app.cyclePrice,
+          status: 'Active',
+          regDate: new Date().toISOString().split('T')[0],
+          nextDue: new Date(Date.now() + (app.cycle === '1y' ? 365 : 30) * 86400000).toISOString().split('T')[0],
+          serverIP: '103.145.118.25',
+          nameservers: ['ns1.jaasbd.com', 'ns2.jaasbd.com'],
+          cpanelUser: cpUser,
+          cpanelPass: cpPass,
+          diskUsed: '12 MB',
+          diskLimit: planInfo.storage || '10 GB',
+          bandwidthUsed: '0.05 GB'
+        };
+      }
+
+      try {
+        if (typeof JaasStore !== 'undefined') {
+          if (JaasStore.saveClient) JaasStore.saveClient(client);
+          JaasStore.setClientUser(client);
+          JaasStore.saveInvoice(invoice);
+          if (service) JaasStore.saveService(service);
+          if (app.domain && app.domain.includes('.')) {
+            const domainItem = {
+              id: 'dom-' + Math.floor(100 + Math.random() * 900),
+              domain: app.domain,
+              regDate: new Date().toISOString().split('T')[0],
+              expiryDate: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
+              nextDue: new Date(Date.now() + 365 * 86400000).toISOString().split('T')[0],
+              price: app.domainPrice || 1150,
+              status: 'Active',
+              autoRenew: true,
+              whoisPrivacy: true,
+              nameservers: ['ns1.jaasbd.com', 'ns2.jaasbd.com'],
+              eppCode: 'EPP-' + Math.floor(100000 + Math.random() * 900000),
+              dnsRecords: [
+                { type: 'A', name: '@', value: '103.145.118.25', ttl: 14400 },
+                { type: 'CNAME', name: 'www', value: app.domain, ttl: 14400 }
+              ]
+            };
+            if (JaasStore.saveDomain) JaasStore.saveDomain(domainItem);
+          }
+          JaasStore.syncOrderToBackend(client, invoice, service);
+        }
+        sessionStorage.setItem('jaas_latest_invoice_id', invoiceId);
+        localStorage.setItem('jaas_last_order', JSON.stringify({ invoice, service, client }));
+      } catch (e) {
+        console.error('Storage error:', e);
+      }
+
+      window.location.href = 'invoice.html?id=' + invoiceId;
+    }
+
+    window.addEventListener('DOMContentLoaded', initPage);
+  </script>
+</body>
+</html>

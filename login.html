@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - JAAS BD Client Portal</title>
+  <link rel="icon" type="image/png" href="assets/images/jaasbd-logo.png">
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f1f5f9;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 1040px;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.8);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      min-height: 640px;
+    }
+
+    /* Left Purple Hero Card */
+    .login-sidebar {
+      background: linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;
+      padding: 48px 40px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background concentric subtle curved rings */
+    .login-sidebar::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+    .login-sidebar::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+
+    .sidebar-top {
+      position: relative;
+      z-index: 2;
+    }
+    .sidebar-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+    .sidebar-logo img {
+      height: 42px;
+      object-fit: contain;
+    }
+    .platform-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #c084fc;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .sidebar-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+    .sidebar-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 30px;
+    }
+
+    /* Feature Pills */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 2;
+    }
+    .feature-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px 18px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateX(4px);
+    }
+    .feature-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(124, 58, 237, 0.25);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c084fc;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .feature-text h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    .feature-text p {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Bottom Quick Action Buttons */
+    .sidebar-actions {
+      display: flex;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+    .btn-side-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #7c3aed;
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-side-primary:hover {
+      background: #9333ea;
+      transform: translateY(-1px);
+    }
+    .btn-side-secondary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-side-secondary:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
+    }
+
+    /* Right Form Card */
+    .login-form-area {
+      padding: 55px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-header {
+      margin-bottom: 30px;
+    }
+    .form-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .form-header p {
+      font-size: 14.5px;
+      color: #64748b;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 12px;
+    }
+    .form-header p::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 42px;
+      height: 3px;
+      border-radius: 2px;
+      background: #7c3aed;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-group label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .forgot-link {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #7c3aed;
+      text-decoration: none;
+    }
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrapper input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .input-wrapper input:focus {
+      background: #ffffff;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+    }
+    .toggle-pass-btn {
+      position: absolute;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px;
+    }
+    .toggle-pass-btn:hover {
+      color: #7c3aed;
+    }
+
+    /* Cloudflare Turnstile Mock Widget matching Frame 4 */
+    .cf-turnstile-box {
+      border: 1px solid #e2e8f0;
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      font-size: 13px;
+    }
+    .cf-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #475569;
+      font-weight: 600;
+    }
+    .cf-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid #cbd5e1;
+      border-top-color: #7c3aed;
+      border-radius: 50%;
+      animation: cf-spin 0.9s linear infinite;
+    }
+    @keyframes cf-spin {
+      to { transform: rotate(360deg); }
+    }
+    .cf-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .cf-logo-text {
+      font-size: 10px;
+      font-weight: 800;
+      color: #7c3aed;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.5px;
+    }
+    .cf-terms {
+      font-size: 9.5px;
+      color: #94a3b8;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-login:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .form-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13.5px;
+      color: #64748b;
+    }
+    .create-acc-link {
+      color: #7c3aed;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 4px;
+    }
+    .create-acc-link:hover {
+      text-decoration: underline;
+    }
+
+    .home-back-strip {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .home-back-strip a {
+      color: #94a3b8;
+      font-size: 12.5px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .home-back-strip a:hover {
+      color: #7c3aed;
+    }
+
+    .alert-msg {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .alert-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+    .alert-success {
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      color: #7e22ce;
+    }
+
+    @media (max-width: 860px) {
+      .login-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .login-sidebar {
+        padding: 35px 24px;
+      }
+      .login-form-area {
+        padding: 35px 24px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/ph-header.css">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <!-- Left Green Column (Frame 4 faithful) -->
+    <div class="login-sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="sidebar-logo">
+          <img src="assets/images/jaasbd-logo.png" alt="JAAS BD">
+        </a>
+        <span class="platform-badge">HOSTING PLATFORM</span>
+        <h1 class="sidebar-title">Manage Your Domain Hosting with Ease</h1>
+        <p class="sidebar-desc">A complete client portal to manage domains, invoices, services and support — all in one place.</p>
+        
+        <div class="feature-list">
+          <div class="feature-card">
+            <div class="feature-icon-box"><i class="fa fa-globe"></i></div>
+            <div class="feature-text">
+              <h4>Domain Management</h4>
+              <p>Register, transfer & manage all TLDs</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box"><i class="fa fa-file-invoice"></i></div>
+            <div class="feature-text">
+              <h4>Invoice & Billing</h4>
+              <p>View and pay invoices instantly</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box"><i class="fa fa-shield-alt"></i></div>
+            <div class="feature-text">
+              <h4>Secure & Reliable</h4>
+              <p>Enterprise-grade security & uptime</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <a href="domain.html" class="btn-side-primary"><i class="fa fa-globe"></i> Register a Domain</a>
+        <a href="basic-hosting.html" class="btn-side-secondary"><i class="fa fa-shopping-cart"></i> Order New Service</a>
+      </div>
+    </div>
+
+    <!-- Right White Form Column -->
+    <div class="login-form-area">
+      <div class="form-header">
+        <h2>Welcome back</h2>
+        <p>Sign in to your account to continue</p>
+      </div>
+
+      <div id="loginAlert" class="alert-msg"></div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="emailInput">Email</label>
+          <div class="input-wrapper">
+            <input type="text" id="emailInput" placeholder="john@example.com" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="passwordInput">Password</label>
+            <a href="#" onclick="alert('Password reset link has been dispatched to your email.'); return false;" class="forgot-link">Forgot Password?</a>
+          </div>
+          <div class="input-wrapper">
+            <input type="password" id="passwordInput" placeholder="••••••••" required autocomplete="current-password">
+            <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()"><i class="fa fa-eye" id="passEyeIcon"></i></button>
+          </div>
+        </div>
+
+        <!-- Cloudflare Mock Widget from Frame 4 -->
+        <div class="cf-turnstile-box">
+          <div class="cf-status">
+            <div class="cf-spinner"></div>
+            <span>Verifying...</span>
+          </div>
+          <div class="cf-brand">
+            <div class="cf-logo-text"><i class="fa fa-cloud"></i> CLOUDFLARE</div>
+            <div class="cf-terms">Privacy • Help</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span>Login to Client Portal</span>
+        </button>
+      </form>
+
+      <div class="form-footer" style="margin-top:18px;">
+        <div>Don't have an account? <a href="cart.html?a=checkout" class="create-acc-link">Create a New Account</a></div>
+      </div>
+
+      <div class="home-back-strip">
+        <a href="index.html"><i class="fa fa-arrow-left"></i> Back to Homepage</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('passwordInput');
+      const eyeIcon = document.getElementById('passEyeIcon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        eyeIcon.className = 'fa fa-eye-slash';
+      } else {
+        passInput.type = 'password';
+        eyeIcon.className = 'fa fa-eye';
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value.trim();
+      const pass = document.getElementById('passwordInput').value.trim();
+      const alertBox = document.getElementById('loginAlert');
+      const loginBtn = document.getElementById('loginBtn');
+
+      alertBox.style.display = 'none';
+      loginBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Authenticating...';
+
+      // 1. Check if Admin credentials
+      let cfgAdminUser = 'admin';
+      let cfgAdminEmail = 'admin@jaasbd.com';
+      let cfgAdminPass = 'admin123';
+      try {
+        const localCfg = JSON.parse(localStorage.getItem('jaas_site_config') || '{}');
+        if (localCfg.admin) {
+          cfgAdminUser = localCfg.admin.username || cfgAdminUser;
+          cfgAdminEmail = localCfg.admin.email || cfgAdminEmail;
+          cfgAdminPass = localCfg.admin.password || cfgAdminPass;
+        }
+      } catch(e) {}
+
+        const isAdminMatch = (email.toLowerCase() === cfgAdminUser.toLowerCase() || email.toLowerCase() === cfgAdminEmail.toLowerCase()) && (pass === cfgAdminPass);
+
+      if (isAdminMatch) {
+        sessionStorage.setItem('jaas_admin_logged_in', 'true');
+        sessionStorage.setItem('jaas_admin_user', cfgAdminUser);
+        localStorage.setItem('jaas_admin_logged_in', 'true');
+        localStorage.setItem('jaas_admin_user', cfgAdminUser);
+        alertBox.className = 'alert-msg alert-success';
+        alertBox.textContent = 'Admin credentials verified. Redirecting to Admin Dashboard...';
+        alertBox.style.display = 'block';
+        setTimeout(() => { window.location.href = 'admin.html'; }, 700);
+        return;
+      }
+
+      // 2. Client Authentication - check registered clients from domain/hosting checkout
+      let clients = [];
+      if (typeof JaasStore !== 'undefined' && JaasStore.getClients) {
+        clients = JaasStore.getClients();
+      } else {
+        try {
+          const raw = localStorage.getItem('jaas_clients');
+          if (raw) clients = JSON.parse(raw);
+        } catch(err) {}
+      }
+
+      // If still empty, check server API
+      if (!clients || clients.length === 0) {
+        try {
+          const resp = await fetch('/api/clients');
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.clients && data.clients.length > 0) clients = data.clients;
+          }
+        } catch(err) {}
+      }
+
+      const cleanEmail = email.trim().toLowerCase();
+      const matchedClient = (clients || []).find(c =>
+        c.email && c.email.trim().toLowerCase() === cleanEmail && c.password === pass
+      );
+
+      setTimeout(() => {
+        if (matchedClient) {
+          matchedClient.loggedIn = true;
+          matchedClient.loginTime = new Date().toISOString();
+          localStorage.setItem('jaas_client_user', JSON.stringify(matchedClient));
+          if (typeof JaasStore !== 'undefined' && JaasStore.setClientUser) {
+            JaasStore.setClientUser(matchedClient);
+          }
+
+          alertBox.className = 'alert-msg alert-success';
+          alertBox.textContent = `Welcome back, ${matchedClient.name || 'Valued Customer'}! Redirecting to your Client Area...`;
+          alertBox.style.display = 'block';
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const redirect = urlParams.get('redirect') || 'clientarea.html';
+          setTimeout(() => {
+            window.location.href = redirect;
+          }, 700);
+        } else {
+          loginBtn.innerHTML = '<span>Login to Client Portal</span>';
+          alertBox.className = 'alert-msg alert-error';
+          alertBox.style.display = 'block';
+          alertBox.innerHTML = `<strong>Login Failed:</strong> Invalid Email Address or Password.<br><span style="font-size:12px; margin-top:4px; display:inline-block; line-height:1.4;">Please enter the exact email and password you entered when purchasing your domain/hosting package.</span>`;
+        }
+      }, 500);
+    }
+  </script>
+  <script src="assets/js/jaas-system.js"></script>
+  <script src="assets/js/ph-nav.js"></script>
+</body>
+</html>

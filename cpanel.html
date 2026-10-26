@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cPanel &bull; JAAS BD Cloud Server (srv1.jaasbd.com)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F4F6F9;
+      color: #333333;
+      font-size: 13px;
+    }
+
+    /* Top Bar */
+    .cp-topbar {
+      height: 52px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #DCE2E6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .cp-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .cp-logo-badge {
+      background: #FF6C2C;
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .cp-brand-text {
+      font-size: 18px;
+      font-weight: 800;
+      color: #293A4C;
+    }
+    .cp-host-badge {
+      font-size: 11px;
+      background: #EFF6FF;
+      color: #0077B6;
+      border: 1px solid #BFDBFE;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .cp-search-wrap {
+      flex: 0 0 350px;
+      position: relative;
+    }
+    .cp-search-input {
+      width: 100%;
+      height: 34px;
+      border: 1px solid #CBD5E1;
+      border-radius: 4px;
+      padding: 0 12px 0 32px;
+      font-size: 12.5px;
+      outline: none;
+    }
+    .cp-search-input:focus { border-color: #FF6C2C; }
+    .cp-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 9px;
+      color: #94A3B8;
+      font-size: 14px;
+    }
+
+    .cp-user-tools {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .cp-btn-logout {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      color: #334155;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .cp-btn-logout:hover { background: #E2E8F0; }
+
+    /* Notice Banner */
+    .cp-notice-bar {
+      background: #f0f9ff;
+      border-bottom: 1px solid #bae6fd;
+      color: #0284c7;
+      padding: 10px 24px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Main Container */
+    .cp-container {
+      max-width: 1350px;
+      margin: 20px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .cp-container { grid-template-columns: 1fr; }
+    }
+
+    /* Group Box */
+    .cp-group-box {
+      background: #FFFFFF;
+      border: 1px solid #DCE2E6;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+    .cp-group-header {
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #293A4C;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cp-items-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 15px 12px;
+      gap: 12px;
+    }
+    @media (max-width: 768px) {
+      .cp-items-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .cp-tool-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .cp-tool-item:hover {
+      background: #F1F5F9;
+      color: #FF6C2C;
+    }
+    .cp-tool-icon {
+      font-size: 22px;
+      width: 28px;
+      text-align: center;
+    }
+
+    /* Sidebar Stats */
+    .cp-sidebar-box {
+      background: #FFFFFF;
+      border: 1px solid #DCE2E6;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .cp-sidebar-header {
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #293A4C;
+    }
+    .cp-info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 16px;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 12px;
+    }
+    .cp-info-row:last-child { border-bottom: none; }
+    .cp-info-lbl { color: #64748B; font-weight: 600; }
+    .cp-info-val { color: #0F172A; font-weight: 700; text-align: right; }
+
+    .cp-prog-bg {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .cp-prog-fill {
+      height: 100%;
+      background: #0077B6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="cp-topbar">
+    <div class="cp-brand">
+      <span class="cp-logo-badge">cp</span>
+      <span class="cp-brand-text">cPanel</span>
+      <span class="cp-host-badge">JAAS BD Cloud &bull; BDIX 10Gbps</span>
+    </div>
+
+    <div class="cp-search-wrap">
+      <span class="cp-search-icon">&#128269;</span>
+      <input type="text" class="cp-search-input" placeholder="Search tools, files, databases...">
+    </div>
+
+    <div class="cp-user-tools">
+      <div style="font-size:12px; font-weight:700; color:#0F172A;">
+        &#128100; <span id="cpUsernameTop">jaas_ashish42</span>
+      </div>
+      <a href="clientarea.html" class="cp-btn-logout">&larr; Return to Client Area</a>
+    </div>
+  </header>
+
+  <!-- Notice Bar -->
+  <div class="cp-notice-bar">
+    <div>
+      &#10004; Authenticated via <strong>Single Sign-On (SSO)</strong> from JAAS BD Client Area &bull; Server Node: <strong>srv1.jaasbd.com (103.145.118.25)</strong>
+    </div>
+    <div style="font-weight:700;">LiteSpeed Web Server &bull; HTTP/3 Active</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="cp-container">
+
+    <!-- Left Column: Tool Groups -->
+    <div>
+
+      <!-- Group 1: Files -->
+      <div class="cp-group-box">
+        <div class="cp-group-header">
+          <span>&#128193; FILES</span>
+        </div>
+        <div class="cp-items-grid">
+          <div class="cp-tool-item" onclick="alert('Launching File Manager in /public_html...');">
+            <span class="cp-tool-icon">&#128194;</span>
+            <span>File Manager</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Viewing Disk Usage...');">
+            <span class="cp-tool-icon">&#128190;</span>
+            <span>Disk Usage</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Opening FTP Accounts Configuration...');">
+            <span class="cp-tool-icon">&#128225;</span>
+            <span>FTP Accounts</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Backup Wizard: Full cPanel automated backup running.');">
+            <span class="cp-tool-icon">&#128229;</span>
+            <span>Backup Wizard</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Directory Privacy settings.');">
+            <span class="cp-tool-icon">&#128274;</span>
+            <span>Directory Privacy</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Git Version Control.');">
+            <span class="cp-tool-icon">&#128451;</span>
+            <span>Git Version Control</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2: Databases -->
+      <div class="cp-group-box">
+        <div class="cp-group-header">
+          <span>&#128451; DATABASES</span>
+        </div>
+        <div class="cp-items-grid">
+          <div class="cp-tool-item" onclick="alert('Opening phpMyAdmin Database Manager...');">
+            <span class="cp-tool-icon">&#128450;</span>
+            <span>phpMyAdmin</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Manage MySQL Databases...');">
+            <span class="cp-tool-icon">&#128190;</span>
+            <span>MySQL Databases</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('MySQL Database Wizard...');">
+            <span class="cp-tool-icon">&#9881;</span>
+            <span>MySQL Wizard</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Remote MySQL Access configuration.');">
+            <span class="cp-tool-icon">&#127760;</span>
+            <span>Remote MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 3: Domains -->
+      <div class="cp-group-box">
+        <div class="cp-group-header">
+          <span>&#127760; DOMAINS</span>
+        </div>
+        <div class="cp-items-grid">
+          <div class="cp-tool-item" onclick="alert('Domain Management: Manage addon domains.');">
+            <span class="cp-tool-icon">&#127758;</span>
+            <span>Domains</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Create and manage Subdomains...');">
+            <span class="cp-tool-icon">&#128279;</span>
+            <span>Subdomains</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('DNS Zone Editor (A, CNAME, MX, TXT records)...');">
+            <span class="cp-tool-icon">&#128221;</span>
+            <span>Zone Editor</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('URL Redirects...');">
+            <span class="cp-tool-icon">&#10138;</span>
+            <span>Redirects</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 4: Email -->
+      <div class="cp-group-box">
+        <div class="cp-group-header">
+          <span>&#9993; EMAIL</span>
+        </div>
+        <div class="cp-items-grid">
+          <div class="cp-tool-item" onclick="alert('Create Email Accounts (Webmail, Outlook, iOS)...');">
+            <span class="cp-tool-icon">&#128236;</span>
+            <span>Email Accounts</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Email Forwarders...');">
+            <span class="cp-tool-icon">&#10140;</span>
+            <span>Forwarders</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Email Autoresponders...');">
+            <span class="cp-tool-icon">&#128233;</span>
+            <span>Autoresponders</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Track Email Delivery...');">
+            <span class="cp-tool-icon">&#128640;</span>
+            <span>Track Delivery</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 5: Software & WordPress -->
+      <div class="cp-group-box">
+        <div class="cp-group-header">
+          <span>&#128187; SOFTWARE</span>
+        </div>
+        <div class="cp-items-grid">
+          <div class="cp-tool-item" onclick="alert('Launching WordPress Manager by Softaculous (1-Click Install)...');">
+            <span class="cp-tool-icon">&#128293;</span>
+            <span>WordPress Manager</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('PHP Selector: Select PHP 8.1, 8.2, 8.3...');">
+            <span class="cp-tool-icon">&#9881;</span>
+            <span>Select PHP Version</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Setup Node.js App...');">
+            <span class="cp-tool-icon">&#9889;</span>
+            <span>Setup Node.js App</span>
+          </div>
+          <div class="cp-tool-item" onclick="alert('Setup Python App...');">
+            <span class="cp-tool-icon">&#128013;</span>
+            <span>Setup Python App</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: General Information & Statistics -->
+    <div>
+
+      <!-- General Info -->
+      <div class="cp-sidebar-box">
+        <div class="cp-sidebar-header">General Information</div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Current User</span>
+          <span class="cp-info-val" id="cpUserVal">jaas_ashish42</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Primary Domain</span>
+          <span class="cp-info-val" id="cpDomainVal" style="color:#0077B6;">mycompany.com</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Shared IP Address</span>
+          <span class="cp-info-val">103.145.118.25</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Home Directory</span>
+          <span class="cp-info-val" id="cpHomeDir">/home/jaas_ashish42</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">cPanel Version</span>
+          <span class="cp-info-val">118.0.12</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Web Server</span>
+          <span class="cp-info-val">LiteSpeed Enterprise</span>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="cp-sidebar-box">
+        <div class="cp-sidebar-header">Statistics</div>
+        <div class="cp-info-row" style="flex-direction:column; gap:4px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span class="cp-info-lbl">Disk Usage (NVMe)</span>
+            <span class="cp-info-val" id="cpDiskVal">1.2 GB / 20 GB (6%)</span>
+          </div>
+          <div class="cp-prog-bg">
+            <div class="cp-prog-fill" style="width:6%;"></div>
+          </div>
+        </div>
+
+        <div class="cp-info-row" style="flex-direction:column; gap:4px;">
+          <div style="display:flex; justify-content:space-between;">
+            <span class="cp-info-lbl">Monthly Bandwidth</span>
+            <span class="cp-info-val">14.8 GB / Unlimited</span>
+          </div>
+          <div class="cp-prog-bg">
+            <div class="cp-prog-fill" style="width:12%; background:#06D6A0;"></div>
+          </div>
+        </div>
+
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">MySQL&reg; Databases</span>
+          <span class="cp-info-val">1 / Unlimited</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Email Accounts</span>
+          <span class="cp-info-val">2 / Unlimited</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">Subdomains</span>
+          <span class="cp-info-val">0 / Unlimited</span>
+        </div>
+        <div class="cp-info-row">
+          <span class="cp-info-lbl">AutoSSL Status</span>
+          <span class="cp-info-val" style="color:#10B981;">&#10004; Active (Let's Encrypt)</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="assets/js/jaas-system.js"></script>
+  <script>
+    const services = JaasStore.getServices();
+    const activeService = services[0] || {
+      domain: 'mycompany.com',
+      cpanelUser: 'jaas_ashish42',
+      storage: '20 GB NVMe'
+    };
+
+    document.getElementById('cpUsernameTop').innerText = activeService.cpanelUser;
+    document.getElementById('cpUserVal').innerText = activeService.cpanelUser;
+    document.getElementById('cpDomainVal').innerText = activeService.domain;
+    document.getElementById('cpHomeDir').innerText = '/home/' + activeService.cpanelUser;
+    document.getElementById('cpDiskVal').innerText = `1.2 GB / ${activeService.storage} (6%)`;
+  </script>
+</body>
+</html>

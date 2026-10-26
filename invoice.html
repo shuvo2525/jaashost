@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAAS BD - Official A4 Invoice</title>
+  <link rel="icon" type="image/png" href="assets/images/jaasbd-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- html2pdf for direct PDF file generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F1F5F9;
+      color: #0F172A;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* Top Action Bar (hidden on print) */
+    .top-action-bar {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+    }
+    .action-bar-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-print {
+      background: #0077B6;
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 3px 10px rgba(0, 119, 182, 0.3);
+    }
+    .btn-print:hover { background: #023E8A; }
+    .btn-portal {
+      background: #7B2CBF;
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 3px 10px rgba(123, 44, 191, 0.3);
+    }
+    .btn-portal:hover { background: #5A189A; }
+    .btn-cpanel {
+      background: #F77F00;
+      color: #FFFFFF;
+      border: none;
+      box-shadow: 0 3px 10px rgba(247, 127, 0, 0.3);
+    }
+    .btn-cpanel:hover { background: #E85D04; }
+    .btn-home {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      color: #334155;
+    }
+    .btn-home:hover { border-color: #0077B6; color: #0077B6; }
+
+    /* Alert Banner */
+    .success-alert {
+      max-width: 794px;
+      margin: 20px auto 0;
+      padding: 12px 18px;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: 8px;
+      color: #065F46;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ==========================================
+       TRUE A4 BILLING PAD CONTAINER (ULTRA HD)
+       Dimensions: 794px x 1123px (210mm x 297mm)
+       ========================================== */
+    .invoice-page-sheet {
+      width: 794px;
+      height: 1123px;
+      max-width: 794px;
+      max-height: 1123px;
+      margin: 20px auto;
+      background: #FFFFFF url('assets/images/jaasbd-pad-hd.png') no-repeat center center;
+      background-size: 794px 1123px;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+      border: 1px solid #E2E8F0;
+      position: relative;
+      padding: 110px 50px 75px; /* Cleanly clears scaled-down top & bottom branding */
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .invoice-inner-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* 1. Header Row */
+    .inv-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #F1F5F9;
+      padding-bottom: 16px;
+    }
+    .inv-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0F172A;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .inv-meta-line {
+      font-size: 12.5px;
+      color: #64748B;
+      margin-top: 4px;
+    }
+    .inv-meta-line strong {
+      color: #0F172A;
+    }
+
+    .paid-stamp-box {
+      text-align: right;
+    }
+    .badge-paid {
+      display: inline-block;
+      background: #10B981;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 5px 16px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .stamp-circle {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #059669;
+      font-weight: 800;
+      border: 1px dashed #10B981;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    /* 2. Billing Info Grid */
+    .billing-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 24px;
+    }
+    .info-box-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #94A3B8;
+      letter-spacing: 0.8px;
+      margin-bottom: 5px;
+    }
+    .client-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 3px;
+    }
+    .client-details {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* 3. Invoice Table */
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    .invoice-table th {
+      background: #F8FAFC;
+      border-top: 1px solid #E2E8F0;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .invoice-table td {
+      padding: 12px;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 12.5px;
+      color: #334155;
+    }
+    .invoice-table td strong {
+      color: #0F172A;
+      font-size: 13.5px;
+      display: block;
+    }
+    .text-right { text-align: right; }
+
+    /* 4. Totals Block (Clean finish at Amount Paid) */
+    .totals-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    .totals-box {
+      width: 270px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .totals-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #64748B;
+      margin-bottom: 5px;
+    }
+    .totals-row strong { color: #0F172A; }
+    .grand-total-row {
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid #CBD5E1;
+      padding-top: 8px;
+      margin-top: 6px;
+      font-size: 15px;
+      font-weight: 900;
+      color: #0077B6;
+    }
+
+    .inv-bottom-note {
+      font-size: 11px;
+      color: #94A3B8;
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    /* ==========================================
+       EXACT A4 PRINT RULES
+       ========================================== */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    @media print {
+      html, body {
+        background: #FFFFFF !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .top-action-bar, .success-alert {
+        display: none !important;
+      }
+      .invoice-page-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-width: 210mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background-size: 210mm 297mm !important;
+        padding: 28mm 14mm 20mm !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar -->
+  <div class="top-action-bar">
+    <div class="action-bar-inner">
+      <div style="font-weight:800; font-size:14px; color:#0F172A; display:flex; align-items:center; gap:8px;">
+        <span style="color:#10B981; font-size:18px;">&#10004;</span> Order Confirmed &bull; Official A4 Invoice
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn-action btn-print" onclick="downloadInvoicePDF()" style="background:#10B981; box-shadow:0 3px 10px rgba(16,185,129,0.3);">
+          📥 Download PDF File
+        </button>
+        <button class="btn-action btn-print" onclick="window.print()">
+          🖨️ Print / A4 Hardcopy
+        </button>
+        <a href="clientarea.html" class="btn-action btn-portal">
+          👤 Client Area Portal
+        </a>
+        <a href="cpanel.html" class="btn-action btn-cpanel" target="_blank">
+          ⚡ Direct cPanel Login &rarr;
+        </a>
+        <a href="index.html" class="btn-action btn-home">
+          Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Banner -->
+  <div class="success-alert">
+    <span style="font-size:18px;">&#9989;</span>
+    <div>
+      <strong>Payment Confirmed &amp; Service Provisioned!</strong> An official copy of this A4 bill has been sent to <span id="alertClientEmail" style="font-weight:700;">your email</span>.
+    </div>
+  </div>
+
+  <!-- TRUE A4 INVOICE SHEET ON OFFICIAL PAD (CLEAN - ENDS AT AMOUNT PAID) -->
+  <div class="invoice-page-sheet">
+    <div class="invoice-inner-content">
+
+      <div>
+        <!-- Invoice Title & Status Row -->
+        <div class="inv-top-row">
+          <div>
+            <h1 class="inv-title">INVOICE</h1>
+            <div class="inv-meta-line">Invoice Number: <strong id="invNumber">INV-2026-0843</strong></div>
+            <div class="inv-meta-line">Invoice Date: <strong id="invDate">20 October 2026</strong></div>
+            <div class="inv-meta-line">Payment Method: <strong id="invGateway">EPS Easy Payment System (PSO)</strong></div>
+          </div>
+
+          <div class="paid-stamp-box">
+            <div class="badge-paid">&#10004; PAID</div><br>
+            <div class="stamp-circle" id="invTxnId">TXN: EPS-849201</div>
+          </div>
+        </div>
+
+        <!-- Invoiced To & Provider Details -->
+        <div class="billing-info-grid">
+          <div>
+            <div class="info-box-title">Invoiced To:</div>
+            <div class="client-name" id="invClientName">Ashish Halder</div>
+            <div class="client-details">
+              <div id="invClientCompany">Golden Frame BD</div>
+              <div id="invClientAddress">843/06, Kadim Dewhata, Mirzapur, Tangail. 1940.</div>
+              <div id="invClientPhone">Phone: +88-01818-430308</div>
+              <div id="invClientEmail">Email: ashish@example.com</div>
+            </div>
+          </div>
+
+          <div style="text-align:right;">
+            <div class="info-box-title">Service Provider:</div>
+            <div class="client-details">
+              <div style="font-weight:600; color:#1E293B;">843/06, KD, Mirzapur, Tangail.</div>
+              <div id="provMobile">Mobile No: +88-01818-430308</div>
+              <div id="provEmail">Email: info@jaasbd.com</div>
+              <div id="provWebsite">Website: www.jaasbd.com</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Itemized Table -->
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th style="width:45%;">Item &amp; Description</th>
+              <th style="width:25%;">Domain Name</th>
+              <th style="width:15%;">Term</th>
+              <th style="width:15%;" class="text-right">Total (BDT)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong id="invItemName">Business Hosting (20 GB NVMe SSD)</strong>
+                <span style="font-size:11.5px; color:#64748B;">
+                  LiteSpeed Server, Free Automated SSL, Unlimited Bandwidth, Daily Backups, 10Gbps BDIX
+                </span>
+              </td>
+              <td>
+                <span style="font-weight:700; color:#0077B6;" id="invItemDomain">goldenframebd.com</span>
+              </td>
+              <td>
+                <span id="invItemTerm">1 Year (Annually)</span>
+              </td>
+              <td class="text-right">
+                <strong style="color:#0077B6; font-size:14px;" id="invItemTotal">৳4,788</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Totals Box (Ends Cleanly at Amount Paid as Requested) -->
+        <div class="totals-wrap">
+          <div class="totals-box">
+            <div class="totals-row">
+              <span>Subtotal:</span>
+              <strong id="invSubtotal">৳5,985</strong>
+            </div>
+            <div class="totals-row">
+              <span>Promotional Discount:</span>
+              <strong style="color:#10B981;" id="invDiscount">-৳1,197</strong>
+            </div>
+            <div class="totals-row" id="invVatRow" style="display:none;">
+              <span id="invVatLabel">Govt. VAT:</span>
+              <strong id="invVatVal">৳0.00</strong>
+            </div>
+            <div class="grand-total-row">
+              <span>Amount Paid:</span>
+              <span id="invGrandTotal">৳4,788 BDT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Note -->
+      <div class="inv-bottom-note">
+        This is a computer-generated official invoice and receipt of hosting payment. Thank you for choosing our services.
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/jaas-system.js"></script>
+  <script>
+    // Load invoice data from query param or latest storage
+    const urlParams = new URLSearchParams(window.location.search);
+    const invoiceId = urlParams.get('id') || sessionStorage.getItem('jaas_latest_invoice_id');
+
+    const invoices = JaasStore.getInvoices();
+    const invoice = invoices.find(inv => inv.id === invoiceId) || invoices[0];
+    const client = JaasStore.getClientUser();
+
+    if (invoice) {
+      document.getElementById('invNumber').innerText = invoice.id;
+      document.getElementById('invDate').innerText = invoice.date;
+      document.getElementById('invGateway').innerText = invoice.gateway || 'EPS Easy Payment System';
+      document.getElementById('invTxnId').innerText = 'TXN: ' + (invoice.txnId || 'EPS-893041');
+      document.getElementById('invItemName').innerText = invoice.planName;
+      document.getElementById('invItemDomain').innerText = invoice.domain;
+      document.getElementById('invItemTotal').innerText = `৳${invoice.amount.toLocaleString()}`;
+      document.getElementById('invGrandTotal').innerText = `৳${invoice.amount.toLocaleString()} BDT`;
+
+      // Subtotal calculation
+      const subtotal = invoice.subtotal || Math.round(invoice.amount / 0.80);
+      const discount = invoice.discount !== undefined ? invoice.discount : (subtotal - invoice.amount);
+      document.getElementById('invSubtotal').innerText = `৳${subtotal.toLocaleString()}`;
+      document.getElementById('invDiscount').innerText = discount > 0 ? `-৳${discount.toLocaleString()}` : '৳0';
+
+      // Govt. VAT display: only show if vatAmount > 0
+      const vatRow = document.getElementById('invVatRow');
+      const vatRate = invoice.vatRate || 0;
+      const vatAmount = invoice.vatAmount || 0;
+      if (vatRow) {
+        if (vatAmount > 0) {
+          vatRow.style.display = 'flex';
+          document.getElementById('invVatLabel').innerText = `Govt. VAT (${vatRate}%):`;
+          document.getElementById('invVatVal').innerText = `+৳${vatAmount.toLocaleString()}`;
+        } else {
+          vatRow.style.display = 'none';
+        }
+      }
+    }
+
+    if (client) {
+      document.getElementById('invClientName').innerText = client.name || 'Ashish Halder';
+      document.getElementById('invClientCompany').innerText = client.company || 'Golden Frame BD';
+      document.getElementById('invClientAddress').innerText = client.address || '843/06, Kadim Dewhata, Mirzapur, Tangail. 1940.';
+      document.getElementById('invClientPhone').innerText = 'Phone: ' + (client.phone || '+88-01818-430308');
+      document.getElementById('invClientEmail').innerText = 'Email: ' + (client.email || 'ashish@example.com');
+      document.getElementById('alertClientEmail').innerText = client.email || 'ashish@example.com';
+    }
+
+    // Dynamic config sync for provider info
+    fetch('/api/config')
+      .then(res => res.json())
+      .then(cfg => {
+        if (cfg && cfg.contact) {
+          if (cfg.contact.phone) document.getElementById('provMobile').innerText = 'Mobile No: ' + cfg.contact.phone;
+          if (cfg.contact.email) document.getElementById('provEmail').innerText = 'Email: ' + cfg.contact.email;
+        }
+      })
+      .catch(() => {});
+    // Direct Client-Side PDF Generation & Download
+    function downloadInvoicePDF() {
+      const invNum = document.getElementById('invNumber').innerText || 'INV-2026-0843';
+      const element = document.querySelector('.invoice-page-sheet');
+
+      if (typeof html2pdf !== 'undefined') {
+        const opt = {
+          margin: 0,
+          filename: `JAAS_BD_${invNum}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, logging: false },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+      } else {
+        window.print();
+      }
+    }
+  </script>
+</body>
+</html>

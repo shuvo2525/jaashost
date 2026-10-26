@@ -1,0 +1,56 @@
+# ========================================================
+# JAAS BD Platform - Apache / XAMPP Configuration
+# ========================================================
+
+# Default Directory Index
+DirectoryIndex index.php index.html
+
+# UTF-8 Character Encoding
+AddDefaultCharset UTF-8
+
+# Prevent directory listings
+Options -Indexes
+
+# MIME Types
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+    AddType image/png .png
+    AddType image/jpeg .jpg .jpeg
+    AddType image/svg+xml .svg
+    AddType font/woff2 .woff2
+    AddType application/json .json
+</IfModule>
+
+# Optional security: protect direct browser download of sensitive raw files if needed
+<FilesMatch "^(database\.sql|\.git)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ========================================================
+# URL Rewriting for Clean Paths
+# ========================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Route /admin or /admin/ to admin-login.html
+    RewriteRule ^admin/?$ admin-login.html [L,QSA]
+    RewriteRule ^admin/login/?$ admin-login.html [L,QSA]
+    RewriteRule ^admin/dashboard/?$ admin.html [L,QSA]
+
+    # Route /clientarea, /account, /accounts to clientarea.html
+    RewriteRule ^(clientarea|account|accounts)/?$ clientarea.html [L,QSA]
+
+    # Route /login to login.html
+    RewriteRule ^login/?$ login.html [L,QSA]
+
+    # Route /cart, /order to cart.html
+    RewriteRule ^(cart|order)/?$ cart.html [L,QSA]
+</IfModule>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Web Hosting Packages | JAAS BD</title>
+  <link rel="icon" type="image/png" href="assets/images/jaasbd-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/ph-header.css">
+  <link rel="stylesheet" href="assets/css/ph-footer.css">
+  <link rel="stylesheet" href="assets/css/ph-custom.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', 'Noto Sans Bengali', sans-serif; background: #f8fafc; color: #334155; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+    .hero-banner { background: linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important; color: #fff; padding: 65px 0 55px; border-radius: 0 0 30px 30px; margin-bottom: 40px; position: relative; overflow: hidden; }
+    .hero-banner::after { content: ''; position: absolute; right: -50px; bottom: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(140,198,63,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center; position: relative; z-index: 2; }
+    @media (max-width: 850px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } }
+    .coupon-box { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.4); border-radius: 8px; padding: 8px 16px; margin: 16px 0; font-size: 14px; font-weight: 700; }
+    .hero-badge-tag { display: inline-block; background: #7c3aed; color: #ffffff; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; }
+
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 50px; }
+    @media (max-width: 991px) { .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin-left: auto; margin-right: auto; } }
+    .pricing-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; position: relative; display: flex; flex-direction: column; transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .pricing-card:hover { transform: translateY(-5px); border-color: #7c3aed; box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2); }
+    .pricing-card.popular { border-color: #7c3aed !important; border-width: 2px !important; box-shadow: 0 15px 40px rgba(124, 58, 237, 0.22) !important; }
+    .pricing-card.popular .btn-plan-order { background: linear-gradient(135deg, #7c3aed 0%, #0284c7 100%) !important; }
+    .card-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #7c3aed 0%, #0284c7 100%); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .plan-title { font-size: 21px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+    .plan-desc { font-size: 12.5px; color: #64748b; margin-bottom: 14px; }
+    .plan-price-wrap { margin: 16px 0; }
+    .plan-cur { font-size: 20px; font-weight: 800; color: #0284c7; vertical-align: top; }
+    .plan-amt { font-size: 38px; font-weight: 900; color: #0f172a; }
+    .plan-period { font-size: 13px; font-weight: 700; color: #64748b; }
+    .plan-yearly { font-size: 12.5px; font-weight: 600; color: #7c3aed; margin-top: 4px; }
+    .plan-features { list-style: none; margin: 20px 0; flex: 1; }
+    .plan-features li { padding: 9px 0; font-size: 13.5px; color: #334155; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9; }
+    .plan-features li i { color: #7c3aed; font-size: 13px; flex-shrink: 0; }
+    .plan-features li strong { color: #0f172a; }
+    .btn-plan-order { display: block; text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%); color: #ffffff; padding: 13px; border-radius: 8px; font-weight: 800; font-size: 14px; text-decoration: none; transition: background 0.2s; margin-top: auto; }
+    .btn-plan-order:hover { background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%); }
+
+    /* Features Grid */
+    .features-section { padding: 50px 0; }
+    .section-head { text-align: center; margin-bottom: 40px; }
+    .section-head h2 { font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 10px; }
+    .section-head p { font-size: 15px; color: #64748b; max-width: 650px; margin: 0 auto; }
+    .corp-feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 50px; }
+    @media (max-width: 900px) { .corp-feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .corp-feat-grid { grid-template-columns: 1fr; } }
+    .corp-feat-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; transition: 0.2s; }
+    .corp-feat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); border-color: #7c3aed; }
+    .corp-feat-icon { width: 48px; height: 48px; border-radius: 10px; background: #e0f2fe; color: #0284c7; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .corp-feat-card h4 { font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .corp-feat-card p { font-size: 13.5px; color: #64748b; line-height: 1.6; }
+
+    /* LVE Table */
+    .lve-table-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; margin-bottom: 50px; overflow-x: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+    .lve-table { width: 100%; border-collapse: collapse; min-width: 650px; }
+    .lve-table th, .lve-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+    .lve-table th { background: #f8fafc; font-weight: 800; color: #0f172a; }
+
+    /* FAQ */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
+    @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px; }
+    .faq-item h4 { font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .faq-item h4 i { color: #0284c7; font-size: 14px; }
+    .faq-item p { font-size: 13.5px; color: #64748b; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  
+  <!-- Top Announcement Bar -->
+  <div class="ph-topbar" id="ph-notice-bar">
+    <div class="container">
+      <div class="ph-topbar-inner" id="ph-notice-content">
+        <a href="corporate-hosting.html" class="ph-notice-item ph-notice-desktop active" style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:1;visibility:visible;align-items:center;justify-content:center;gap:12px;color:#fff;text-decoration:none;display:flex;">
+          <i class="fa fa-bullhorn" style="font-size:12px;opacity:0.75;flex-shrink:0;"></i>
+          <span style="color:#fff;font-size:13.5px;font-weight:600;letter-spacing:0.15px;white-space:nowrap;">কর্পোরেট ওয়েব হোস্টিংয়ে পাচ্ছেন ডেডিকেটেড রিসোর্স ও ৯৯.৯৯% আপটাইম এসএলএ গ্যারান্টি!</span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Order Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="ph-header" id="ph-site-header">
+    <div class="container">
+      <div class="ph-header-inner">
+        <!-- LOGO -->
+        <div class="ph-logo">
+          <a href="index.html" class="ph-logo-link">
+            <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-logo-img" fetchpriority="high" loading="eager">
+          </a>
+        </div>
+
+        <!-- DESKTOP NAV -->
+        <nav class="ph-desktop-nav">
+          <ul class="ph-nav-menu">
+            <!-- 1. Domain -->
+            <li class="has-ph-dropdown">
+              <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Registration</span><span class="ph-dd-subtext">Register Your Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="cart.html?a=add&domain=transfer"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/transfer.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Transfer</span><span class="ph-dd-subtext">Transfer to JAAS BD</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bd-domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/bd_domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">.BD Domain</span><span class="ph-dd-subtext">Register .BD Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 2. Hosting -->
+            <li class="has-ph-dropdown">
+              <a href="#" style="color:#7c3aed;">Hosting <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="basic-hosting.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Basic Web Hosting</span><span class="ph-dd-subtext">Perfect for small personal sites</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="pro-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Pro Web Hosting</span><span class="ph-dd-subtext">Ideal for growing businesses</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="premium-hosting.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Premium Web Hosting</span><span class="ph-dd-subtext">Enhanced speed and performance</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="corporate-hosting.html"><div class="ph-dd-icon" style="color:#059669;background:#ecfdf5;"><i class="fa fa-briefcase"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text" style="font-weight:700;color:#059669;">Corporate Web Hosting</span><span class="ph-dd-subtext">Dedicated enterprise resources &amp; SLA</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-basic.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Basic Hosting</span><span class="ph-dd-subtext">Ultra-fast local BD routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-premium.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Premium Hosting</span><span class="ph-dd-subtext">Maximum power with local routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="email-hosting.html"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Email Hosting</span><span class="ph-dd-subtext">Professional business email</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="radio-hosting.html"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-podcast"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Radio Hosting</span><span class="ph-dd-subtext">Broadcast your audio globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="charity-hosting.html"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-heart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Free Hosting for Charities</span><span class="ph-dd-subtext">Special packages for nonprofits</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 3. Reseller -->
+            <li class="has-ph-dropdown">
+              <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="domain-reseller.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-sitemap"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Reseller</span><span class="ph-dd-subtext">Start your own domain business</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="reseller-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Reseller Hosting</span><span class="ph-dd-subtext">White-label hosting solutions</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-reseller.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Reseller Hosting</span><span class="ph-dd-subtext">High-speed local BD reseller</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 4. Server -->
+            <li class="has-ph-dropdown">
+              <a href="#">Server <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bdix-vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-circle"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="rdp-server.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">RDP Server</span><span class="ph-dd-subtext">Remote desktop access globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="backup.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Backup Server</span><span class="ph-dd-subtext">Secure data storage &amp; recovery</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="dedicated.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Dedicated Server</span><span class="ph-dd-subtext">Ultimate power &amp; full control</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 5. Website -->
+            <li class="has-ph-dropdown">
+              <a href="#">Website <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-shopping-cart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">E-Commerce Website</span><span class="ph-dd-subtext">Complete online store solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Ecommerce Landing Page</span><span class="ph-dd-subtext">High-converting product pages</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-newspaper-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal Website</span><span class="ph-dd-subtext">Modern news publishing platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-file-text-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal E-Paper</span><span class="ph-dd-subtext">Digital newspaper experience</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Host &amp; IT Site</span><span class="ph-dd-subtext">Professional IT business website</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/social-media/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-microphone"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Social Media Website</span><span class="ph-dd-subtext">Online radio station platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/software/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-share-alt"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Software</span><span class="ph-dd-subtext">Community &amp; networking platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="https://putulit.com/category/plugin/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-tv"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WordPress Plugin</span><span class="ph-dd-subtext">Video streaming &amp; TV portal</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+
+            <!-- 6. Services -->
+            <li class="has-ph-dropdown">
+              <a href="#">Services <i class="fa fa-angle-down"></i></a>
+              <ul class="ph-dropdown-menu">
+                <li><a href="bulk-sms.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-cog"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk SMS</span><span class="ph-dd-subtext">Complete billing &amp; automation</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="bulk-mail.html"><div class="ph-dd-icon" style="color:#723394;background:#eff6ff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk Mail</span><span class="ph-dd-subtext">Complete bulk mail solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="whmcs-solution.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WHMCS Solution</span><span class="ph-dd-subtext">Web Hosting &amp; Domain Panel</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                <li><a href="graphics-design.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-paint-brush"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Graphics Design</span><span class="ph-dd-subtext">Creative branding &amp; visuals</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- DESKTOP ACTIONS -->
+        <div class="ph-header-actions">
+          <a href="affiliates.html" class="ph-btn-affiliate">AFFILIATE</a>
+          
+          <div class="ph-support-dropdown">
+            <button class="ph-btn-support"><i class="fa fa-headphones"></i> Support</button>
+            <div class="ph-support-mega-menu">
+              <div class="psm-section">
+                <h4>Talk to Expert (Sales)</h4>
+                <a href="tel:+8801818430308" class="psm-phone-box">
+                  <i class="fa fa-phone"></i> +8801818430308
+                </a>
+                <p class="psm-timing">Available: 24/7 Priority Support</p>
+              </div>
+              <div class="psm-section">
+                <h4>Chat with us</h4>
+                <div class="psm-chat-btns">
+                  <a href="https://wa.me/8801818430308" class="psm-chat-btn" target="_blank" rel="noopener">
+                    <i class="fa fa-whatsapp"></i> <span>WhatsApp</span>
+                  </a>
+                  <a href="clientarea.html" class="psm-chat-btn">
+                    <i class="fa fa-ticket"></i> <span>Ticket</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="login.html" class="ph-btn-account">
+            <i class="fa fa-user-circle"></i> Account
+          </a>
+        </div>
+
+        <!-- MOBILE ACTIONS -->
+        <div class="ph-mobile-actions">
+          <a href="login.html" class="ph-mobile-btn"><i class="fa fa-user"></i></a>
+          <button class="ph-mobile-menu-toggle" id="phMenuToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION OVERLAY & SIDEBAR -->
+  <div class="ph-mobile-overlay" id="phMobileOverlay"></div>
+  <div class="ph-mobile-sidebar" id="phMobileSidebar">
+    <div class="ph-ms-header">
+      <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-ms-logo">
+      <button class="ph-ms-close" id="phMenuClose">&times;</button>
+    </div>
+    <div class="ph-ms-body">
+      <ul class="ph-ms-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="has-ms-sub">
+          <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="basic-hosting.html">Basic Web Hosting</a></li>
+            <li><a href="pro-hosting.html">Pro Web Hosting</a></li>
+            <li><a href="premium-hosting.html">Premium Web Hosting</a></li>
+                    <li><a href="corporate-hosting.html">Corporate Web Hosting</a></li>
+            <li><a href="corporate-hosting.html" style="color:#0284c7;font-weight:700;">Corporate Web Hosting</a></li>
+            <li><a href="bdix-basic.html">BDIX Basic Hosting</a></li>
+            <li><a href="bdix-premium.html">BDIX Premium Hosting</a></li>
+            <li><a href="email-hosting.html">Email Hosting</a></li>
+            <li><a href="radio-hosting.html">Radio Hosting</a></li>
+            <li><a href="charity-hosting.html">Free Hosting for Charities</a></li>
+          </ul>
+        </li>
+        <li class="has-ms-sub">
+          <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="domain-reseller.html">Domain Reseller</a></li>
+            <li><a href="reseller-hosting.html">Reseller Hosting</a></li>
+            <li><a href="bdix-reseller.html">BDIX Reseller Hosting</a></li>
+          </ul>
+        </li>
+        <li class="has-ms-sub">
+          <a href="#">Server <i class="fa fa-angle-down"></i></a>
+          <ul class="ph-ms-submenu">
+            <li><a href="vps.html">VPS Server</a></li>
+            <li><a href="bdix-vps.html">BDIX VPS Server</a></li>
+            <li><a href="rdp-server.html">RDP Server</a></li>
+            <li><a href="backup.html">Backup Server</a></li>
+            <li><a href="dedicated.html">Dedicated Server</a></li>
+          </ul>
+        </li>
+        <li><a href="affiliates.html">Affiliates</a></li>
+        <li><a href="tel:+8801818430308">Contact</a></li>
+      </ul>
+      <div class="ph-ms-footer">
+        <a href="login.html" class="ph-ms-btn-primary">Client Login</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subnav Bar -->
+  <div class="bh-subnav-bar" style="background:#ffffff; border-bottom:1px solid #e2e8f0; padding:10px 0; font-size:13.5px; font-weight:600;">
+    <div class="container" style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+      <span style="color:#0284c7; font-weight:800;">Hosting =&gt;</span>
+      <a href="basic-hosting.html" style="color:#64748b; text-decoration:none;">Basic Hosting</a>
+      <a href="pro-hosting.html" style="color:#64748b; text-decoration:none;">Pro Hosting</a>
+      <a href="premium-hosting.html" style="color:#64748b; text-decoration:none;">Premium Hosting</a>
+      <a href="corporate-hosting.html" style="color:#64748b; text-decoration:none;">Corporate Hosting</a>
+      <a href="corporate-hosting.html" style="color:#0284c7; font-weight:800; text-decoration:none;">Corporate Hosting</a>
+      <a href="bdix-basic.html" style="color:#64748b; text-decoration:none;">BDIX Basic</a>
+      <a href="bdix-premium.html" style="color:#64748b; text-decoration:none;">BDIX Premium</a>
+      <a href="email-hosting.html" style="color:#64748b; text-decoration:none;">Email Hosting</a>
+      <a href="radio-hosting.html" style="color:#64748b; text-decoration:none;">Radio Hosting</a>
+    </div>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-badge-tag"><i class="fa fa-shield-alt"></i> Enterprise Grade Hosting</span>
+        <h1 style="font-size:36px; font-weight:900; line-height:1.2; margin-bottom:12px;">Corporate Web Hosting</h1>
+        <p style="font-size:16px; opacity:0.95; max-width:620px;">
+          কর্পোরেট প্রতিষ্ঠান, ই-কমার্স ও উচ্চ ভিজিটর সাইটের জন্য সম্পূর্ণ ডেডিকেটেড ক্লাউড রিসোর্স, লাইটস্পিড এন্টারপ্রাইজ ইঞ্জিন, স্প্যামএক্সপার্টস এবং ৯৯.৯৯% আপটাইম এসএলএ গ্যারান্টি।
+        </p>
+        <div class="coupon-box">
+          <i class="fa fa-ticket-alt"></i> Use Promo Code: <span style="color:#facc15;">CORP15</span> for 15% OFF on Corporate Yearly Plans!
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <img src="assets/images/ph/server-rack.png" alt="Corporate Server" style="max-height:240px; width:auto; filter:drop-shadow(0 15px 30px rgba(0,0,0,0.3));" onerror="this.src='assets/images/jaasbd-logo.png'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Cards Section -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Corporate Hosting Plans &amp; Pricing</h2>
+      <p>আপনার প্রতিষ্ঠানের পরিধি ও প্রবৃদ্ধির সাথে মানানসই সেরা এন্টারপ্রাইজ প্ল্যানটি বেছে নিন</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Plan 1 -->
+      <div class="pricing-card">
+        <div class="plan-title">CORPORATE STANDARD</div>
+        <div class="plan-desc">For Growing Medium Businesses</div>
+        <div class="plan-price-wrap">
+          <span class="plan-cur">৳</span><span class="plan-amt">999</span><span class="plan-period">/ MO</span>
+          <div class="plan-yearly">৳9,990 billed annually</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fa fa-check"></i> <strong>10</strong> Websites Allowed</li>
+          <li><i class="fa fa-check"></i> <strong>20 GB</strong> Pure NVMe Storage</li>
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Monthly Bandwidth</li>
+          <li><i class="fa fa-check"></i> <strong>2 Core</strong> Dedicated CPU / 4GB RAM</li>
+          <li><i class="fa fa-check"></i> <strong>50</strong> Corporate Email Accounts</li>
+          <li><i class="fa fa-check"></i> <strong>LiteSpeed</strong> Enterprise + LSCache</li>
+          <li><i class="fa fa-check"></i> <strong>Free SSL</strong> &amp; Daily JetBackup</li>
+          <li><i class="fa fa-check"></i> <strong>99.99%</strong> SLA Uptime Guarantee</li>
+        </ul>
+        <a href="cart.html?plan=corp-starter" class="btn-plan-order">ORDER NOW</a>
+      </div>
+
+      <!-- Plan 2 (Popular) -->
+      <div class="pricing-card popular">
+        <div class="card-badge">Most Popular</div>
+        <div class="plan-title">CORPORATE BUSINESS</div>
+        <div class="plan-desc">High-Traffic E-Commerce &amp; Large Brands</div>
+        <div class="plan-price-wrap">
+          <span class="plan-cur">৳</span><span class="plan-amt">1,750</span><span class="plan-period">/ MO</span>
+          <div class="plan-yearly">৳17,500 billed annually</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fa fa-check"></i> <strong>25</strong> Websites Allowed</li>
+          <li><i class="fa fa-check"></i> <strong>50 GB</strong> Pure NVMe Storage</li>
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Monthly Bandwidth</li>
+          <li><i class="fa fa-check"></i> <strong>4 Core</strong> Dedicated CPU / 8GB RAM</li>
+          <li><i class="fa fa-check"></i> <strong>1 Free</strong> Dedicated IP Included</li>
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Corporate Emails</li>
+          <li><i class="fa fa-check"></i> <strong>SpamExperts</strong> Inbound/Outbound</li>
+          <li><i class="fa fa-check"></i> <strong>24/7</strong> Dedicated Account Manager</li>
+        </ul>
+        <a href="cart.html?plan=corp-business" class="btn-plan-order" style="background:linear-gradient(135deg, #7c3aed 0%, #0284c7 100%);">ORDER NOW</a>
+      </div>
+
+      <!-- Plan 3 -->
+      <div class="pricing-card">
+        <div class="plan-title">CORPORATE ENTERPRISE</div>
+        <div class="plan-desc">Ultimate Power &amp; Mission-Critical Systems</div>
+        <div class="plan-price-wrap">
+          <span class="plan-cur">৳</span><span class="plan-amt">3,200</span><span class="plan-period">/ MO</span>
+          <div class="plan-yearly">৳32,000 billed annually</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Websites Allowed</li>
+          <li><i class="fa fa-check"></i> <strong>100 GB</strong> Pure NVMe Storage</li>
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Monthly Bandwidth</li>
+          <li><i class="fa fa-check"></i> <strong>8 Core</strong> Dedicated CPU / 16GB RAM</li>
+          <li><i class="fa fa-check"></i> <strong>1 Free</strong> Dedicated IP Included</li>
+          <li><i class="fa fa-check"></i> <strong>Unlimited</strong> Corporate Emails</li>
+          <li><i class="fa fa-check"></i> <strong>Dual SpamExperts</strong> Protection</li>
+          <li><i class="fa fa-check"></i> <strong>24/7 VIP SLA</strong> Instant Priority Support</li>
+        </ul>
+        <a href="cart.html?plan=corp-enterprise" class="btn-plan-order">ORDER NOW</a>
+      </div>
+    </div>
+
+    <!-- CloudLinux LVE Limits & Specifications Table -->
+    <div class="lve-table-card">
+      <h3 style="font-size:20px; font-weight:800; color:#0f172a; margin-bottom:16px;">Corporate CloudLinux Dedicated Limits</h3>
+      <table class="lve-table">
+        <thead>
+          <tr>
+            <th>Hardware / Limit Specification</th>
+            <th>Standard (20GB)</th>
+            <th style="color:#0284c7;">Business (50GB)</th>
+            <th>Enterprise (100GB)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dedicated CPU Cores</strong></td>
+            <td>2 Cores (100% allocation)</td>
+            <td style="font-weight:800; color:#0284c7;">4 Cores Dedicated</td>
+            <td style="font-weight:800;">8 Cores Dedicated</td>
+          </tr>
+          <tr>
+            <td><strong>Physical Memory (RAM)</strong></td>
+            <td>4 GB DDR4/DDR5</td>
+            <td style="font-weight:800; color:#0284c7;">8 GB Guaranteed</td>
+            <td style="font-weight:800;">16 GB Guaranteed</td>
+          </tr>
+          <tr>
+            <td><strong>I/O Speed Limit</strong></td>
+            <td>100.00 MB/s</td>
+            <td style="font-weight:800; color:#0284c7;">150.00 MB/s</td>
+            <td style="font-weight:800;">200.00 MB/s</td>
+          </tr>
+          <tr>
+            <td><strong>IOPS Rate</strong></td>
+            <td>4,096 IOPS</td>
+            <td style="font-weight:800; color:#0284c7;">8,192 IOPS</td>
+            <td style="font-weight:800;">16,384 IOPS</td>
+          </tr>
+          <tr>
+            <td><strong>Entry Processes (EP)</strong></td>
+            <td>50 Concurrent</td>
+            <td style="font-weight:800; color:#0284c7;">100 Concurrent</td>
+            <td style="font-weight:800;">200 Concurrent</td>
+          </tr>
+          <tr>
+            <td><strong>Dedicated IP Address</strong></td>
+            <td>Optional Add-on</td>
+            <td style="font-weight:800; color:#0284c7;">Free 1 Dedicated IPv4</td>
+            <td style="font-weight:800;">Free 1 Dedicated IPv4</td>
+          </tr>
+          <tr>
+            <td><strong>Backup Schedule</strong></td>
+            <td>Daily Automated JetBackup</td>
+            <td style="font-weight:800; color:#0284c7;">Daily + Snapshot On Demand</td>
+            <td style="font-weight:800;">Disaster Recovery Cloud Mirror</td>
+          </tr>
+          <tr>
+            <td><strong>Email Delivery</strong></td>
+            <td>MailChannels Premium Relay</td>
+            <td style="font-weight:800; color:#0284c7;">SpamExperts In/Outbound</td>
+            <td style="font-weight:800;">Dual SpamExperts + White-glove IP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Corporate Features Section -->
+    <div class="features-section">
+      <div class="section-head">
+        <h2>Enterprise Features Built for Business Reliability</h2>
+        <p>ব্যবসায়িক কার্যক্রম নির্বিঘ্ন রাখতে সেরা হার্ডওয়্যার এবং এন্টারপ্রাইজ প্রযুক্তির সমন্বয়</p>
+      </div>
+
+      <div class="corp-feat-grid">
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-tachometer-alt"></i></div>
+          <h4>Pure Enterprise NVMe SSD</h4>
+          <p>সাধারণ SSD-এর চেয়ে ৭ গুণ দ্রুতগতিসম্পন্ন পিওর Enterprise PCIe NVMe ডিস্ক স্টোরেজ, যা আপনার ডেটাবেজ ও কোয়ারি এক্সিকিউশন দ্রুত সম্পন্ন করে।</p>
+        </div>
+
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-bolt"></i></div>
+          <h4>LiteSpeed Web Server + LSCache</h4>
+          <p>Apache-এর চেয়ে ৯ গুণ দ্রুত পেজ লোডিং ক্ষমতা। বিল্ট-ইন ওয়ার্ডপ্রেস ও লারাভেল ক্যাশিংয়ের মাধ্যমে ট্রাফিক পিক সময়েও ওয়েবসাইট থাকে সুপারফাস্ট।</p>
+        </div>
+
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-shield-virus"></i></div>
+          <h4>Imunify360 Enterprise WAF</h4>
+          <p>অ্যাডভান্সড এআই চালিত ওয়েব অ্যাপ্লিকেশন ফায়ারওয়াল (WAF), লাইভ ম্যালওয়্যার স্ক্যানার, ব্রুট ফোর্স ডিফেন্স এবং রিয়েল-টাইম প্যাচিং নিরাপত্তা।</p>
+        </div>
+
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-envelope-open-text"></i></div>
+          <h4>SpamExperts Business Email</h4>
+          <p>ইনবক্স ডেলিভারিবিলিটি ৯৯.৯% নিশ্চিত করতে MailChannels ও SpamExperts গার্ড। কোনো স্প্যামিং সমস্যা ছাড়াই অফিসিয়াল মেইল আদান-প্রদান করুন।</p>
+        </div>
+
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-cloud-download-alt"></i></div>
+          <h4>Automated Daily JetBackup</h4>
+          <p>প্রতিদিন স্বয়ংক্রিয়ভাবে ক্লাউড অফসাইটে ব্যাকআপ তৈরি হয়। ৩ ক্লিকেই ফুল cPanel ব্যাকআপ, ডেটাবেস অথবা নির্দিষ্ট ফাইল মুহূর্তেই রিস্টোর করা যায়।</p>
+        </div>
+
+        <div class="corp-feat-card">
+          <div class="corp-feat-icon"><i class="fa fa-user-tie"></i></div>
+          <h4>Dedicated Account Manager</h4>
+          <p>কর্পোরেট ক্লায়েন্টদের জন্য সরাসরি হোয়াটসঅ্যাপ এবং ডেডিকেটেড ফোন লাইনে ২৪/৭ প্রায়োরিটি ভিআইপি টেকনিক্যাল এসএলএ সাপোর্ট।</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corporate FAQ -->
+    <div class="section-head">
+      <h2>Frequently Asked Questions</h2>
+      <p>কর্পোরেট হোস্টিং সম্পর্কিত প্রয়োজনীয় তথ্য ও সমাধান</p>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4><i class="fa fa-question-circle"></i> সাধারণ হোস্টিংয়ের সাথে কর্পোরেট হোস্টিংয়ের পার্থক্য কী?</h4>
+        <p>সাধারণ শেয়ার্ড হোস্টিংয়ে রিসোর্স ভাগাভাগি হয়, কিন্তু কর্পোরেট হোস্টিংয়ে আপনার অ্যাকাউন্টের জন্য নির্দিষ্ট ডেডিকেটেড CPU, RAM এবং IOPS নিশ্চিত থাকে। কোনো প্রতিবেশী অ্যাকাউন্টের কারণে আপনার সার্ভার স্লো হবে না।</p>
+      </div>
+
+      <div class="faq-item">
+        <h4><i class="fa fa-question-circle"></i> আপনারা কি পুরনো প্রোভাইডার থেকে ফ্রি মাইগ্রেশন করে দেবেন?</h4>
+        <p>হ্যাঁ, আমাদের এক্সপার্ট টিম সম্পূর্ণ বিনামূল্যে আপনার সমস্ত ওয়েবসাইট, ডেটাবেজ, এবং কর্পোরেট ইমেইল অ্যাকাউন্ট জিরো-ডাউনটাইমে সফলভাবে আমাদের সার্ভারে মাইগ্রেশন করে দেবে।</p>
+      </div>
+
+      <div class="faq-item">
+        <h4><i class="fa fa-question-circle"></i> অফিসিয়াল ভ্যাট ও ট্যাক্স চালান (Invoice) পাওয়া যাবে?</h4>
+        <p>অবশ্যই। প্রতিটি কেনাকাটার সাথে আপনার কোম্পানির নাম ও টিআইএন/বিন উল্লেখপূর্বক প্রোপার অফিসিয়াল ইনভয়েস অটোমেটিক জেনারেট হয়, যা আপনার প্রাতিষ্ঠানিক অডিটের জন্য বৈধ।</p>
+      </div>
+
+      <div class="faq-item">
+        <h4><i class="fa fa-question-circle"></i> ডেডিকেটেড আইপি কি প্যাকেজের সাথে অন্তর্ভুক্ত?</h4>
+        <p>হ্যাঁ, Corporate Business এবং Corporate Enterprise প্যাকেজে ১টি ডেডিকেটেড ফ্রেশ IPv4 সম্পূর্ণ ফ্রিতে দেওয়া হয়, যা আপনার সাইটের এসইও ও ইমেইল ইনবক্স রেপুটেশন বৃদ্ধি করে।</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ultra Footer matching Putulhost Exact Layout & High Contrast White Email -->
+  <footer class="ph-ultra-footer" style="background:linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;">
+    <div class="container">
+        <!-- BOTTOM FOOTER: INFO GRID -->
+        <div class="ph-footer-bottom-grid">
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Our Address</h4>
+                <p class="ph-fb-text">
+                    <strong>JAAS BD</strong><br>
+                    Kadim Dewhata, Mirzapur, Tangail, Dhaka - Bangladesh                </p>
+                <div class="ph-footer-contact">
+                    <p style="color:#ffffff !important;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;"><i class="fa fa-phone" style="color:#7c3aed !important;font-size:16px;"></i> <span style="color:#ffffff !important;font-weight:600;">+8801818430308</span> <span style="font-size:11.5px;color:#94a3b8 !important;">(10AM-8PM)</span></p>
+                    <p style="color:#ffffff !important;font-size:14px;display:flex;align-items:center;gap:10px;"><i class="fa fa-envelope" style="color:#7c3aed !important;font-size:16px;"></i> <a href="mailto:info@jaasbd.com" style="color:#ffffff !important;font-weight:700 !important;text-decoration:none !important;letter-spacing:0.3px;font-size:14px;transition:color 0.2s;">info@jaasbd.com</a></p>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Payment Options</h4>
+                <div class="ph-payment-options">
+                    <img src="assets/images/ph/SSLCommerz-Pay.png" alt="Payment Options" style="max-width: 100%; border-radius: 8px;" loading="lazy">
+                </div>
+
+                <div class="ph-footer-membership-compact">
+                    <h5 class="ph-membership-title-small">Official Member of</h5>
+                    <div class="ph-membership-list-small">
+                        <img src="assets/images/ph/Basis-logo.png" alt="BASIS" loading="lazy">
+                        <img src="assets/images/ph/e-Cab-logo.png" alt="e-CAB" loading="lazy">
+                        <img src="assets/images/ph/Apnic-logo.png" alt="APNIC" loading="lazy">
+                        <img src="assets/images/ph/DBID11.png" alt="DBID" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Subscribe Newsletter</h4>
+                <p class="ph-fb-text">Subscribe for new offers and updates.</p>
+                <form class="ph-subscribe-form" role="form" aria-label="Newsletter Subscription">
+                    <!-- Honeypot: bots fill this, humans don't see it -->
+                    <input type="text" name="ph_website" value="" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true">
+                    <input type="hidden" name="ph_form_time" id="ph_form_time" value="">
+                    <label for="ph-newsletter-email" class="screen-reader-text">Email Address</label>
+                    <input type="email" id="ph-newsletter-email" placeholder="enter your email...." required aria-label="Email Address" autocomplete="email">
+                    <button type="submit" aria-label="Subscribe to newsletter"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
+
+                <div class="ph-social-links-wrapper">
+                    <p class="ph-social-text">To get updates follow us on Facebook, Twitters etc.</p>
+                    <div class="ph-social-links-compact">
+                        <a href="https://www.facebook.com/putulhost.official" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>                        <a href="https://x.com/putulhost" target="_blank" rel="noopener" title="X (Twitter)"><i class="fa fa-twitter"></i></a>                        <a href="https://www.instagram.com/myputulhost/" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>                        <a href="https://www.youtube.com/c/JAAS BD" target="_blank" rel="noopener" title="YouTube"><i class="fa fa-youtube-play"></i></a>                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Company</h4>
+                <ul class="ph-footer-links-small">
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li style="margin-top: 15px;"><a href="affiliates.html" class="ph-affiliate-btn">Affiliate</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BACK TO TOP BUTTON -->
+        <div class="ph-back-to-top" id="backToTop">
+            <div class="ph-btt-icon">
+                <i class="fa fa-chevron-up"></i>
+            </div>
+        </div>
+
+        <!-- FLOATING SUPPORT WIDGET (toggle controlled) -->
+        
+    <div class="ph-footer-bottom-bar">
+        <div class="container">
+            <div class="ph-bottom-bar-flex">
+                <div class="ph-copyright-text">
+                    � 2026 <span>JAAS BD</span>. All rights reserved.
+                </div>
+                <div class="ph-footer-bottom-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <span class="divider">|</span>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span class="divider">|</span>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <script src="assets/js/ph-nav.js"></script>
+</body>
+</html>

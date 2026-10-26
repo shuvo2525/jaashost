@@ -1,0 +1,1367 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk SMS Solution | Masking & Non-Masking Gateway | JAAS BD</title>
+    <link rel="icon" type="image/png" href="assets/images/jaasbd-logo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="assets/css/ph-header.css">
+    <link rel="stylesheet" href="assets/css/ph-custom.css">
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: 'Inter', 'Noto Sans Bengali', sans-serif; color: #334155; }
+      .container { width: 100% !important; max-width: 1200px !important; margin: 0 auto !important; padding: 0 20px !important; box-sizing: border-box !important; }
+      a { text-decoration: none !important; }
+    </style>
+  <link rel="stylesheet" href="assets/css/ph-footer.css">
+</head>
+<body class="wp-theme-PHTheme">
+
+<div class="ph-topbar" id="ph-notice-bar">
+    <div class="container">
+        <div class="ph-topbar-inner" id="ph-notice-content">
+            <a href="domain.html" class="ph-notice-item ph-notice-desktop active" style="position:absolute;top:0;left:0;right:0;bottom:0;opacity:1;visibility:visible;align-items:center;justify-content:center;gap:12px;color:#fff;text-decoration:none;display:flex;">
+                <i class="fa fa-bullhorn" style="font-size:12px;opacity:0.75;flex-shrink:0;"></i>
+                <span style="color:#fff;font-size:13.5px;font-weight:600;letter-spacing:0.15px;white-space:nowrap;">.TOP ডোমেইন মাত্র ২১০ টাকা ! রিসেলার হোস্টিংয়ের ওপর সর্বোচ্চ ৫০% ছাড় ! .COM ডোমেইন রেজিস্টার ১০৫০ টাকা</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Go!</span>
+            </a>
+            <a href="basic-hosting.html" class="ph-notice-item ph-notice-mobile active" style="display:none;align-items:center;justify-content:center;gap:8px;padding:9px 14px;color:#fff;text-decoration:none;">
+                <i class="fa fa-bullhorn" style="font-size:11px;opacity:0.75;flex-shrink:0;"></i>
+                <span style="color:#fff;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">BASIC &amp; PRO WEB HOST এ পান ২০% ছাড়</span>
+                <span style="display:inline-flex;align-items:center;justify-content:center;background: #7c3aed; color: #ffffff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Go!</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     MAIN HEADER (PUTULHOST EXACT 1:1)
+============================================= -->
+<header class="ph-header" id="ph-site-header">
+    <div class="container">
+        <div class="ph-header-inner">
+
+            <!-- LOGO -->
+            <div class="ph-logo">
+                <a href="index.html" class="ph-logo-link">
+                    <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-logo-img" fetchpriority="high" loading="eager">
+                </a>
+            </div>
+
+            <!-- DESKTOP NAV -->
+            <nav class="ph-desktop-nav">
+                <ul class="ph-nav-menu">
+                    <!-- 1. Domain -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Registration</span><span class="ph-dd-subtext">Register Your Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="cart.html?a=add&domain=transfer"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/transfer.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Transfer</span><span class="ph-dd-subtext">Transfer to JAAS BD</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bd-domain.html"><div class="ph-dd-icon" style="color:#0284c7;background:#dcfce7;"><img src="assets/images/ph/bd_domain.png" width="28" height="28" style="object-fit:contain;border-radius:3px;"></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">.BD Domain</span><span class="ph-dd-subtext">Register .BD Domain Names</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 2. Hosting -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="basic-hosting.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Basic Web Hosting</span><span class="ph-dd-subtext">Perfect for small personal sites</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="pro-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-linux"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Pro Web Hosting</span><span class="ph-dd-subtext">Ideal for growing businesses</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="premium-hosting.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Premium Web Hosting</span><span class="ph-dd-subtext">Enhanced speed and performance</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="corporate-hosting.html"><div class="ph-dd-icon" style="color:#059669;background:#ecfdf5;"><i class="fa fa-briefcase"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Corporate Web Hosting</span><span class="ph-dd-subtext">Dedicated enterprise resources &amp; SLA</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-basic.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Basic Hosting</span><span class="ph-dd-subtext">Ultra-fast local BD routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-premium.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Premium Hosting</span><span class="ph-dd-subtext">Maximum power with local routing</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="email-hosting.html"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Email Hosting</span><span class="ph-dd-subtext">Professional business email</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="radio-hosting.html"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-podcast"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Radio Hosting</span><span class="ph-dd-subtext">Broadcast your audio globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="charity-hosting.html"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-heart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Free Hosting for Charities</span><span class="ph-dd-subtext">Special packages for nonprofits</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 3. Reseller -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="domain-reseller.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-sitemap"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Reseller</span><span class="ph-dd-subtext">Start your own domain business</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="reseller-hosting.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Reseller Hosting</span><span class="ph-dd-subtext">White-label hosting solutions</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-reseller.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX Reseller Hosting</span><span class="ph-dd-subtext">High-speed local BD reseller</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 4. Server -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Server <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bdix-vps.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-circle"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">BDIX VPS Server</span><span class="ph-dd-subtext">High performance virtual servers</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="rdp-server.html"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">RDP Server</span><span class="ph-dd-subtext">Remote desktop access globally</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="backup.html"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-database"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Backup Server</span><span class="ph-dd-subtext">Secure data storage &amp; recovery</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="dedicated.html"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Dedicated Server</span><span class="ph-dd-subtext">Ultimate power &amp; full control</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 5. Website -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Website <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#f59e0b;background:#fffbeb;"><i class="fa fa-shopping-cart"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">E-Commerce Website</span><span class="ph-dd-subtext">Complete online store solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Ecommerce Landing Page</span><span class="ph-dd-subtext">High-converting product pages</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ef4444;background:#fef2f2;"><i class="fa fa-newspaper-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal Website</span><span class="ph-dd-subtext">Modern news publishing platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#8b5cf6;background:#f5f3ff;"><i class="fa fa-file-text-o"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">News Portal E-Paper</span><span class="ph-dd-subtext">Digital newspaper experience</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#06b6d4;background:#ecfeff;"><i class="fa fa-server"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Domain Host &amp; IT Site</span><span class="ph-dd-subtext">Professional IT business website</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/social-media/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-microphone"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Social Media Website</span><span class="ph-dd-subtext">Online radio station platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/software/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#ec4899;background:#fdf2f8;"><i class="fa fa-share-alt"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Software</span><span class="ph-dd-subtext">Community &amp; networking platform</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="https://putulit.com/category/plugin/" target="_blank" rel="noopener"><div class="ph-dd-icon" style="color:#10b981;background:#ecfdf5;"><i class="fa fa-tv"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WordPress Plugin</span><span class="ph-dd-subtext">Video streaming &amp; TV portal</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 6. Services -->
+                    <li class="has-ph-dropdown">
+                        <a href="#">Services <i class="fa fa-angle-down"></i></a>
+                        <ul class="ph-dropdown-menu">
+                            <li><a href="bulk-sms.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-cog"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk SMS</span><span class="ph-dd-subtext">Complete billing &amp; automation</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="bulk-mail.html"><div class="ph-dd-icon" style="color:#723394;background:#eff6ff;"><i class="fa fa-envelope"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Bulk Mail</span><span class="ph-dd-subtext">Complete bulk mail solution</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="whmcs-solution.html"><div class="ph-dd-icon" style="color:#3b82f6;background:#eff6ff;"><i class="fa fa-desktop"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">WHMCS Solution</span><span class="ph-dd-subtext">Web Hosting &amp; Domain Panel</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                            <li><a href="graphics-design.html"><div class="ph-dd-icon" style="color:#a855f7;background:#faf5ff;"><i class="fa fa-paint-brush"></i></div><div class="ph-dd-text-wrap"><span class="ph-dd-text">Graphics Design</span><span class="ph-dd-subtext">Creative branding &amp; visuals</span></div><i class="fa fa-angle-right ph-dd-arrow"></i></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- DESKTOP ACTIONS -->
+            <div class="ph-header-actions">
+                <a href="affiliates.html" class="ph-btn-affiliate">AFFILIATE</a>
+                
+                <div class="ph-support-dropdown">
+                    <button class="ph-btn-support"><i class="fa fa-headphones"></i> Support</button>
+                    <div class="ph-support-mega-menu">
+                        <div class="psm-section">
+                            <h4>Talk to Expert (Sales)</h4>
+                            <a href="tel:+8801818430308" class="psm-phone-box">
+                                <i class="fa fa-phone"></i> +8801818430308
+                            </a>
+                            <p class="psm-timing">Available: 24/7 Support</p>
+                        </div>
+                        
+                        <div class="psm-section">
+                            <h4>Chat with us</h4>
+                            <div class="psm-chat-btns">
+                                <a href="https://wa.me/8801818430308" class="psm-chat-btn" target="_blank" rel="noopener">
+                                    <i class="fa fa-whatsapp"></i>
+                                    <span>WhatsApp</span>
+                                </a>
+                                <a href="clientarea.html" class="psm-chat-btn">
+                                    <i class="fa fa-ticket"></i>
+                                    <span>Ticket</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="psm-links">
+                            <a href="domain.html" class="psm-link"><i class="fa fa-book"></i> Visit our blog</a>
+                            <a href="clientarea.html" class="psm-link"><i class="fa fa-database"></i> Knowledgebase</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="login.html" class="ph-btn-account">
+                    <i class="fa fa-user-circle"></i> Account
+                </a>
+            </div>
+
+            <!-- MOBILE ACTIONS (VISIBLE ONLY ON MOBILE) -->
+            <div class="ph-mobile-actions">
+                <a href="login.html" class="ph-mobile-btn"><i class="fa fa-user"></i></a>
+                <button class="ph-mobile-menu-toggle" id="phMenuToggle" aria-label="Toggle Navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div class="ph-mobile-overlay" id="phMobileOverlay"></div>
+<div class="ph-mobile-sidebar" id="phMobileSidebar">
+    <div class="ph-ms-header">
+        <img src="assets/images/jaasbd-logo.png" alt="JAAS BD" class="ph-ms-logo">
+        <button class="ph-ms-close" id="phMenuClose">&times;</button>
+    </div>
+    <div class="ph-ms-body">
+        <ul class="ph-ms-menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-ms-sub">
+                <a href="#">Domain <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="domain.html">Register Domain</a></li>
+                    <li><a href="cart.html?a=add&domain=transfer">Transfer Domain</a></li>
+                    <li><a href="bd-domain.html">.BD Domain</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Hosting <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="basic-hosting.html">Basic Web Hosting</a></li>
+                    <li><a href="pro-hosting.html">Pro Web Hosting</a></li>
+                    <li><a href="premium-hosting.html">Premium Web Hosting</a></li>
+                    <li><a href="corporate-hosting.html">Corporate Web Hosting</a></li>
+                    <li><a href="bdix-basic.html">BDIX Basic Hosting</a></li>
+                    <li><a href="bdix-premium.html">BDIX Premium Hosting</a></li>
+                    <li><a href="email-hosting.html">Email Hosting</a></li>
+                    <li><a href="radio-hosting.html">Radio Hosting</a></li>
+                    <li><a href="charity-hosting.html">Free Hosting for Charities</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Reseller <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="domain-reseller.html">Domain Reseller</a></li>
+                    <li><a href="reseller-hosting.html">Reseller Hosting</a></li>
+                    <li><a href="bdix-reseller.html">BDIX Reseller Hosting</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Server <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="vps.html">VPS Server</a></li>
+                    <li><a href="bdix-vps.html">BDIX VPS Server</a></li>
+                    <li><a href="rdp-server.html">RDP Server</a></li>
+                    <li><a href="backup.html">Backup Server</a></li>
+                    <li><a href="dedicated.html">Dedicated Server</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Website <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="https://putulit.com/category/e-commerce/" target="_blank" rel="noopener">E-Commerce Website</a></li>
+                    <li><a href="https://putulit.com/category/e-commerce-landing/" target="_blank" rel="noopener">Ecommerce Landing Page</a></li>
+                    <li><a href="https://putulit.com/category/news-portal/" target="_blank" rel="noopener">News Portal Website</a></li>
+                    <li><a href="https://putulit.com/category/e-paper/" target="_blank" rel="noopener">News Portal E-Paper</a></li>
+                    <li><a href="https://putulit.com/category/it-site/" target="_blank" rel="noopener">Domain Host &amp; IT Site</a></li>
+                    <li><a href="https://putulit.com/category/social-media/" target="_blank" rel="noopener">Social Media Website</a></li>
+                    <li><a href="https://putulit.com/category/software/" target="_blank" rel="noopener">Software</a></li>
+                    <li><a href="https://putulit.com/category/plugin/" target="_blank" rel="noopener">WordPress Plugin</a></li>
+                </ul>
+            </li>
+            <li class="has-ms-sub">
+                <a href="#">Services <i class="fa fa-angle-down"></i></a>
+                <ul class="ph-ms-submenu">
+                    <li><a href="bulk-sms.html">Bulk SMS</a></li>
+                    <li><a href="bulk-mail.html">Bulk Mail</a></li>
+                    <li><a href="whmcs-solution.html">WHMCS Solution</a></li>
+                    <li><a href="graphics-design.html">Graphics Design</a></li>
+                </ul>
+            </li>
+            <li><a href="affiliates.html">Affiliates</a></li>
+            <li><a href="tel:+8801818430308">Contact</a></li>
+        </ul>
+        <div class="ph-ms-footer">
+            <a href="login.html" class="ph-ms-btn-primary">Client Login</a>
+            <div class="ph-ms-social">
+                <a href="https://www.facebook.com" target="_blank" rel="noopener"><i class="fa fa-facebook"></i></a>
+                <a href="https://x.com" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener"><i class="fa fa-youtube-play"></i></a>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- MOBILE NAVIGATION OVERLAY -->
+
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Notice Bar — JS controls display directly (CSS-independent)
+    const isMobile = window.innerWidth <= 640;
+    const desktopItems = Array.from(document.querySelectorAll('.ph-notice-desktop'));
+    const mobileItems  = Array.from(document.querySelectorAll('.ph-notice-mobile'));
+
+    function showOnlyDesktop(items, index) {
+        items.forEach((el, i) => { el.style.display = i === index ? 'flex' : 'none'; });
+    }
+    function showOnlyMobile(items, index) {
+        items.forEach((el, i) => { el.classList.toggle('active', i === index); });
+    }
+
+    if (isMobile) {
+        desktopItems.forEach(el => { el.style.display = 'none'; });
+        if (mobileItems.length > 0) {
+            showOnlyMobile(mobileItems, 0);
+            if (mobileItems.length > 1) {
+                let idx = 0;
+                setInterval(() => { idx = (idx + 1) % mobileItems.length; showOnlyMobile(mobileItems, idx); }, 4000);
+            }
+        }
+    } else {
+        if (desktopItems.length > 1) {
+            let idx = 0;
+            setInterval(() => { idx = (idx + 1) % desktopItems.length; showOnlyDesktop(desktopItems, idx); }, 4000);
+        }
+    }
+
+    // Mega Menu Tab Logic
+    const tabLinks = document.querySelectorAll('.ph-mega-left a');
+    const tabContents = document.querySelectorAll('.ph-mega-tab-content');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            const tabId = this.getAttribute('data-tab');
+            if(!tabId) return;
+
+            // Reset background for all and highlight current
+            tabLinks.forEach(l => l.classList.remove('active-tab'));
+            this.classList.add('active-tab');
+
+            tabContents.forEach(content => content.classList.remove('active'));
+            const target = document.getElementById('ph-tab-' + tabId);
+            if(target) target.classList.add('active');
+        });
+    });
+
+    // --- GLOBAL MEGA MENU PRICING SYNC ---
+    (function() {
+        function getP(s){ return Math.floor(parseFloat(String(s).replace(/[^0-9.]/g,'')) || 0); }
+        function sync(data) {
+            if (!data || !data.length) return;
+            function getP(s){ return Math.floor(parseFloat(String(s).replace(/[^0-9.]/g,'')) || 0); }
+            function findTld(t){ return data.find(function(d){ return d.tld === t || d.tld === '.'+t; }); }
+
+            // Hot Offers
+            ['com', 'xyz', 'net', 'org'].forEach(function(t) {
+                var item = findTld(t);
+                var el = document.getElementById('menu-price-' + t);
+                if (el && item) {
+                    var p = item.reg || item.register || 0;
+                    el.innerHTML = '\u09F3' + getP(p);
+                }
+            });
+
+            // Min Transfer
+            var minTr = 999999;
+            data.forEach(function(i){ var p = getP(i.tran); if(p > 0 && p < minTr) minTr = p; });
+            var trEl = document.getElementById('menu-min-transfer');
+            if(trEl && minTr < 999999) trEl.innerHTML = 'Starting at \u09F3' + minTr;
+
+            // --- NEW CALCULATIONS ---
+            var minAll = 999999;
+            var minBD = 999999;
+            data.forEach(function(i){
+                var p = getP(i.reg || i.register);
+                if(p > 0 && p < minAll) minAll = p;
+                if((i.tld.indexOf('.bd') > -1 || i.tld === 'bd') && p > 0 && p < minBD) minBD = p;
+            });
+
+            var allEl = document.getElementById('menu-min-all');
+            if(allEl && minAll < 999999) allEl.innerHTML = 'Starting at \u09F3' + minAll;
+
+            var bdEl = document.getElementById('menu-min-bd');
+            if(bdEl && minBD < 999999) bdEl.innerHTML = 'Starting at \u09F3' + minBD;
+
+            // Individual Boxes
+            var bdpure = findTld('bd');
+            var combd = findTld('com.bd');
+            if(bdpure) { var el = document.getElementById('menu-price-bd-pure'); if(el) el.innerHTML = '\u09F3' + getP(bdpure.reg || bdpure.register) + '/y'; }
+            if(combd) { var el = document.getElementById('menu-price-combd'); if(el) el.innerHTML = '\u09F3' + getP(combd.reg || combd.register) + '/y'; }
+
+            // --- HERO & SLIDER SYNC ---
+            var heroEl = document.getElementById('heroMinPrice');
+            // Skip on domain page while it still holds STATIC fallback \u2014 page-domain.php updates it from the live feed
+            if(heroEl && minAll < 999999 && !window.phDomainStatic) heroEl.innerHTML = '\u09F3' + minAll.toLocaleString() + '/year';
+
+            var sliderPrices = document.querySelectorAll('.tld-price-sync');
+            sliderPrices.forEach(function(el) {
+                var t = el.getAttribute('data-tld');
+                var item = findTld(t);
+                if(item) {
+                    var p = item.reg || item.register || 0;
+                    el.innerHTML = '\u09F3' + getP(p).toLocaleString();
+                }
+            });
+        }
+
+        window.addEventListener('load', function() {
+            if (window.allDomainPricingData) { sync(window.allDomainPricingData); return; }
+            var script = document.createElement('script');
+            script.src = 'https://control.putulhost.com/feeds/domainpricing.php?currency=2';
+            script.onload = function() {
+                // If the feed is a standard WHMCS document.write table
+                // we can't easily get a variable, so we might need to parse the text
+                // or rely on the PHP proxy which is more reliable.
+                if (typeof domainprices !== 'undefined' && domainprices.length) {
+                    var tmp = [];
+                    for (var i = 0; i < domainprices.length; i++) {
+                        var d = domainprices[i];
+                        if (Array.isArray(d)) tmp.push({tld:String(d[0]).replace(/^\./, ''), reg:d[1]||'0', tran:d[3]||'0'});
+                        else if (d && d.tld) tmp.push({tld:String(d.tld).replace(/^\./, ''), reg:d.register||'0', tran:d.transfer||'0'});
+                    }
+                    sync(tmp);
+                } else {
+                    // Fallback to PHP proxy if JS variable is missing
+                    fetch('https://putulhost.com/wp-admin/admin-ajax.php?action=ph_domain_pricing&_wpnonce=dd66d37bc3')
+                        .then(r => r.json())
+                        .then(res => { if(res.success) sync(res.data); });
+                }
+            };
+            document.head.appendChild(script);
+        });
+    })();
+});
+</script>
+
+<style>
+    /* ══ BULK SMS PAGE ══ */
+
+    /* ── Hero ── */
+    .sms-hero {
+        background: linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;
+        padding: 65px 0 55px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter', 'Open Sans', sans-serif;
+    }
+    .sms-hero::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse at 75% 40%, rgba(134,239,172,0.18) 0%, transparent 60%),
+                    radial-gradient(ellipse at 20% 60%, rgba(5,46,22,0.25) 0%, transparent 55%);
+        pointer-events: none;
+    }
+    .sms-hero-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 30px; padding: 6px 18px;
+        font-size: 12px; font-weight: 700; color: #7c3aed;
+        letter-spacing: 1.2px; text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    .sms-hero-title {
+        font-size: 40px; font-weight: 900; color: #fff;
+        line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px;
+    }
+    .sms-hero-title span { color: #c084fc; }
+    .sms-hero-sub {
+        font-size: 16px; color: rgba(255,255,255,0.85);
+        max-width: 660px; margin: 0 auto 32px; line-height: 1.75;
+    }
+    .sms-hero-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .sms-btn-primary {
+        display: inline-block;
+        background: #fff; color: #14532d !important;
+        text-decoration: none !important;
+        padding: 13px 32px; border-radius: 10px;
+        font-size: 14px; font-weight: 800;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        transition: all 0.25s ease;
+    }
+    .sms-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.25); }
+    .sms-btn-outline {
+        display: inline-block;
+        background: rgba(255,255,255,0.12);
+        border: 1.5px solid rgba(255,255,255,0.35);
+        color: #fff !important; text-decoration: none !important;
+        padding: 13px 32px; border-radius: 10px;
+        font-size: 14px; font-weight: 700;
+        transition: all 0.25s ease;
+    }
+    .sms-btn-outline:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
+
+    /* ── Stats Bar ── */
+    .sms-stats {
+        background: #fff;
+        border-bottom: 1px solid #dcfce7;
+        padding: 24px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-stats-inner {
+        max-width: 1100px; margin: 0 auto; padding: 0 20px;
+        display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 18px;
+    }
+    .sms-stat { text-align: center; }
+    .sms-stat-num { font-size: 26px; font-weight: 900; color: #1e293b; line-height: 1; }
+    .sms-stat-num span { color: #0284c7; }
+    .sms-stat-label { font-size: 12px; color: #64748b; font-weight: 600; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sms-stat-sep { width: 1px; height: 38px; background: #e2e8f0; }
+
+    /* ── Shared Section Styles ── */
+    .sms-section-tag {
+        font-size: 11px; font-weight: 800; color: #0284c7;
+        letter-spacing: 1.8px; text-transform: uppercase;
+        margin-bottom: 10px; display: block; text-align: center;
+    }
+    .sms-section-title {
+        font-size: 30px; font-weight: 900; color: #1e293b;
+        line-height: 1.3; margin-bottom: 12px; text-align: center;
+    }
+    .sms-section-title span { color: #0284c7; }
+    .sms-section-desc {
+        font-size: 15px; color: #64748b;
+        text-align: center; max-width: 640px;
+        margin: 0 auto 46px; line-height: 1.75;
+    }
+
+    /* ── Pricing ── */
+    .sms-pricing {
+        background: #f0fdf4;
+        padding: 72px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-plans-grid {
+        max-width: 960px; margin: 0 auto; padding: 0 20px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        align-items: start;
+    }
+    .sms-plan-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 2px solid #dcfce7;
+        transition: all 0.25s ease;
+        position: relative;
+    }
+    .sms-plan-card:hover { border-color: #0284c7; box-shadow: 0 12px 36px rgba(22,101,52,0.13); transform: translateY(-4px); }
+    .sms-plan-card.featured { border-color: #0284c7; box-shadow: 0 8px 32px rgba(22,101,52,0.2); transform: translateY(-6px); }
+    .sms-plan-card.featured:hover { transform: translateY(-10px); }
+    .sms-plan-badge {
+        position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: #fff; font-size: 10px; font-weight: 800;
+        padding: 4px 14px; border-radius: 20px;
+        white-space: nowrap;
+        text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .sms-plan-header {
+        padding: 22px 20px 18px;
+        background: linear-gradient(160deg, #0b132b 0%, #0369a1 50%, #0284c7 100%) !important;
+        text-align: center;
+        border-radius: 14px 14px 0 0;
+    }
+    .sms-plan-header.green-dark { background: linear-gradient(160deg, #0b132b 0%, #0369a1 50%, #0284c7 100%) !important; }
+    .sms-plan-header.green-mid { background: linear-gradient(160deg, #0284c7 0%, #7c3aed 100%) !important; }
+    .sms-plan-header.green-lite { background: linear-gradient(160deg, #0b132b 0%, #0369a1 50%, #0284c7 100%) !important; }
+    .sms-plan-header.dark       { background: linear-gradient(135deg, #0f172a, #1e293b); }
+    .sms-plan-name {
+        font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.85);
+        text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 6px;
+    }
+    .sms-plan-rate {
+        font-size: 22px; font-weight: 900; color: #fef9c3;
+        margin-bottom: 10px;
+    }
+    .sms-plan-total-wrap {
+        display: flex; align-items: baseline; justify-content: center; gap: 3px;
+    }
+    .sms-plan-currency { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.8); }
+    .sms-plan-amount   { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; }
+    .sms-plan-volume   { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 4px; font-weight: 600; }
+    .sms-plan-body { padding: 20px; }
+    .sms-plan-features { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; }
+    .sms-plan-features li {
+        display: flex; align-items: flex-start; gap: 9px;
+        font-size: 13px; color: #374151; font-weight: 500;
+        padding-bottom: 10px; border-bottom: 1px dashed #f1f5f9;
+    }
+    .sms-plan-features li:last-child { border-bottom: none; padding-bottom: 0; }
+    .sms-plan-features li i { font-size: 13px; color: #0284c7; flex-shrink: 0; margin-top: 1px; }
+    .sms-order-btn {
+        display: block; text-align: center;
+        background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%) !important;
+        color: #fff !important; text-decoration: none !important;
+        padding: 13px; border-radius: 10px;
+        font-size: 13px; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.6px;
+        transition: all 0.2s ease;
+    }
+    .sms-order-btn:hover { background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%) !important; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35); }
+    .sms-order-btn.dark-btn { background: linear-gradient(135deg, #1e293b, #0f172a); }
+    .sms-order-btn.dark-btn:hover { box-shadow: 0 4px 14px rgba(15,23,42,0.3); }
+    .sms-plans-note { text-align: center; margin-top: 26px; font-size: 13px; color: #64748b; font-family: 'Inter', sans-serif; }
+    .sms-plans-note a { color: #0284c7; font-weight: 600; text-decoration: none; }
+
+    /* ── Features ── */
+    .sms-features {
+        background: #fff;
+        padding: 72px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-feat-grid {
+        max-width: 1140px; margin: 0 auto; padding: 0 20px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    }
+    .sms-feat-card {
+        background: #f0fdf4;
+        border: 1.5px solid #dcfce7;
+        border-radius: 14px; padding: 26px 24px;
+        transition: all 0.2s ease;
+    }
+    .sms-feat-card:hover {
+        border-color: #0284c7; box-shadow: 0 8px 24px rgba(22,101,52,0.1);
+        transform: translateY(-3px);
+    }
+    .sms-feat-icon {
+        width: 52px; height: 52px; border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 22px; margin-bottom: 16px;
+    }
+    .sms-fi-orange { background: #dcfce7; color: #0284c7; }
+    .sms-fi-amber  { background: #fef3c7; color: #d97706; }
+    .sms-fi-red    { background: #fee2e2; color: #dc2626; }
+    .sms-fi-blue   { background: #dbeafe; color: #2563eb; }
+    .sms-fi-green  { background: #dcfce7; color: #0284c7; }
+    .sms-fi-teal   { background: #ccfbf1; color: #0d9488; }
+    .sms-fi-purple { background: #ede9fe; color: #7c3aed; }
+    .sms-fi-sky    { background: #e0f2fe; color: #0284c7; }
+    .sms-fi-rose   { background: #ffe4e6; color: #e11d48; }
+    .sms-feat-title { font-size: 15px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+    .sms-feat-desc  { font-size: 13.5px; color: #64748b; line-height: 1.7; }
+
+    /* ── Requirements Accordion ── */
+    .sms-requirements {
+        background: #f8fafc;
+        padding: 72px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-req-inner { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+    .sms-accordion { display: flex; flex-direction: column; gap: 12px; }
+    .sms-acc-item {
+        background: #fff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px; overflow: hidden;
+        transition: border-color 0.2s;
+    }
+    .sms-acc-item.open { border-color: #0284c7; }
+    .sms-acc-trigger {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 18px 22px; cursor: pointer;
+        user-select: none;
+    }
+    .sms-acc-trigger-left { display: flex; align-items: center; gap: 14px; }
+    .sms-acc-num {
+        width: 32px; height: 32px; border-radius: 8px;
+        background: #dcfce7; color: #0284c7;
+        font-size: 13px; font-weight: 800;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sms-acc-item.open .sms-acc-num { background: #0284c7; color: #fff; }
+    .sms-acc-title { font-size: 15px; font-weight: 700; color: #1e293b; }
+    .sms-acc-arrow {
+        font-size: 12px; color: #94a3b8;
+        transition: transform 0.3s ease;
+    }
+    .sms-acc-item.open .sms-acc-arrow { transform: rotate(180deg); color: #0284c7; }
+    .sms-acc-body {
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.35s ease, padding 0.3s ease;
+    }
+    .sms-acc-item.open .sms-acc-body { max-height: 600px; }
+    .sms-acc-content {
+        padding: 0 22px 20px 22px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 16px;
+    }
+    .sms-req-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .sms-req-list li {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: 13.5px; color: #374151; font-weight: 500; line-height: 1.6;
+    }
+    .sms-req-list li i { font-size: 13px; color: #0284c7; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── Why Choose ── */
+    .sms-why {
+        background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #14532d 100%);
+        padding: 72px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-why-inner {
+        max-width: 1100px; margin: 0 auto; padding: 0 20px;
+    }
+    .sms-why-head { text-align: center; margin-bottom: 44px; }
+    .sms-why-head .sms-section-tag  { color: #7c3aed; }
+    .sms-why-head .sms-section-title { color: #fff; }
+    .sms-why-head .sms-section-title span { color: #7c3aed; }
+    .sms-why-head p { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 0; }
+    .sms-why-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .sms-why-card {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 14px; padding: 26px 22px;
+        transition: all 0.2s ease;
+    }
+    .sms-why-card:hover {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(134,239,172,0.4);
+        transform: translateY(-3px);
+    }
+    .sms-why-icon {
+        width: 50px; height: 50px; border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 20px; margin-bottom: 14px;
+    }
+    .swi-orange { background: rgba(22,163,74,0.2);  color: #22c55e; }
+    .swi-yellow { background: rgba(253,224,71,0.2);  color: #fde047; }
+    .swi-teal   { background: rgba(94,234,212,0.2);  color: #5eead4; }
+    .swi-blue   { background: rgba(147,197,253,0.2); color: #93c5fd; }
+    .swi-green  { background: rgba(134,239,172,0.2); color: #7c3aed; }
+    .swi-pink   { background: rgba(249,168,212,0.2); color: #f9a8d4; }
+    .sms-why-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .sms-why-desc  { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+
+    /* ── Plugins & Modules ── */
+    .sms-plugins {
+        background: #fff;
+        padding: 72px 0;
+        font-family: 'Inter', sans-serif;
+    }
+    .sms-plugins-title {
+        text-align: center;
+        font-size: 28px; font-weight: 900; color: #1e293b;
+        margin-bottom: 6px;
+    }
+    .sms-plugins-title span { color: #0284c7; }
+    .sms-plugins-sub {
+        text-align: center; font-size: 14px; color: #64748b;
+        margin-bottom: 40px;
+    }
+    .sms-plugin-group { margin-bottom: 52px; }
+    .sms-plugin-group:last-child { margin-bottom: 0; }
+    .sms-group-heading {
+        display: flex; align-items: center; justify-content: center;
+        gap: 14px; margin-bottom: 28px;
+    }
+    .sms-group-heading::before,
+    .sms-group-heading::after {
+        content: ''; flex: 1; max-width: 120px;
+        height: 1px; background: #e2e8f0;
+    }
+    .sms-group-heading span {
+        font-size: 18px; font-weight: 800; color: #0284c7;
+        white-space: nowrap;
+    }
+    .sms-plugin-grid {
+        max-width: 1140px; margin: 0 auto; padding: 0 20px;
+        display: grid; gap: 22px;
+    }
+    .sms-plugin-grid.cols-2 { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin: 0 auto; }
+    .sms-plugin-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .sms-plugin-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .sms-plugin-card {
+        background: #fff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 0 0 22px;
+        text-align: center;
+        transition: all 0.25s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .sms-plugin-card:hover {
+        border-color: #0284c7;
+        box-shadow: 0 10px 30px rgba(22,101,52,0.12);
+        transform: translateY(-4px);
+    }
+    .sms-plugin-badge {
+        display: inline-block;
+        position: absolute; top: 0; left: 0;
+        background: linear-gradient(135deg, #166534, #16a34a);
+        color: #fff; font-size: 10px; font-weight: 800;
+        padding: 5px 12px;
+        border-radius: 0 0 10px 0;
+        letter-spacing: 0.5px;
+    }
+    .sms-plugin-icon-wrap {
+        padding: 28px 20px 12px;
+        display: flex; justify-content: flex-end; align-items: flex-start;
+    }
+    .sms-plugin-icon {
+        width: 52px; height: 52px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+        background: #f0fdf4; border: 2px solid #dcfce7;
+        font-size: 26px; color: #0284c7;
+        flex-shrink: 0;
+    }
+    .sms-plugin-name {
+        font-size: 15px; font-weight: 800; color: #0284c7;
+        margin: 0 18px 10px; line-height: 1.3;
+    }
+    .sms-plugin-desc {
+        font-size: 12.5px; color: #64748b;
+        margin: 0 18px 18px; line-height: 1.65;
+    }
+    .sms-plugin-btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        background: linear-gradient(135deg, #166534, #16a34a);
+        color: #fff !important; text-decoration: none !important;
+        padding: 10px 22px; border-radius: 8px;
+        font-size: 12px; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.5px;
+        transition: all 0.2s ease;
+    }
+    .sms-plugin-btn:hover {
+        background: linear-gradient(135deg, #14532d, #166534);
+        box-shadow: 0 4px 14px rgba(22,101,52,0.35);
+        transform: translateY(-1px);
+    }
+    @media (max-width: 1024px) {
+        .sms-plugin-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+        .sms-plugin-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+        .sms-plugin-grid.cols-4,
+        .sms-plugin-grid.cols-3,
+        .sms-plugin-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ── CTA ── */
+    .sms-cta {
+        background: #fff;
+        padding: 70px 0;
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+    }
+    .sms-cta-inner { max-width: 700px; margin: 0 auto; padding: 0 20px; }
+    .sms-cta-inner .sms-section-title { font-size: 30px; margin-bottom: 14px; }
+    .sms-cta-inner p { font-size: 15px; color: #64748b; margin-bottom: 30px; line-height: 1.75; }
+    .sms-cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .sms-cta-main {
+        display: inline-block;
+        background: linear-gradient(135deg, #14532d, #166534);
+        color: #fff !important; text-decoration: none !important;
+        padding: 15px 38px; border-radius: 10px;
+        font-size: 15px; font-weight: 800;
+        box-shadow: 0 6px 22px rgba(22,101,52,0.35);
+        transition: all 0.25s ease;
+    }
+    .sms-cta-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22,101,52,0.45); }
+    .sms-cta-chat {
+        display: inline-block;
+        background: #f1f5f9; color: #334155 !important;
+        text-decoration: none !important;
+        padding: 15px 38px; border-radius: 10px;
+        font-size: 15px; font-weight: 700;
+        transition: all 0.25s ease;
+    }
+    .sms-cta-chat:hover { background: #e2e8f0; transform: translateY(-2px); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+        .sms-plans-grid { grid-template-columns: repeat(2, 1fr); }
+        .sms-feat-grid  { grid-template-columns: repeat(2, 1fr); }
+        .sms-why-grid   { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .sms-hero-title { font-size: 26px; }
+        .sms-plans-grid { grid-template-columns: 1fr; max-width: 440px; }
+        .sms-feat-grid  { grid-template-columns: 1fr; }
+        .sms-why-grid   { grid-template-columns: 1fr; }
+        .sms-plan-card.featured { transform: none; }
+        .sms-stat-sep   { display: none; }
+    }
+</style>
+
+<!-- ═══ HERO ═══ -->
+<section class="sms-hero">
+    <div class="container">
+        <h1 class="sms-hero-title">Reach Millions Instantly with<br><span>Bulk SMS Marketing</span></h1>
+        <p class="sms-hero-sub">Send promotional, transactional, and OTP SMS to any mobile network in Bangladesh. High-speed delivery, real-time reports, and the most affordable rates in the market.</p>
+        <div class="sms-hero-btns">
+            <a href="#sms-pricing" class="sms-btn-primary"><i class="fa fa-shopping-cart"></i> &nbsp;Buy SMS Package</a>
+            <a href="#sms-features" class="sms-btn-outline"><i class="fa fa-info-circle"></i> &nbsp;Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="sms-pricing" id="sms-pricing">
+    <div class="container">
+        <span class="sms-section-tag">SMS Packages</span>
+        <h2 class="sms-section-title">Affordable <span>Bulk SMS Packages</span></h2>
+        <p class="sms-section-desc">Choose the package that fits your marketing needs. All packages include FREE SMS API, dashboard access, and 1-year validity with carry forward.</p>
+
+        
+        <div class="sms-plans-grid">
+                        <div class="sms-plan-card ">
+                                <div class="sms-plan-header green-lite">
+                    <div class="sms-plan-name">N SMS 01</div>
+                    <div class="sms-plan-rate">৳0.35/SMS</div>
+                    <div class="sms-plan-total-wrap">
+                        <span class="sms-plan-currency">৳</span>
+                        <span class="sms-plan-amount">1000</span>
+                    </div>
+                    <div class="sms-plan-volume">2858 SMS</div>
+                </div>
+                <div class="sms-plan-body">
+                    <ul class="sms-plan-features">
+                                                <li><i class="fa fa-check-circle"></i> Single, Bulk &amp; Group SMS Facility</li>
+                                                <li><i class="fa fa-check-circle"></i> FREE SMS API &amp; Dashboard</li>
+                                                <li><i class="fa fa-check-circle"></i> Real-time Delivery Reports with DLR</li>
+                                                <li><i class="fa fa-check-circle"></i> Dedicated Sender ID for All</li>
+                                                <li><i class="fa fa-check-circle"></i> Powerful Panel With SMS Schedule</li>
+                                                <li><i class="fa fa-check-circle"></i> Bulk SMS from Excel &amp; Phonebook</li>
+                                                <li><i class="fa fa-check-circle"></i> Support Dynamic &amp; Long SMS</li>
+                                                <li><i class="fa fa-check-circle"></i> Validity: 1 Year</li>
+                                            </ul>
+                    <a href="cart.html?plan=n-sms-01" class="sms-order-btn">
+                        ORDER NOW
+                    </a>
+                </div>
+            </div>
+                        <div class="sms-plan-card featured">
+                <div class="sms-plan-badge">Best Value</div>                <div class="sms-plan-header green-mid">
+                    <div class="sms-plan-name">N SMS 02</div>
+                    <div class="sms-plan-rate">৳0.33/SMS</div>
+                    <div class="sms-plan-total-wrap">
+                        <span class="sms-plan-currency">৳</span>
+                        <span class="sms-plan-amount">3000</span>
+                    </div>
+                    <div class="sms-plan-volume">9090 SMS</div>
+                </div>
+                <div class="sms-plan-body">
+                    <ul class="sms-plan-features">
+                                                <li><i class="fa fa-check-circle"></i> Single, Bulk &amp; Group SMS Facility</li>
+                                                <li><i class="fa fa-check-circle"></i> FREE SMS API &amp; Dashboard</li>
+                                                <li><i class="fa fa-check-circle"></i> Real-time Delivery Reports with DLR</li>
+                                                <li><i class="fa fa-check-circle"></i> Dedicated Sender ID for All</li>
+                                                <li><i class="fa fa-check-circle"></i> Powerful Panel With SMS Schedule</li>
+                                                <li><i class="fa fa-check-circle"></i> Bulk SMS from Excel &amp; Phonebook</li>
+                                                <li><i class="fa fa-check-circle"></i> Support Dynamic &amp; Long SMS</li>
+                                                <li><i class="fa fa-check-circle"></i> Validity: 1 Year</li>
+                                            </ul>
+                    <a href="cart.html?plan=n-sms-02" class="sms-order-btn">
+                        ORDER NOW
+                    </a>
+                </div>
+            </div>
+                        <div class="sms-plan-card ">
+                                <div class="sms-plan-header green-dark">
+                    <div class="sms-plan-name">N SMS 03</div>
+                    <div class="sms-plan-rate">৳0.32/SMS</div>
+                    <div class="sms-plan-total-wrap">
+                        <span class="sms-plan-currency">৳</span>
+                        <span class="sms-plan-amount">5000</span>
+                    </div>
+                    <div class="sms-plan-volume">15625 SMS</div>
+                </div>
+                <div class="sms-plan-body">
+                    <ul class="sms-plan-features">
+                                                <li><i class="fa fa-check-circle"></i> Single, Bulk &amp; Group SMS Facility</li>
+                                                <li><i class="fa fa-check-circle"></i> FREE SMS API &amp; Dashboard</li>
+                                                <li><i class="fa fa-check-circle"></i> Real-time Delivery Reports with DLR</li>
+                                                <li><i class="fa fa-check-circle"></i> Dedicated Sender ID for All</li>
+                                                <li><i class="fa fa-check-circle"></i> Powerful Panel With SMS Schedule</li>
+                                                <li><i class="fa fa-check-circle"></i> Bulk SMS from Excel &amp; Phonebook</li>
+                                                <li><i class="fa fa-check-circle"></i> Support Dynamic &amp; Long SMS</li>
+                                                <li><i class="fa fa-check-circle"></i> Validity: 1 Year</li>
+                                            </ul>
+                    <a href="cart.html?plan=n-sms-03" class="sms-order-btn">
+                        ORDER NOW
+                    </a>
+                </div>
+            </div>
+                    </div>
+
+        <p class="sms-plans-note">
+            Need a custom volume? <a href="javascript:void(toggleLiveChat())">Contact us</a> for enterprise pricing tailored to your business.
+        </p>
+    </div>
+</section>
+
+<!-- ═══ KEY FEATURES ═══ -->
+<section class="sms-features" id="sms-features">
+    <div class="container">
+        <span class="sms-section-tag">Platform Features</span>
+        <h2 class="sms-section-title">Everything You Need for <span>Powerful SMS Campaigns</span></h2>
+        <p class="sms-section-desc">Our SMS gateway is packed with features to help you send smarter, faster, and more effectively to your audience.</p>
+
+        <div class="sms-feat-grid">
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-orange"><i class="fa fa-bolt"></i></div>
+                <div class="sms-feat-title">Instant High-Speed Delivery</div>
+                <div class="sms-feat-desc">Send millions of SMS in minutes with our high-throughput gateway. Lightning-fast delivery to all 6 mobile operators in Bangladesh.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-blue"><i class="fa fa-users"></i></div>
+                <div class="sms-feat-title">Bulk, Group & Single SMS</div>
+                <div class="sms-feat-desc">Send to a single contact, a specific group, or millions of recipients in one click. Manage contact lists and groups with ease from your dashboard.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-green"><i class="fa fa-bar-chart"></i></div>
+                <div class="sms-feat-title">Real-Time Delivery Reports</div>
+                <div class="sms-feat-desc">Track every SMS with real-time delivery reports (DLR). Know exactly who received your message and who didn't — instantly.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-purple"><i class="fa fa-code"></i></div>
+                <div class="sms-feat-title">Free SMS API Integration</div>
+                <div class="sms-feat-desc">Integrate SMS into your website, app, or system with our RESTful API. Supports OTP, transactional, and automated messaging. Free for all clients.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-amber"><i class="fa fa-calendar"></i></div>
+                <div class="sms-feat-title">SMS Scheduling System</div>
+                <div class="sms-feat-desc">Schedule your campaigns to send at the perfect time. Set it and forget it — our system delivers your messages at the exact date and time you choose.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-teal"><i class="fa fa-file-excel-o"></i></div>
+                <div class="sms-feat-title">Bulk Upload via Excel</div>
+                <div class="sms-feat-desc">Upload thousands of contacts instantly from Excel or CSV files. Also supports phonebook import for quick and easy campaign setup.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-red"><i class="fa fa-user-circle"></i></div>
+                <div class="sms-feat-title">Dedicated Sender ID</div>
+                <div class="sms-feat-desc">Send SMS from your own branded Sender ID (e.g., your company name). Build trust and recognition with your audience every time you message.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-sky"><i class="fa fa-language"></i></div>
+                <div class="sms-feat-title">Unicode & Bangla Support</div>
+                <div class="sms-feat-desc">Send SMS in Bangla (Unicode) as well as English, Arabic, and other languages. Reach your audience in their preferred language effortlessly.</div>
+            </div>
+            <div class="sms-feat-card">
+                <div class="sms-feat-icon sms-fi-rose"><i class="fa fa-refresh"></i></div>
+                <div class="sms-feat-title">Dynamic & Personalized SMS</div>
+                <div class="sms-feat-desc">Personalize every message with the recipient's name or custom data using our dynamic SMS feature. Boost engagement and response rates significantly.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ REQUIREMENTS ACCORDION ═══ -->
+<section class="sms-requirements">
+    <div class="container">
+        <span class="sms-section-tag">Documentation</span>
+        <h2 class="sms-section-title">Procedure & <span>Requirements</span></h2>
+        <p class="sms-section-desc">To activate your Bulk SMS account, you'll need to submit the following documents as per BTRC regulations.</p>
+
+        <div class="sms-req-inner">
+            <div class="sms-accordion">
+
+                <div class="sms-acc-item open">
+                    <div class="sms-acc-trigger">
+                        <div class="sms-acc-trigger-left">
+                            <span class="sms-acc-num">01</span>
+                            <span class="sms-acc-title">Required Documents for Non-Masking SMS</span>
+                        </div>
+                        <i class="fa fa-chevron-down sms-acc-arrow"></i>
+                    </div>
+                    <div class="sms-acc-body">
+                        <div class="sms-acc-content">
+                            <ul class="sms-req-list">
+                                <li><i class="fa fa-check-circle"></i> Copy of valid National ID</li>
+                                <li><i class="fa fa-check-circle"></i> Copy of valid Trade License</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sms-acc-item">
+                    <div class="sms-acc-trigger">
+                        <div class="sms-acc-trigger-left">
+                            <span class="sms-acc-num">02</span>
+                            <span class="sms-acc-title">Required Documents for Masking SMS (Sender ID)</span>
+                        </div>
+                        <i class="fa fa-chevron-down sms-acc-arrow"></i>
+                    </div>
+                    <div class="sms-acc-body">
+                        <div class="sms-acc-content">
+                            <ul class="sms-req-list">
+                                <li><i class="fa fa-check-circle"></i> All documents required for Non-Masking SMS (see above).</li>
+                                <li><i class="fa fa-check-circle"></i> Sender ID must be your registered company / brand name (max 11 characters, no space).</li>
+                                <li><i class="fa fa-check-circle"></i> Sender ID approval form signed by authorized signatory on company letterhead.</li>
+                                <li><i class="fa fa-check-circle"></i> Trademark certificate or proof of brand ownership (if applicable).</li>
+                                <li><i class="fa fa-check-circle"></i> BTRC approval may take 3–7 working days after submission of all documents.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sms-acc-item">
+                    <div class="sms-acc-trigger">
+                        <div class="sms-acc-trigger-left">
+                            <span class="sms-acc-num">03</span>
+                            <span class="sms-acc-title">OTP & Transactional SMS Requirements</span>
+                        </div>
+                        <i class="fa fa-chevron-down sms-acc-arrow"></i>
+                    </div>
+                    <div class="sms-acc-body">
+                        <div class="sms-acc-content">
+                            <ul class="sms-req-list">
+                                <li><i class="fa fa-check-circle"></i> Describe the purpose and use case of OTP/transactional SMS in your application.</li>
+                                <li><i class="fa fa-check-circle"></i> Provide your website URL or mobile app link for verification.</li>
+                                <li><i class="fa fa-check-circle"></i> Sample message template must be submitted for prior approval.</li>
+                                <li><i class="fa fa-check-circle"></i> API integration must use HTTPS with proper authentication.</li>
+                                <li><i class="fa fa-check-circle"></i> OTP messages must expire within a reasonable time frame (recommended: 5 minutes).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sms-acc-item">
+                    <div class="sms-acc-trigger">
+                        <div class="sms-acc-trigger-left">
+                            <span class="sms-acc-num">04</span>
+                            <span class="sms-acc-title">Account Activation Process</span>
+                        </div>
+                        <i class="fa fa-chevron-down sms-acc-arrow"></i>
+                    </div>
+                    <div class="sms-acc-body">
+                        <div class="sms-acc-content">
+                            <ul class="sms-req-list">
+                                <li><i class="fa fa-check-circle"></i> Step 1: Purchase your preferred SMS package from above.</li>
+                                <li><i class="fa fa-check-circle"></i> Step 2: Submit required documents via email or support ticket.</li>
+                                <li><i class="fa fa-check-circle"></i> Step 3: Our team verifies and activates your account within 24 hours.</li>
+                                <li><i class="fa fa-check-circle"></i> Step 4: Log in to your SMS dashboard and start sending immediately.</li>
+                                <li><i class="fa fa-check-circle"></i> Step 5: Integrate SMS API into your system using our free developer documentation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PLUGINS & MODULES ═══ -->
+<section class="sms-plugins">
+    <div class="container">
+        <h2 class="sms-plugins-title">Plugins &amp; <span>Modules</span></h2>
+        <p class="sms-plugins-sub">Integrate our SMS gateway with your favorite platforms using ready-made plugins and modules</p>
+
+        <div class="sms-plugin-grid cols-3">
+
+            <!-- WHMCS Module -->
+            <div class="sms-plugin-card">
+                <span class="sms-plugin-badge"><i class="fa fa-cog"></i> &nbsp;WHMCS Module</span>
+                <div class="sms-plugin-icon-wrap">
+                    <div class="sms-plugin-icon"><i class="fa fa-cog"></i></div>
+                </div>
+                <div class="sms-plugin-name">MiMSMS for WHMCS v8</div>
+                <div class="sms-plugin-desc">Automatically send Invoice SMS, Order SMS, Delivery SMS, Payment SMS, and more — directly from your WHMCS billing panel.</div>
+                <a href="https://putulhost.net/wosms.zip" class="sms-plugin-btn">
+                    <i class="fa fa-download"></i> Download
+                </a>
+            </div>
+
+            <!-- WordPress Plugin -->
+            <div class="sms-plugin-card">
+                <span class="sms-plugin-badge"><i class="fa fa-wordpress"></i> &nbsp;WordPress Plugin</span>
+                <div class="sms-plugin-icon-wrap">
+                    <div class="sms-plugin-icon"><i class="fa fa-wordpress"></i></div>
+                </div>
+                <div class="sms-plugin-name">WordPress SMS &amp; OTP</div>
+                <div class="sms-plugin-desc">Automatically send Invoice SMS, Order OTP, Order SMS, Delivery SMS, Payment SMS, and more via the PH SMS gateway from your WordPress site.</div>
+                <a href="https://putulhost.net/WoSMS.zip" class="sms-plugin-btn">
+                    <i class="fa fa-download"></i> Download
+                </a>
+            </div>
+
+            <!-- API Documentation -->
+            <div class="sms-plugin-card">
+                <span class="sms-plugin-badge"><i class="fa fa-code"></i> &nbsp;API Documentation</span>
+                <div class="sms-plugin-icon-wrap">
+                    <div class="sms-plugin-icon"><i class="fa fa-code"></i></div>
+                </div>
+                <div class="sms-plugin-name">Developer API Docs</div>
+                <div class="sms-plugin-desc">Integrate SMS &amp; OTP sending directly into your own app with our REST API. Full endpoints, parameters, and code samples included.</div>
+                <a href="https://putulhost.net/API_Documentation.html" class="sms-plugin-btn" target="_blank" rel="noopener">
+                    <i class="fa fa-book"></i> View API Documentation
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="sms-cta">
+    <div class="sms-cta-inner">
+        <span class="sms-section-tag">Get Started Today</span>
+        <h2 class="sms-section-title">Ready to Launch Your <span>SMS Campaign?</span></h2>
+        <p>Join 10,000+ businesses already using our platform. Buy a package now and start reaching your audience within minutes.</p>
+        <div class="sms-cta-btns">
+            <a href="#sms-pricing" class="sms-cta-main"><i class="fa fa-send"></i> &nbsp;Buy SMS Package</a>
+            <a href="javascript:void(toggleLiveChat())" class="sms-cta-chat"><i class="fa fa-comments-o"></i> &nbsp;Live Chat</a>
+        </div>
+    </div>
+</section>
+
+<script>
+var _lcOpen = false;
+function toggleLiveChat() {
+    if (!_lcOpen) {
+        if (typeof LiveChat !== 'undefined' && LiveChat.open) {
+            LiveChat.open();
+            _lcOpen = true;
+        }
+    } else {
+        if (typeof LiveChat !== 'undefined') {
+            if (typeof LiveChat.close === 'function') { LiveChat.close(); }
+            else if (typeof LiveChat.hide === 'function') { LiveChat.hide(); }
+            else if (typeof LiveChat.minimize === 'function') { LiveChat.minimize(); }
+        }
+        _lcOpen = false;
+    }
+}
+
+// Accordion
+document.querySelectorAll('.sms-acc-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+        var item = this.closest('.sms-acc-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.sms-acc-item').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+    });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#sms-"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+});
+</script>
+
+﻿<!-- MODERN GLOBAL SUPPORT SECTION -->
+
+
+<section class="ph-support-modern">
+    <div class="container">
+        <div class="ph-support-unified-box">
+            <div class="ph-support-content">
+                <h2 class="ph-support-title">Finding It Hard to Pick the Right Hosting?</h2>
+                <p class="ph-support-text">Our expert consultants are ready to walk you through our solutions and help you discover the perfect fit for your website's performance and budget. Let's start a conversation today.</p>
+                <div class="ph-support-cards">
+                    <a href="javascript:void(toggleFooterChat())" class="ph-s-card card-cyan">
+                        <i class="fa fa-comments-o"></i>
+                        <span>Sales Live Chat</span>
+                    </a>
+                    <a href="https://control.putulhost.com/supporttickets.php" class="ph-s-card card-gold" target="_blank" rel="noopener">
+                        <i class="fa fa-ticket"></i>
+                        <span>Support Tickets</span>
+                    </a>
+                    <a href="tel:+8809638205205" class="ph-s-card card-green">
+                        <i class="fa fa-phone"></i>
+                        <span>Call Us Now</span>
+                    </a>
+                    <a href="mailto:info@jaasbd.com" class="ph-s-card card-pink">
+                        <i class="fa fa-envelope"></i>
+                        <span>Send Email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- ABSOLUTE AGENT WRAPPER -->
+        <div class="ph-absolute-agent-wrapper">
+            <div class="ph-agent-circle"></div>
+            <img src="https://putulhost.com/wp-content/themes/PH%20Theme/assets/images/support1.png" alt="Support Help" class="ph-absolute-agent" loading="lazy">
+        </div>
+    </div>
+</section>
+
+
+
+<footer class="ph-ultra-footer" style="background:linear-gradient(135deg, #090314 0%, #170d2f 50%, #3b0764 100%) !important;">
+    <div class="container">
+        <!-- BOTTOM FOOTER: INFO GRID -->
+        <div class="ph-footer-bottom-grid">
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Our Address</h4>
+                <p class="ph-fb-text">
+                    <strong>JAAS BD</strong><br>
+                    Kadim Dewhata, Mirzapur, Tangail, Dhaka - Bangladesh                </p>
+                <div class="ph-footer-contact">
+                    <p style="color:#ffffff !important;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;"><i class="fa fa-phone" style="color:#7c3aed !important;font-size:16px;"></i> <span style="color:#ffffff !important;font-weight:600;">+8801818430308</span> <span style="font-size:11.5px;color:#94a3b8 !important;">(10AM-8PM)</span></p>
+                    <p style="color:#ffffff !important;font-size:14px;display:flex;align-items:center;gap:10px;"><i class="fa fa-envelope" style="color:#7c3aed !important;font-size:16px;"></i> <a href="mailto:info@jaasbd.com" style="color:#ffffff !important;font-weight:700 !important;text-decoration:none !important;letter-spacing:0.3px;font-size:14px;transition:color 0.2s;">info@jaasbd.com</a></p>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Payment Options</h4>
+                <div class="ph-payment-options">
+                    <img src="assets/images/ph/SSLCommerz-Pay.png" alt="Payment Options" style="max-width: 100%; border-radius: 8px;" loading="lazy">
+                </div>
+
+                <div class="ph-footer-membership-compact">
+                    <h5 class="ph-membership-title-small">Official Member of</h5>
+                    <div class="ph-membership-list-small">
+                        <img src="assets/images/ph/Basis-logo.png" alt="BASIS" loading="lazy">
+                        <img src="assets/images/ph/e-Cab-logo.png" alt="e-CAB" loading="lazy">
+                        <img src="assets/images/ph/Apnic-logo.png" alt="APNIC" loading="lazy">
+                        <img src="assets/images/ph/DBID11.png" alt="DBID" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Subscribe Newsletter</h4>
+                <p class="ph-fb-text">Subscribe for new offers and updates.</p>
+                <form class="ph-subscribe-form" role="form" aria-label="Newsletter Subscription">
+                    <!-- Honeypot: bots fill this, humans don't see it -->
+                    <input type="text" name="ph_website" value="" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true">
+                    <input type="hidden" name="ph_form_time" id="ph_form_time" value="">
+                    <label for="ph-newsletter-email" class="screen-reader-text">Email Address</label>
+                    <input type="email" id="ph-newsletter-email" placeholder="enter your email...." required aria-label="Email Address" autocomplete="email">
+                    <button type="submit" aria-label="Subscribe to newsletter"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
+
+                <div class="ph-social-links-wrapper">
+                    <p class="ph-social-text">To get updates follow us on Facebook, Twitters etc.</p>
+                    <div class="ph-social-links-compact">
+                        <a href="https://www.facebook.com/putulhost.official" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>                        <a href="https://x.com/putulhost" target="_blank" rel="noopener" title="X (Twitter)"><i class="fa fa-twitter"></i></a>                        <a href="https://www.instagram.com/myputulhost/" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>                        <a href="https://www.youtube.com/c/JAAS BD" target="_blank" rel="noopener" title="YouTube"><i class="fa fa-youtube-play"></i></a>                    </div>
+                </div>
+            </div>
+            <div class="ph-fb-col">
+                <h4 class="ph-fb-title">Company</h4>
+                <ul class="ph-footer-links-small">
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li style="margin-top: 15px;"><a href="affiliates.html" class="ph-affiliate-btn">Affiliate</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BACK TO TOP BUTTON -->
+        <div class="ph-back-to-top" id="backToTop">
+            <div class="ph-btt-icon">
+                <i class="fa fa-chevron-up"></i>
+            </div>
+        </div>
+
+        <!-- FLOATING SUPPORT WIDGET (toggle controlled) -->
+        
+    <div class="ph-footer-bottom-bar">
+        <div class="container">
+            <div class="ph-bottom-bar-flex">
+                <div class="ph-copyright-text">
+                    � 2026 <span>JAAS BD</span>. All rights reserved.
+                </div>
+                <div class="ph-footer-bottom-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <span class="divider">|</span>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span class="divider">|</span>
+                    <a href="refund.html">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/ph-nav.js"></script>
+</body>
+</html>

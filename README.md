@@ -1,4 +1,4 @@
-# JAAS BD - PutulHost 1:1 Clone Website & WHMCS Funnel
+# JAAS BD - Hosting Website & WHMCS Funnel
 
 Official website project for **JAAS BD (www.jaasbd.com)**.
 
@@ -12,7 +12,7 @@ Official website project for **JAAS BD (www.jaasbd.com)**.
 2. Open your browser and visit: **http://localhost:3000**
 
 ## Project Pages
-- \`index.html\`: PutulHost 1:1 homepage (Hero, Notice bar, Menu dropdowns, Services, Ultra footer).
+- \`index.html\`: JAAS BD homepage (Hero, Notice bar, Menu dropdowns, Services, Ultra footer).
 - \`basic-hosting.html\`: Basic Web Hosting packages.
 - \`pro-hosting.html\`: Pro Web Hosting packages.
 - \`premium-hosting.html\`: Premium Web Hosting packages.

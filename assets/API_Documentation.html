@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WO SMS — API Documentation</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	:root {
+		--bg: #f1f5f9; --card: #ffffff; --ink: #0f172a; --muted: #64748b;
+		--line: #e2e8f0; --sky: #0ea5e9; --sky-soft: #f0f9ff; --sky-line: #bae6fd;
+		--code-bg: #0f172a; --code-ink: #e2e8f0; --green: #16a34a; --red: #dc2626;
+	}
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Bengali", sans-serif;
+		background: var(--bg); color: var(--ink); line-height: 1.7; font-size: 15px;
+	}
+	.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; }
+
+	/* Header */
+	header {
+		background: linear-gradient(135deg, #0ea5e9, #0369a1); color: #fff;
+		padding: 44px 0; margin-bottom: 32px;
+	}
+	header .wrap { padding-bottom: 0; display: flex; align-items: center; gap: 18px; }
+	.logo {
+		width: 56px; height: 56px; border-radius: 14px; background: rgba(255,255,255,.15);
+		display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
+	}
+	header h1 { font-size: 26px; font-weight: 800; line-height: 1.2; }
+	header p { opacity: .9; font-size: 14px; margin-top: 4px; }
+
+	/* Meta chips */
+	.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+	.chip {
+		background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+		padding: 6px 14px; font-size: 12.5px; font-weight: 600; color: var(--muted);
+	}
+	.chip b { color: var(--ink); }
+
+	/* Cards / sections */
+	section {
+		background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+		padding: 26px 28px; margin-bottom: 22px;
+	}
+	h2 {
+		font-size: 19px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+	}
+	h2 .num {
+		width: 26px; height: 26px; background: var(--sky); color: #fff; border-radius: 8px;
+		display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+	}
+	h3 { font-size: 15px; font-weight: 700; margin: 20px 0 8px; color: #334155; }
+	p { margin-bottom: 10px; }
+	.muted { color: var(--muted); font-size: 13.5px; }
+
+	/* Endpoint pill */
+	.endpoint {
+		display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+		background: var(--sky-soft); border: 1px solid var(--sky-line); border-radius: 10px;
+		padding: 12px 16px; margin: 12px 0; font-family: "SFMono-Regular", Consolas, monospace; font-size: 13.5px;
+	}
+	.method { background: var(--sky); color: #fff; font-weight: 700; padding: 3px 10px; border-radius: 6px; font-size: 12px; letter-spacing: .5px; }
+	.method.get { background: #64748b; }
+	.url { color: #0369a1; font-weight: 600; word-break: break-all; }
+
+	/* Code blocks */
+	pre {
+		background: var(--code-bg); color: var(--code-ink); border-radius: 12px;
+		padding: 16px 18px; overflow-x: auto; font-size: 13px; line-height: 1.6;
+		font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; margin: 10px 0 16px;
+	}
+	code:not(pre code) {
+		background: #eef2f7; color: #b91c1c; padding: 2px 6px; border-radius: 5px;
+		font-family: "SFMono-Regular", Consolas, monospace; font-size: 12.5px;
+	}
+	.tok-key { color: #7dd3fc; }
+	.tok-str { color: #86efac; }
+	.tok-cmt { color: #64748b; }
+
+	/* Tables */
+	table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 13.5px; }
+	th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+	thead th { background: #f8fafc; color: var(--muted); font-weight: 700; white-space: nowrap; }
+	td code { white-space: nowrap; }
+	.req { color: var(--green); font-weight: 700; text-align: center; }
+	.tbl-scroll { overflow-x: auto; }
+
+	/* Badges */
+	.badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; }
+	.badge.ok { color: var(--green); }
+	.badge.err { color: var(--red); }
+
+	/* Callout */
+	.note {
+		background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #f59e0b;
+		border-radius: 10px; padding: 12px 16px; margin: 14px 0; font-size: 13.5px; color: #92400e;
+	}
+	.note b { color: #78350f; }
+
+	hr.soft { border: none; border-top: 1px solid var(--line); margin: 22px 0; }
+
+	footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; }
+
+	@media (max-width: 640px) {
+		header h1 { font-size: 21px; }
+		section { padding: 20px 18px; }
+	}
+</style>
+</head>
+<body>
+
+<header>
+	<div class="wrap">
+		<div>
+			<h1>WO SMS — API Documentation</h1>
+		</div>
+	</div>
+</header>
+
+<div class="wrap">
+
+	<div class="chips">
+		<span class="chip">Protocol: <b>HTTPS</b></span>
+		<span class="chip">Method: <b>POST</b></span>
+		<span class="chip">Body: <b>JSON</b></span>
+		<span class="chip">Auth: <b>UserName + Apikey</b></span>
+		<span class="chip">HTTP Status: <b>সবসময় 200</b></span>
+	</div>
+
+	<!-- Overview -->
+	<section>
+		<h2>Overview</h2>
+		<p>এই ডকুমেন্টে <b>WO SMS</b> প্লাগিন যে API কল করে তার পূর্ণ বিবরণ দেওয়া আছে — যাতে SMS প্যানেল ঠিকভাবে রেসপন্স দিতে পারে।</p>
+		<p class="muted">গেটওয়ে সবসময় HTTP <code>200</code> ফেরত দেয় — আসল ফলাফল থাকে JSON body-র <code>statusCode</code> / <code>status</code> ফিল্ডে।</p>
+
+		<h3>Base URL</h3>
+		<div class="endpoint"><span class="url">https://smsapi.resellcore.com/</span></div>
+
+		<div class="tbl-scroll">
+		<table>
+			<thead><tr><th>কাজ</th><th>Method</th><th>Endpoint</th></tr></thead>
+			<tbody>
+				<tr><td>SMS পাঠানো</td><td><code>POST</code></td><td><code>/api/SmsSending/SMS</code></td></tr>
+				<tr><td>ব্যালেন্স চেক</td><td><code>POST</code></td><td><code>/api/SmsSending/balanceCheck</code></td></tr>
+			</tbody>
+		</table>
+		</div>
+		<div class="note">Base URL দরকার হলে <code>wp-config.php</code>-এ override করা যায়:<br>
+			<code>define( 'WOSMS_API_BASE', 'https://smsapi.resellcore.com/' );</code>
+		</div>
+	</section>
+
+	<!-- Send SMS -->
+	<section>
+		<h2><span class="num">1</span> Send SMS</h2>
+
+		<div class="endpoint">
+			<span class="method">POST</span>
+			<span class="url">https://smsapi.resellcore.com/api/SmsSending/SMS</span>
+		</div>
+
+		<h3>Headers</h3>
+<pre><span class="tok-key">Content-Type</span>: application/json
+<span class="tok-key">Accept</span>: application/json</pre>
+
+		<h3>Request Body (JSON)</h3>
+<pre>{
+  <span class="tok-key">"UserName"</span>: <span class="tok-str">"your_username"</span>,
+  <span class="tok-key">"Apikey"</span>: <span class="tok-str">"your_api_key"</span>,
+  <span class="tok-key">"MobileNumber"</span>: <span class="tok-str">"8801712345678"</span>,
+  <span class="tok-key">"CampaignId"</span>: <span class="tok-str">"null"</span>,
+  <span class="tok-key">"SenderName"</span>: <span class="tok-str">"CODEFORHOST"</span>,
+  <span class="tok-key">"TransactionType"</span>: <span class="tok-str">"T"</span>,
+  <span class="tok-key">"Message"</span>: <span class="tok-str">"প্রিয় গ্রাহক, আপনার অর্ডার কনফার্ম হয়েছে।"</span>
+}</pre>
+
+		<h3>Parameters</h3>
+		<div class="tbl-scroll">
+		<table>
+			<thead><tr><th>Field</th><th>Type</th><th>Required</th><th>বিবরণ</th></tr></thead>
+			<tbody>
+				<tr><td><code>UserName</code></td><td>string</td><td class="req">✔</td><td>প্যানেলের ইউজারনেম</td></tr>
+				<tr><td><code>Apikey</code></td><td>string</td><td class="req">✔</td><td>প্যানেলের API key</td></tr>
+				<tr><td><code>MobileNumber</code></td><td>string</td><td class="req">✔</td><td>প্রাপকের নম্বর, <code>8801XXXXXXXXX</code> ফরম্যাটে</td></tr>
+				<tr><td><code>CampaignId</code></td><td>string</td><td class="req">✔</td><td>ক্যাম্পেইন না থাকলে <code>"null"</code> (স্ট্রিং)</td></tr>
+				<tr><td><code>SenderName</code></td><td>string</td><td class="req">✔</td><td>অনুমোদিত Sender ID / Masking</td></tr>
+				<tr><td><code>TransactionType</code></td><td>string</td><td class="req">✔</td><td><code>"T"</code> = Transactional, <code>"P"</code> = Promotional</td></tr>
+				<tr><td><code>Message</code></td><td>string</td><td class="req">✔</td><td>SMS টেক্সট (UTF-8, বাংলা সাপোর্টেড)</td></tr>
+			</tbody>
+		</table>
+		</div>
+
+		<h3>cURL উদাহরণ</h3>
+<pre><span class="tok-cmt"># Send SMS</span>
+curl -X POST <span class="tok-str">"https://smsapi.resellcore.com/api/SmsSending/SMS"</span> \
+  -H <span class="tok-str">"Content-Type: application/json"</span> \
+  -H <span class="tok-str">"Accept: application/json"</span> \
+  -d <span class="tok-str">'{
+    "UserName": "your_username",
+    "Apikey": "your_api_key",
+    "MobileNumber": "8801712345678",
+    "CampaignId": "null",
+    "SenderName": "CODEFORHOST",
+    "TransactionType": "T",
+    "Message": "Test message"
+  }'</span></pre>
+
+		<h3><span class="badge ok">Success Response</span> <span class="muted">(HTTP 200)</span></h3>
+<pre>{
+  <span class="tok-key">"statusCode"</span>: <span class="tok-str">"200"</span>,
+  <span class="tok-key">"status"</span>: <span class="tok-str">"Success"</span>,
+  <span class="tok-key">"responseResult"</span>: <span class="tok-str">"SMS Submitted Successfully"</span>
+}</pre>
+
+		<h3><span class="badge err">❌ Error Response</span> <span class="muted">(HTTP 200, ভিন্ন statusCode)</span></h3>
+<pre>{
+  <span class="tok-key">"statusCode"</span>: <span class="tok-str">"406"</span>,
+  <span class="tok-key">"status"</span>: <span class="tok-str">"Failed"</span>,
+  <span class="tok-key">"responseResult"</span>: <span class="tok-str">"IP Black List."</span>
+}</pre>
+
+		<div class="tbl-scroll">
+		<table>
+			<thead><tr><th>responseResult</th><th>কারণ</th></tr></thead>
+			<tbody>
+				<tr><td><code>IP Black List.</code></td><td>সার্ভার IP প্যানেলে whitelist করা নেই</td></tr>
+				<tr><td><code>Invalid User Name Or Password</code></td><td>ভুল <code>UserName</code> / <code>Apikey</code></td></tr>
+				<tr><td><code>Invalid Sender Id</code></td><td><code>SenderName</code> অনুমোদিত নয়</td></tr>
+				<tr><td><code>Insufficient Balance</code></td><td>ব্যালেন্স শেষ</td></tr>
+				<tr><td><code>Invalid Number</code></td><td>নম্বর ফরম্যাট ভুল</td></tr>
+			</tbody>
+		</table>
+		</div>
+	</section>
+
+	<!-- Balance Check -->
+	<section>
+		<h2><span class="num">2</span> Balance Check</h2>
+
+		<div class="endpoint">
+			<span class="method">POST</span>
+			<span class="url">https://smsapi.resellcore.com/api/SmsSending/balanceCheck</span>
+		</div>
+
+		<h3>Request Body (JSON)</h3>
+<pre>{
+  <span class="tok-key">"UserName"</span>: <span class="tok-str">"your_username"</span>,
+  <span class="tok-key">"Apikey"</span>: <span class="tok-str">"your_api_key"</span>
+}</pre>
+
+		<h3>cURL উদাহরণ</h3>
+<pre>curl -X POST <span class="tok-str">"https://smsapi.resellcore.com/api/SmsSending/balanceCheck"</span> \
+  -H <span class="tok-str">"Content-Type: application/json"</span> \
+  -H <span class="tok-str">"Accept: application/json"</span> \
+  -d <span class="tok-str">'{ "UserName": "your_username", "Apikey": "your_api_key" }'</span></pre>
+
+		<h3><span class="badge ok">Success Response</span> <span class="muted">(HTTP 200)</span></h3>
+<pre>{
+  <span class="tok-key">"statusCode"</span>: <span class="tok-str">"200"</span>,
+  <span class="tok-key">"status"</span>: <span class="tok-str">"Success"</span>,
+  <span class="tok-key">"responseResult"</span>: <span class="tok-str">"1375.33"</span>
+}</pre>
+		<p class="muted">প্লাগিন <code>responseResult</code>-কে ব্যালেন্স হিসেবে পড়ে এবং <code>৳1,375.33</code> ফরম্যাটে দেখায়। <code>balance</code> / <code>Balance</code> / <code>current_balance</code> কী থাকলেও ধরতে পারে।</p>
+	</section>
+
+	<!-- Response logic -->
+	<section>
+		<h2>Response ব্যাখ্যা</h2>
+		<p>গেটওয়ে <b>সবসময় HTTP 200</b> দেয়। প্লাগিন এভাবে success/fail নির্ণয় করে:</p>
+<pre><span class="tok-cmt">success = (HTTP 2xx)
+          AND ( statusCode == "200"
+                OR status ∈ { "Success", "Sent", "Delivered" } )</span></pre>
+		<div class="tbl-scroll">
+		<table>
+			<thead><tr><th>Field</th><th>মান (success)</th></tr></thead>
+			<tbody>
+				<tr><td><code>statusCode</code></td><td><code>"200"</code></td></tr>
+				<tr><td><code>status</code></td><td><code>"Success"</code></td></tr>
+				<tr><td><code>responseResult</code></td><td>মানুষ-পাঠযোগ্য বার্তা / ব্যালেন্স</td></tr>
+			</tbody>
+		</table>
+		</div>
+		<p class="muted">Field নাম case-insensitive সহনশীল: <code>statusCode</code>/<code>StatusCode</code>, <code>status</code>/<code>Status</code>, <code>responseResult</code>/<code>ResponseResult</code> — যেকোনোটি চলবে।</p>
+	</section>
+
+	<!-- Notes -->
+	<section>
+		<h2>নম্বর ফরম্যাট, Signature ও IP Whitelist</h2>
+
+		<h3>মোবাইল নম্বর ফরম্যাট</h3>
+		<div class="tbl-scroll">
+		<table>
+			<thead><tr><th>ইনপুট</th><th>পাঠানো হয়</th></tr></thead>
+			<tbody>
+				<tr><td><code>01712345678</code></td><td><code>8801712345678</code></td></tr>
+				<tr><td><code>1712345678</code></td><td><code>8801712345678</code></td></tr>
+				<tr><td><code>8801712345678</code></td><td><code>8801712345678</code> (অপরিবর্তিত)</td></tr>
+			</tbody>
+		</table>
+		</div>
+
+		<h3>Signature</h3>
+		<p class="muted">Settings-এ <b>Signature</b> সেট থাকলে (যেমন <code>-YourBrand</code>) প্রতিটি <code>Message</code>-এর শেষে যোগ হয় (আগে থেকে থাকলে দুবার যোগ হয় না)। খালি রাখলে কিছু যোগ হয় না।</p>
+
+		<h3>IP Whitelist</h3>
+		<p class="muted">API <code>IP Black List.</code> দিলে সার্ভারের আউটগোয়িং IP প্যানেলে যোগ করতে হবে। প্লাগিন IPv6 ঝামেলা এড়াতে অনুরোধ IPv4-তে pin করে রাখে।</p>
+		<div class="note">বন্ধ করতে <code>wp-config.php</code>-এ: <code>define( 'WOSMS_FORCE_IPV4', false );</code></div>
+	</section>
+
+	<!-- GET alt -->
+	<section>
+		<h2>(ঐচ্ছিক) GET query-string বিকল্প</h2>
+		<p class="muted">প্লাগিন <b>POST JSON</b> ব্যবহার করে। অনেক প্যানেল সমতুল্য GET রিকোয়েস্টও গ্রহণ করে — শুধু রেফারেন্সের জন্য:</p>
+		<div class="endpoint">
+			<span class="method get">GET</span>
+			<span class="url">https://smsapi.resellcore.com/api/SmsSending/SMS</span>
+		</div>
+<pre><span class="tok-cmt"># সব প্যারামিটার query string-এ</span>
+?UserName=your_username
+&Apikey=your_api_key
+&MobileNumber=8801712345678
+&SenderName=CODEFORHOST
+&TransactionType=T
+&Message=Test%20message</pre>
+		<div class="note">WO SMS প্লাগিন এই GET ফর্ম <b>ব্যবহার করে না</b> — এটি শুধু তথ্যের জন্য। প্রকৃত ইন্টিগ্রেশন উপরের POST JSON অনুযায়ী।</div>
+	</section>
+
+	<!-- Summary -->
+	<section>
+		<h2>সারসংক্ষেপ</h2>
+		<div class="tbl-scroll">
+		<table>
+			<tbody>
+				<tr><td>Base URL</td><td><code>https://smsapi.resellcore.com/</code></td></tr>
+				<tr><td>Send</td><td><code>POST /api/SmsSending/SMS</code></td></tr>
+				<tr><td>Balance</td><td><code>POST /api/SmsSending/balanceCheck</code></td></tr>
+				<tr><td>Body format</td><td>JSON</td></tr>
+				<tr><td>Auth</td><td><code>UserName</code> + <code>Apikey</code> (body-তে)</td></tr>
+				<tr><td>Success marker</td><td><code>statusCode = "200"</code> বা <code>status = "Success"</code></td></tr>
+				<tr><td>HTTP status</td><td>সবসময় <code>200</code></td></tr>
+			</tbody>
+		</table>
+		</div>
+	</section>
+
+	<footer>
+		WO SMS API Documentation v1.0
+	</footer>
+
+</div>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"fb5b47d58c494d9fbbf868e226f17ebd","r":1}' crossorigin="anonymous"></script>
+</body>
+</html>

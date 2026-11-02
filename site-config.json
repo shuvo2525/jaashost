@@ -89,7 +89,7 @@
       "firstName": "Valued",
       "lastName": "Customer",
       "email": "customer@jaasbd.com",
-      "password": "PutulHost@2026#Secure",
+      "password": "JAASBD@2026#Secure",
       "phone": "+8801818430308",
       "company": "Personal Account",
       "address": "Hat Masjid Road, Rajbari",
@@ -618,9 +618,9 @@
     "showPaymentGateways": true
   },
   "social": {
-    "facebook": "https://www.facebook.com/putulhost.official",
-    "twitter": "https://x.com/putulhost",
-    "instagram": "https://www.instagram.com/myputulhost/",
+    "facebook": "https://www.facebook.com/jaasbd",
+    "twitter": "https://x.com/jaasbd",
+    "instagram": "https://www.instagram.com/jaasbd/",
     "youtube": "https://www.youtube.com/c/JAAS BD",
     "whatsapp": "8801818430308"
   },
@@ -654,7 +654,7 @@
       "key": "bd-domain",
       "name": "Bd Domain",
       "file": "bd-domain.html",
-      "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | Putul Host",
+      "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | JAAS BD",
       "heroTitle": "Official .BD Domain Registration",
       "heroSubtitle": "Official BTCL .bd and .bangla domain registration in Bangladesh with fast approval and dedicated document support.",
       "heroBadge": "Official Service"
@@ -744,7 +744,7 @@
       "key": "domain-reseller",
       "name": "Domain Reseller",
       "file": "domain-reseller.html",
-      "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | Putul Host",
+      "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | JAAS BD",
       "heroTitle": "Start Your Own Domain Business",
       "heroSubtitle": "Start your domain business with our wholesale domain reseller API, free WHMCS module, and 500+ TLDs.",
       "heroBadge": "Official Service"
@@ -852,7 +852,7 @@
       "key": "affiliates",
       "name": "Affiliates",
       "file": "affiliates.html",
-      "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | Putul Host",
+      "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | JAAS BD",
       "heroTitle": "Earn Up to 20% Commission",
       "heroSubtitle": "Join the JAAS BD affiliate program and earn up to 25% recurring commissions with instant tracking.",
       "heroBadge": "Official Service"
@@ -861,8 +861,8 @@
       "key": "about",
       "name": "About",
       "file": "about.html",
-      "metaTitle": "About Us - আমাদের সম্পর্কে | Putul Host",
-      "heroTitle": "About Putul Host",
+      "metaTitle": "About Us - আমাদের সম্পর্কে | JAAS BD",
+      "heroTitle": "About JAAS BD",
       "heroSubtitle": "Learn about JAAS BD — leading web hosting, cloud server infrastructure, and IT solutions in Bangladesh.",
       "heroBadge": "Official Service"
     },
@@ -870,7 +870,7 @@
       "key": "contact",
       "name": "Contact",
       "file": "contact.html",
-      "metaTitle": "Contact Us - যোগাযোগ | Putul Host",
+      "metaTitle": "Contact Us - যোগাযোগ | JAAS BD",
       "heroTitle": "Contact Us",
       "heroSubtitle": "24/7 customer support, sales inquiries, and billing assistance. We are always ready to help you.",
       "heroBadge": "Official Service"
@@ -879,7 +879,7 @@
       "key": "terms",
       "name": "Terms",
       "file": "terms.html",
-      "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | Putul Host",
+      "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | JAAS BD",
       "heroTitle": "Terms of Service",
       "heroSubtitle": "Please read our terms and conditions governing the use of JAAS BD services and hosting infrastructure.",
       "heroBadge": "Official Service"
@@ -888,7 +888,7 @@
       "key": "privacy",
       "name": "Privacy",
       "file": "privacy.html",
-      "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | Putul Host",
+      "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | JAAS BD",
       "heroTitle": "Privacy Policy",
       "heroSubtitle": "Our commitment to protecting your personal data, privacy, and account security at JAAS BD.",
       "heroBadge": "Official Service"
@@ -897,7 +897,7 @@
       "key": "refund",
       "name": "Refund",
       "file": "refund.html",
-      "metaTitle": "Refund Policy - রিফান্ড পলিসি | Putul Host",
+      "metaTitle": "Refund Policy - রিফান্ড পলিসি | JAAS BD",
       "heroTitle": "Refund Policy",
       "heroSubtitle": "Transparent and hassle-free 30-day money back guarantee on all our shared and reseller hosting plans.",
       "heroBadge": "Official Service"

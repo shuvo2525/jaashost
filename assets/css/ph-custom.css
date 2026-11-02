@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Putul Host & JAAS BD Core Layout Reset & Alignment Fix
+   JAAS BD Core Layout Reset & Alignment Fix
    ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -42,7 +42,7 @@ img {
     height: auto;
 }
 
-/* Putul Host Custom CSS extracted for JAAS BD Clone */
+/* JAAS BD Custom CSS */
 
 /* --- STYLE BLOCK 1 --- */
 

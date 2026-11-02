@@ -1,5 +1,5 @@
 /**
- * Putulhost / JAAS BD Navigation & Dropdown Engine (100% Putulhost.com Compatible)
+ * JAAS BD Navigation & Dropdown Engine
  */
 document.addEventListener('DOMContentLoaded', function () {
   // Desktop Dropdowns

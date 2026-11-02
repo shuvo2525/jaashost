@@ -1103,7 +1103,7 @@ const JaasStore = {
         firstName: 'Valued',
         lastName: 'Customer',
         email: 'customer@jaasbd.com',
-        password: 'PutulHost@2026#Secure',
+        password: 'JAASBD@2026#Secure',
         phone: '+8801818430308',
         company: 'Personal Account',
         address: 'Hat Masjid Road, Rajbari',

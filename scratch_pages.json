@@ -18,7 +18,7 @@
   "bd-domain": {
     "key": "bd-domain",
     "file": "bd-domain.html",
-    "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | Putul Host",
+    "metaTitle": ".BD Domain Registration - ডোমেইন রেজিস্ট্রেশন | JAAS BD",
     "heroTitle": "Official .BD Domain Registration",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -98,7 +98,7 @@
   "domain-reseller": {
     "key": "domain-reseller",
     "file": "domain-reseller.html",
-    "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | Putul Host",
+    "metaTitle": "Domain Reseller Program - ডোমেইন রিসেলার | JAAS BD",
     "heroTitle": "Start Your Own Domain Business",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -194,7 +194,7 @@
   "affiliates": {
     "key": "affiliates",
     "file": "affiliates.html",
-    "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | Putul Host",
+    "metaTitle": "Affiliate Program - অ্যাফিলিয়েট প্রোগ্রাম | JAAS BD",
     "heroTitle": "Earn Up to 20% Commission",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -202,15 +202,15 @@
   "about": {
     "key": "about",
     "file": "about.html",
-    "metaTitle": "About Us - আমাদের সম্পর্কে | Putul Host",
-    "heroTitle": "About Putul Host",
+    "metaTitle": "About Us - আমাদের সম্পর্কে | JAAS BD",
+    "heroTitle": "About JAAS BD",
     "heroSubtitle": "",
     "heroBadge": ""
   },
   "contact": {
     "key": "contact",
     "file": "contact.html",
-    "metaTitle": "Contact Us - যোগাযোগ | Putul Host",
+    "metaTitle": "Contact Us - যোগাযোগ | JAAS BD",
     "heroTitle": "Contact Us",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -218,7 +218,7 @@
   "terms": {
     "key": "terms",
     "file": "terms.html",
-    "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | Putul Host",
+    "metaTitle": "Terms of Service - নিয়ম ও শর্তাবলী | JAAS BD",
     "heroTitle": "Terms of Service",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -226,7 +226,7 @@
   "privacy": {
     "key": "privacy",
     "file": "privacy.html",
-    "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | Putul Host",
+    "metaTitle": "Privacy Policy - গোপনীয়তা নীতি | JAAS BD",
     "heroTitle": "Privacy Policy",
     "heroSubtitle": "",
     "heroBadge": ""
@@ -234,7 +234,7 @@
   "refund": {
     "key": "refund",
     "file": "refund.html",
-    "metaTitle": "Refund Policy - রিফান্ড পলিসি | Putul Host",
+    "metaTitle": "Refund Policy - রিফান্ড পলিসি | JAAS BD",
     "heroTitle": "Refund Policy",
     "heroSubtitle": "",
     "heroBadge": ""
